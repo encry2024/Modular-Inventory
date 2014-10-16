@@ -69,10 +69,10 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 			$item = new Item;
 			$item->name = $data['itemTb'];
 			$item->save();
-
+			//get name and id
 			$item_name = $item->name;
 			$insertedId = $item->id;
-
+			//save actions in audit
 			$audits = new Audit;
 			$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " added the item " . $item_name . " on the database.";
 			$audits->save();
