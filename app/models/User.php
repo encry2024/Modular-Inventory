@@ -1,0 +1,110 @@
+<?php
+
+use Illuminate\Auth\UserTrait;
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
+use Illuminate\Auth\Reminders\RemindableInterface;
+
+class User extends Eloquent implements UserInterface, RemindableInterface {
+
+	use UserTrait, RemindableTrait;
+
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	//protected $primaryKey = 'admin_id';
+
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+
+	public function audit() {
+		return $this->hasMany('Audit');
+	}
+
+	protected $hidden = array('password', 'remember_token');
+
+
+	public static function tryRegister($data) {
+		//get all data
+		//data to validate
+		$values = array(
+			'username' => $data['username'],
+			'password' => $data['password'],
+			'firstname' => $data['firstName'],
+			'lastname' => $data['lastName']
+		);
+
+		//rules
+		$rules =array(
+			'username' => 'required|unique:users,username|alpha_num',
+			'password' => 'required',
+			'firstname' => 'required',
+			'lastname' => 'required'
+		);
+
+		//create validation instance
+		$validation = Validator::make($values, $rules);
+
+		//check if validation successful
+		if($validation->fails()) {
+			return Redirect::back()
+				->withErrors($validation);
+			//return var_dump($validation->messages());
+		} else {
+			
+			$user = new User;
+			$user->username = $data['username'];
+			$user->password = Hash::make($data['password']);
+			$user->firstname = $data['firstName'];
+			$user->lastname = $data['lastName'];
+
+			$user->save();
+
+			$users_username = $user->username;
+			$user_name = $user->firstname ." ". $user->lastname;
+			//if (Auditdate::select('date_created')->whereNull('date_created')->get()) {
+			
+			$audits = new Audit;
+			$audits->history = $user_name . " created an account named " . $users_username .".";
+			$audits->save();
+
+			return Redirect::to('login');
+		}
+	}
+
+	public static function tryAuthenticate($data) {
+		$values = array(
+			'username' => $data['username'],
+			'password' => $data['password']
+		);
+	
+		$rules =array(
+			'username' => 'required',
+			'password' => 'required'
+		);
+	
+		$validation = Validator::make($values, $rules);
+
+		if($validation->fails()) {
+			return Redirect::back()
+				->withErrors($validation);
+		}
+
+
+		if (Auth::attempt(array('username' => $data['username'], 'password' => $data['password'])))
+		{	
+
+			return Redirect::to('/');
+
+			
+		} else {
+			return Redirect::back()
+				->with('message', 'Invalid username/password');
+		}
+	}
+}
