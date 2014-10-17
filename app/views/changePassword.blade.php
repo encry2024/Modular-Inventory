@@ -17,7 +17,12 @@
 				{{ Form::open(array('url' => 'changepass')) }}
 					<div class="row">
 						<div class="large-12 columns">
-							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your password" name="password">
+							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your password" name="oldPass">
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-12 columns">
+							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your password" name="newPass">
 						</div>
 					</div>
 					<div class="row">
