@@ -73,6 +73,8 @@ Route::get('All/Track', 'AuditController@trackAll');
 Route::get('Track/{id}', 'DeviceController@showTracks');
 Route::get('Edit/{id}', 'ItemsController@editItem');
 Route::get('/Location', 'LocationController@viewLocation');
+Route::get('changePassword', 'UserController@showChangePass');
+
 #POST
 Route::post('authenticate', 'LoginController@authenticate');
 Route::post('registeruser', 'RegisterController@registerUser');

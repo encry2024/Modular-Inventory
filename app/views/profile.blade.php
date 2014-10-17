@@ -19,7 +19,7 @@
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
 					<li>{{ link_to('logout','Logout') }} </li>
-					<li class="active"><a href="#">Change Password</a></li>
+					<li class="active">{{ link_to('changePassword', 'Change Password') }}</a></li>
 				</ul>
 			</li>
 		</ul>
