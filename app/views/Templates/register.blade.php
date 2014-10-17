@@ -9,6 +9,7 @@
 		Northstar Inventory
 	</title>
 
+		@yield('registerBody')
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/jquery.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.topbar.js') }}
@@ -23,12 +24,5 @@
         {{ HTML::style('packages/foundation-icons/foundation-icons.ttf') }}
         {{ HTML::style('main.css') }}
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/modernizr.js') }}
-
-
-	<style type="text/css">
-		body {
-			background-color: #003400;
-		}
-	</style>
 	</body>
 </html>

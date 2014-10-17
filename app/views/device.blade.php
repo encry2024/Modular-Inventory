@@ -44,18 +44,11 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<table class="large-12 columns tableOne" id="tableTwo">
-					
 				<thead>
-
 				   	<tr>
-
-				      		
 						<th>Track Device added to the database</th>
-
 					</tr>
-
 				</thead>
-
 				<tbody>
 					@foreach ($devices as $device)
 							<tr>

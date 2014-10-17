@@ -33,8 +33,5 @@ class Location extends Eloquent {
 
 			return Redirect::back();
 		}
-
-
 	}
-	
 }

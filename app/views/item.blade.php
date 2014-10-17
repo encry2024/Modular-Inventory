@@ -37,7 +37,7 @@
 @section('bdy')
 <div class="row">
 	<div class="large-10 push-2 columns">
-		<h1 class="font">{{ $item->name }} Devices</h1>
+		<h1>{{ $item->name }} Devices</h1>
 			<div class="row">
 				<div class="large-12 columns">
 					<table class="large-12 columns tableOne">

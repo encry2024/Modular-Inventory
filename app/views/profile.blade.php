@@ -33,7 +33,7 @@
 
 @section('bodySection')
 <div class="large-11 columns large-centered">
-	<h1 class="font">Inventory</h1>
+	<h1>Inventory</h1>
 </div>
 
 <div class=" large-10 columns large-centered">
