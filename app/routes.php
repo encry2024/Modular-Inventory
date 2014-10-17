@@ -86,3 +86,4 @@ Route::post('updateitem', 'ItemsController@updateItem');
 Route::post('assign', 'DeviceController@assignDevice');
 Route::post('unassign', 'DeviceController@unassignDevice');
 Route::post('changestatus', 'DeviceController@changeStatus');
+Route::post('changepass', 'UserController@changeUserPass');

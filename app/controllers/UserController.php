@@ -8,6 +8,7 @@ class UserController extends BaseController {
 	}
 
 	public function changeUserPass() {
-		
+		$changepass = User::action_changePassword(Input::all());;
+		return $changepass;
 	}
 }
