@@ -107,9 +107,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function action_changePassword($data) {
 		$user = User::find(Auth::user()->id);
-		$oldPassword = $user->password;
 
-		if($oldPassword == $data["oldPass"]) {
+		if(Hash::check($data["oldPass"], Auth::user()->password)) {
 			if ($data["newPass"] == $data["confirmPassword"]) {
 				$user->password = Hash::make($data["newPass"]);
 				$user->save();
