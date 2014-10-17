@@ -35,7 +35,7 @@ Route::get('Device/delete/{id}', function($id)
 });
 
 Route::get('Field/delete/{id}', function($id) {
-
+	//Search field id before delete
 	$field = Field::find($id);
 	$fieldItemId = $field->item_id;
 	$field_name = $field->item_label;
