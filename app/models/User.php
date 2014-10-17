@@ -97,14 +97,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
 		if (Auth::attempt(array('username' => $data['username'], 'password' => $data['password'])))
-		{	
-
+		{
 			return Redirect::to('/');
-
-			
 		} else {
 			return Redirect::back()
 				->with('message', 'Invalid username/password');
 		}
+	}
+
+	public static function action_changePassword() {
+		$user = User::find(Auth::user()->id);
+		$user->password = Hash::make($data["password"]);
+		$user->save();
+
+		$audits = new Audit;
+		$audits->history = Auth::user()->firstname . " " . Auth::user()->lastname . " has changed his/her password.";
+		$audits->save();
 	}
 }
