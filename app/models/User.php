@@ -105,13 +105,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		}
 	}
 
-	public static function action_changePassword() {
-		$user = User::find(Auth::user()->id);
-		$user->password = Hash::make($data["password"]);
-		$user->save();
+	public static function action_changePassword($data) {
 
-		$audits = new Audit;
-		$audits->history = Auth::user()->firstname . " " . Auth::user()->lastname . " has changed his/her password.";
-		$audits->save();
+		if ($data["password"] == $data["confirmPassword"]) {
+			$user = User::find(Auth::user()->id);
+			$user->password = Hash::make($data["password"]);
+			$user->save();
+
+			$audits = new Audit;
+			$audits->history = Auth::user()->firstname . " " . Auth::user()->lastname . " has changed his/her password.";
+			$audits->save();
+
+			return Redirect::back()
+							 ->with('message', 'You have successfully changed your password.');
+		} else {}
 	}
 }

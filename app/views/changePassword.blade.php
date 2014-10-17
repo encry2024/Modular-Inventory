@@ -14,12 +14,7 @@
 		<br>
 		<div class="row">
 			<div class="large-12 small-12 columns">
-				{{ Form::open(array('url' => 'registeruser')) }}
-					<div class="row">
-						<div class="large-12 columns">
-							<input type="text" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your Username" name="username">
-						</div>
-					</div>
+				{{ Form::open(array('url' => 'changepass')) }}
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your password" name="password">
@@ -32,7 +27,7 @@
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
-							<input type="submit" class="button large alert expand login-button radius" />
+							<input type="submit" value="Change Password" class="button large alert expand login-button radius" />
 						</div>
 					</div>
 			    	{{ Form::close() }}
