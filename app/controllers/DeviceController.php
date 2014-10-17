@@ -63,11 +63,9 @@ class DeviceController extends BaseController {
 	public function showTracks($id) {
 		//Get Device: ID, Name
 		$getDevice = Device::find($id);
-		$getDeviceItemId = $getDevice->item_id;
-		$getDeviceName = $getDevice->name;
 
 		//Get Item: Name
-		$getItemName = Item::find($getDeviceItemId);
+		$getItemName = Item::find($getDevice->item_id);
 		$item_name = $getItemName->name;
 
 		$device_location = DeviceLocation::with('location.device')->get();
