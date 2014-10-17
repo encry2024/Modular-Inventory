@@ -118,6 +118,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 			return Redirect::back()
 							 ->with('message', 'You have successfully changed your password.');
-		} else {}
+		} else {
+			return Redirect::to('register')
+							 ->with('message', 'Password do not match.');
+		}
 	}
 }
