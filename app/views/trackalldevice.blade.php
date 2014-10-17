@@ -39,7 +39,7 @@
 	</br>
 		<div class="row">
 			<div class="large-12 columns">
-				{{ link_to('Item/'. $item_id, 'Return to ' . $device_name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
+				{{ link_to('Item/'. $getInfo->item_id, 'Return to ' . $getInfo->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
 			</div>
 		</div>
 

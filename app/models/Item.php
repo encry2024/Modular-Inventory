@@ -86,10 +86,9 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 					//$field = new Item;
 					$field->item_id = $insertedId;
 					$field->item_label = $labelField;
-
 					$field->save();
 					$field_name = $field->item_label;
-
+					//Separate each field with comma ,
 					$field_array = implode(", ", array_values(($_POST["mytext"])));
 
 					//Save the added field on the history.

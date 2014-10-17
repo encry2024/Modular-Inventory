@@ -75,8 +75,7 @@ class DeviceController extends BaseController {
 		if ($device_location == true) {
 			return View::make('trackalldevice')
 						->with('device_locations', $device_location)
-						->with('item_id', $getDeviceItemId)
-						->with('device_name', $getDeviceName)
+						->with('getInfo', $getDevice)
 						->with('itemName', $item_name);
 		}
 	}
