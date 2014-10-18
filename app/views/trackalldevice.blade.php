@@ -33,13 +33,21 @@
 	<div class="large-10 columns large-centered">
 		<div class="row">
 			<div class="large-12 columns">
+<<<<<<< HEAD
 				<h3>-Track All Ac-</h3>
+=======
+				<h3>-Track All {{$itemName}}-</h3>
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 		</div>
 	</br>
 		<div class="row">
 			<div class="large-12 columns">
+<<<<<<< HEAD
 				{{ link_to('Item/'. $item_id, 'Return to ' . $device_name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
+=======
+				{{ link_to('Item/'. $getInfo->item_id, 'Return to ' . $getInfo->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 		</div>
 

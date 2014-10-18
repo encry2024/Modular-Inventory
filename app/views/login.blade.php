@@ -15,6 +15,7 @@
 		<br>
 		<br>
 		<div class="row">
+<<<<<<< HEAD
 			<div class="large-12 small-12 columns">
 				{{ Form::open(array('url' => 'authenticate')) }}
 					<div class="row">
@@ -27,12 +28,29 @@
 							<input type="password" class="radius" placeholder="Enter your password" name="password">
 						</div>
 					</div>
+=======
+			<div class="large-12 columns">
+				{{ Form::open(array('url' => 'authenticate')) }}
+					<div class="row">
+						<div class="large-12 columns">
+							<input type="text" class="radius textAlign" placeholder="Enter your username" name="username">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="large-12 columns">
+							<input type="password" class="radius textAlign" placeholder="Enter your password" name="password">
+						</div>
+					</div>
+
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 					<div class="row">
 						<div class="large-12 columns">
 							 <input type="submit" value="Login" class="button large alert expand login-button" name="Login" />
 						</div>
 					</div>
 			    	{{ Form::close() }}
+<<<<<<< HEAD
 			    	<br>
 
 				@if($errors->has()) 
@@ -47,6 +65,22 @@
 		        			<a href="#" class="close">&times;</a>
 		    			</div>
 				@endif
+=======
+			    	{{ link_to('register', 'Register User', array('class'=>'button small right')) }}
+
+					@if($errors->has()) 
+						@foreach($errors->all() as $message)
+							<span class="error">{{ $message }}</span>
+						@endforeach
+					@endif
+
+					@if ($alert = Session::get('message'))
+			    			<div data-alert class="alert-box alert round">
+			        			{{ $alert }}
+			        			<a href="#" class="close">&times;</a>
+			    			</div>
+					@endif
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 		</div>
 	</div>

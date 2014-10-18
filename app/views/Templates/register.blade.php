@@ -9,6 +9,10 @@
 		Northstar Inventory
 	</title>
 
+<<<<<<< HEAD
+=======
+		@yield('registerBody')
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/jquery.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.topbar.js') }}
@@ -23,6 +27,7 @@
         {{ HTML::style('packages/foundation-icons/foundation-icons.ttf') }}
         {{ HTML::style('main.css') }}
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/modernizr.js') }}
+<<<<<<< HEAD
 
 
 	<style type="text/css">
@@ -30,5 +35,7 @@
 			background-color: #003400;
 		}
 	</style>
+=======
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 	</body>
 </html>

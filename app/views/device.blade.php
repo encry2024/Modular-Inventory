@@ -44,6 +44,7 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<table class="large-12 columns tableOne" id="tableTwo">
+<<<<<<< HEAD
 					
 				<thead>
 
@@ -56,6 +57,13 @@
 
 				</thead>
 
+=======
+				<thead>
+				   	<tr>
+						<th>Track Device added to the database</th>
+					</tr>
+				</thead>
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 				<tbody>
 					@foreach ($devices as $device)
 							<tr>

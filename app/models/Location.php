@@ -33,8 +33,12 @@ class Location extends Eloquent {
 
 			return Redirect::back();
 		}
+<<<<<<< HEAD
 
 
 	}
 	
+=======
+	}
+>>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 }
