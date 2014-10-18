@@ -2,8 +2,6 @@
 
 <?php $fields = $item->field; ?>
 
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
-
 @section('deviceHeader')
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">

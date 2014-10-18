@@ -11,13 +11,14 @@ class ItemsController extends BaseController {
 		//Search Item by id
 		$item = Item::find($id);
 		$locations = Location::lists('name','id');
+		$devices = Device::with('location')->get();
 
 		if($item == true) {
 			return View::make('Item')
 				->with('item', $item)
 				->with('devices', $item->devices)
 				->with('locations', $locations)
-				->with('device_location', $item->devices);
+				->with('device_location', $devices);
 		} else {
 			return View::make('404');
 		}

@@ -102,7 +102,6 @@
 		</div>
     </div>
 </div>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 <!-- MODALS -->
 
 <!-- ADD DEVICE MODAL -->
