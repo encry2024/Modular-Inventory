@@ -97,7 +97,7 @@
 				</br>
 				</br>
 				</br>
-				<li>{{ link_to('', 'Return to Items', array("class"=>"button tiny large-12 radius"))}}</li>
+				<li>{{ link_to('', 'Return to Item', array("class"=>"button tiny large-12 radius"))}}</li>
 			</ul>
 		</div>
     </div>
