@@ -73,11 +73,8 @@ Route::get('All/Track', 'AuditController@trackAll');
 Route::get('Track/{id}', 'DeviceController@showTracks');
 Route::get('Edit/{id}', 'ItemsController@editItem');
 Route::get('/Location', 'LocationController@viewLocation');
-<<<<<<< HEAD
-=======
 Route::get('changePassword', 'UserController@showChangePass');
 
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 #POST
 Route::post('authenticate', 'LoginController@authenticate');
 Route::post('registeruser', 'RegisterController@registerUser');
@@ -88,8 +85,5 @@ Route::post('updateDevice', 'DeviceController@updateDevInfo');
 Route::post('updateitem', 'ItemsController@updateItem');
 Route::post('assign', 'DeviceController@assignDevice');
 Route::post('unassign', 'DeviceController@unassignDevice');
-<<<<<<< HEAD
-=======
 Route::post('changestatus', 'DeviceController@changeStatus');
 Route::post('changepass', 'UserController@changeUserPass');
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184

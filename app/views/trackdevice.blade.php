@@ -1,7 +1,5 @@
 @extends('Templates.device')
 
-<<<<<<< HEAD
-=======
 <?php $fields = $item->field; ?>
 
 >>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
@@ -33,39 +31,6 @@
 @endsection
 
 @section('deviceBody')
-<<<<<<< HEAD
-</br>
-<div class=" large-10 columns large-centered">
-	</br>
-	<div class="row">
-		<div class="large-5 columns">
-			{{ link_to('Item/'. $devices, 'Return to Devices', $attributes = array('class' => 'button tiny radius', 'title' => 'Return Home', 'id'=>$devices  . csrf_token())) }}
-		</div>
-	</div>
-	</br>
-	<div class="row">
-		<div class="large-12 columns">
-			<table class="large-12 columns" id="tableTwo">
-				<thead>
-				   	<tr>
-						<th>Track Assigned Locations</th>
-					</tr>
-				</thead>
-			
-				<tbody>
-				@foreach ($device_location as $devList)
-	    			<tr>
-    					<td> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
-					</tr>
-				@endforeach
-				</tbody>
-			
-			</table>
-		</div>
-	</div>
-</div>
-@endsection
-=======
 <div class="row">
 	<div class="large-9 push-2 columns">
 		<h1> {{ $device->name }} </h1>
@@ -233,4 +198,3 @@
 		document.getElementById("dev_id").value = id;
 	}
 </script>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184

@@ -1,23 +1,13 @@
 @extends('Templates.mainPage')
 
 <?php 
-<<<<<<< HEAD
-	//declarations
-	$ctr = 0;
-	$ctr2 = 0;
 
-?>
-
-@section('header')
-
-=======
 	//Declarations
 	$ctr = 0;
 	$ctr2 = 0;
 ?>
 
 @section('header')
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -30,11 +20,7 @@
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
 					<li>{{ link_to('logout','Logout') }} </li>
-<<<<<<< HEAD
-					<li class="active"><a href="#">Change Password</a></li>
-=======
 					<li class="active">{{ link_to('changePassword', 'Change Password') }}</a></li>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 				</ul>
 			</li>
 		</ul>
@@ -44,19 +30,12 @@
 		</ul>
 	</section>
 </nav>
-<<<<<<< HEAD
 
-=======
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 @endsection
 
 @section('bodySection')
 <div class="large-11 columns large-centered">
-<<<<<<< HEAD
-	<h1 class="font">Inventory</h1>
-=======
 	<h1>Inventory</h1>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 </div>
 
 <div class=" large-10 columns large-centered">
@@ -64,28 +43,6 @@
 		<div class="large-9 columns">
 			<div class="row">
 				<div class="large-10 columns">
-<<<<<<< HEAD
-						{{ link_to('', ' Add Item', array('class' => 'button tiny radius', 'data-reveal-id' => 'myModal')) }}
-						{{ link_to('/Location', 'Location', $attributes = array('class' => 'button tiny radius', 'title' => 'Add a Location for the Device')) }}
-						{{ link_to('All/Track' , 'History', $attributes = array('class' => 'button tiny radius', 'title' => "Check all the actions taken on history.")) }}
-						@if($errors->has()) 
-							@foreach($errors->all() as $message)
-								<span class="error">{{ $message }}</span>
-							@endforeach
-						@endif
-						@if ($notification = Session::get('message'))
-							<div data-alert class="alert-box success ">
-								{{ $notification }}
-								<a href="#" class="close">&times;</a>
-							</div>
-						@endif
-						@if ($notification = Session::get('deleteMessage'))
-							<div data-alert class="alert-box success ">
-								{{ $notification }}
-								<a href="#" class="close">&times;</a>
-							</div>
-						@endif
-=======
 					{{ link_to('', ' Add Item', array('class' => 'button tiny radius', 'data-reveal-id' => 'myModal')) }}
 					{{ link_to('/Location', 'Location', $attributes = array('class' => 'button tiny radius', 'title' => 'Add a Location for the Device')) }}
 					{{ link_to('All/Track' , 'History', $attributes = array('class' => 'button tiny radius', 'title' => "Check all the actions taken on history.")) }}
@@ -108,7 +65,6 @@
 							<a href="#" class="close">&times;</a>
 						</div>
 					@endif
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 				</div>
 			</div>
 		</div>
@@ -127,20 +83,10 @@
 
 				<tbody>
 		  			@foreach ($items as $item)
-<<<<<<< HEAD
-		    				<tr>
-							<td class="font weight">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id  . csrf_token())) }}</td>
-							<td class="font weight">
-								{{ count($item->devices) }}
-							</td>
-							<td class="font weight">
-								
-=======
 		    			<tr>
 							<td class="font weight">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
 							<td class="font weight">{{ count($item->device) }}</td>
 							<td class="font weight">
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 								{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'button large-3 tiny radius', 'title' => 'Edit a Device')) }}
 								{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-3 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
 							</td>

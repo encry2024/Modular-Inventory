@@ -17,14 +17,11 @@ class DeviceController extends BaseController {
 		return $dev_loc;
 	}
 
-<<<<<<< HEAD
-=======
 	public function changeStatus() {
 		$device_status = Device::changeStatus(Input::all());
 		return $device_status;
 	}
 
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 	public function showDevice($id) {
 		$item = Item::find($id);
 		$devices = Device::where('item_id', $id)->get();
@@ -42,14 +39,6 @@ class DeviceController extends BaseController {
 	public function showTrack($id) {
 		//Search device id
 		$device = Device::find($id);
-<<<<<<< HEAD
-
-		//Get item_id on Device
-		$device_item_id = $device->item_id;
-		
-		//Get all the Location of a specific Device
-		$device_location = DeviceLocation::where('device_id', $id)->get();
-=======
 		//Get item_id on Device
 		$device_item_id = $device->item_id;
 		//Get Item by the Device's item_id
@@ -58,51 +47,34 @@ class DeviceController extends BaseController {
 		$device_location = DeviceLocation::where('device_id', $id)->get();
 		//Get Devices with Location
 		$devices = Device::with('location')->where('id', $id)->get();
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 
 		if($device == true) {
 				return View::make('trackdevice')
 					->with('devices', $device_item_id)
-<<<<<<< HEAD
-					->with('device_location', $device_location);
-=======
 					->with('device_location', $device_location)
 					->with('device', $device)
 					->with('dvc', $devices)
 					->with('item', $item);
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			} else {
 				return View::make('404');
 		}
 	}
 
 	public function showTracks($id) {
-<<<<<<< HEAD
-		$getDevice = Device::find($id);
-		$getDeviceItemId = $getDevice->item_id;
-		$getDeviceName = $getDevice->name;
-=======
 		//Get Device: ID, Name
 		$getDevice = Device::find($id);
 
 		//Get Item: Name
 		$getItemName = Item::find($getDevice->item_id);
 		$item_name = $getItemName->name;
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 
 		$device_location = DeviceLocation::with('location.device')->get();
 
 		if ($device_location == true) {
 			return View::make('trackalldevice')
-<<<<<<< HEAD
-							->with('device_locations', $device_location)
-							->with('item_id', $getDeviceItemId)
-							->with('device_name', $getDeviceName);
-=======
 						->with('device_locations', $device_location)
 						->with('getInfo', $getDevice)
 						->with('itemName', $item_name);
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 		}
 	}
 

@@ -27,17 +27,11 @@ h8 {
 	text-align: center!important;
 }
 
-<<<<<<< HEAD
-#menuPanel {
-
-	/* border-style: solid; */
-=======
 .fontAlign {
   text-align: center!important;
 }
 
 #menuPanel {
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 	border-style: solid;
 	border-width: 1px;
 	border-color: #d8d8d8;
@@ -182,8 +176,6 @@ h8 {
   	font-size: 17 !important;
   }
 
-<<<<<<< HEAD
-=======
   .fontSize-5 {
     font-size: 15 !important;
   }
@@ -192,7 +184,6 @@ h8 {
     font-size: 12 !important;
   }
 
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
   .fontSize-3 {
   	font-size: 22 !important;
   }
@@ -250,30 +241,19 @@ h8 {
   }
 
   .login-button {
-<<<<<<< HEAD
-    font-family: "Open Sans" !important;
-=======
     font-family: "Source Code Pro" !important;
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
     font-size: 24 !important;
   }
 
   .fontStyle-2 {
-<<<<<<< HEAD
-    font-family: "Open Sans" !important;
-=======
     font-family: "Source Code Pro" !important;
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
     font-size: 30 !important;
   }
 
   .fontWeight {
     font-weight: bold;
-<<<<<<< HEAD
-=======
   }
 
   .fontSegoe{
     font-family: "Segoe UI Semibold" !important;
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
   }

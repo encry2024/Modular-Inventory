@@ -9,22 +9,13 @@
 	$location_name = "";
 ?>
 
-<<<<<<< HEAD
-@section('header')
-<nav class="top-bar" data-topbar role="navigation">
-	<ul class="title-area">
-     	<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-	</ul>
-=======
+
 @section('itemHeader')
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	</ul>
-
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 	<section class="top-bar-section">
     <!-- Right Nav Section -->
 		<ul class="right">
@@ -44,49 +35,6 @@
 @endsection
 
 @section('bdy')
-<<<<<<< HEAD
-<div class="large-11 columns large-centered">
-	<h1 class="font">{{ $item->name }} Devices</h1>
-
-{{ Form::label('','',array('id'=>'location_ID')) }}
-</br>
-<!--MAIN PAGE DESIGN-->
-<div class="large-10 columns large-centered">
-	<div class="row">
-			<!--DEVICE MENU BUTTON-->
-			<div class="row">
-				<div class="large-12 columns">
-					<div class="row">
-						<div class="large-6 columns">
-							{{ link_to('adddevice', 'Add', $attributes = array('class' => 'button tiny large-3 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}
-							{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'button radius tiny large-3 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ')) }}
-							{{ link_to('/', 'Home', $attributes = array('class' => 'button radius tiny large-3 ', 'title' => 'Return Home')) }}
-							@if ($notification = Session::get('message'))
-								<div data-alert class="alert-box success ">
-									{{ $notification }}
-									<a href="#" class="close">&times;</a>
-								</div>
-							@endif
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--DEVICE TABLE-->
-			<div class="row">
-				@if($errors->has()) 
-					@foreach($errors->all() as $message)
-						<span class="error small-8 columns small-centered">{{ $message }}</span>
-					@endforeach
-				@endif
-				<div class="large-12 columns">
-					<table class="large-12 columns tableOne">
-			  			<thead>
-			   				<tr>
-			      			<th id="headerStyle" class="history-Header-bg">Device Name</th>
-							<th id="headerStyle" class="history-Header-bg">Availability</th>
-							<th id="headerStyle" class="history-Header-bg">Status</th>
-							<th class="history-Header-bg">Actions</th>
-=======
 <div class="row">
 	<div class="large-10 push-2 columns">
 		<h1>{{ $item->name }} Devices</h1>
@@ -99,43 +47,20 @@
 								<th id="headerStyle" class="history-Header-bg">Availability</th>
 								<th id="headerStyle" class="history-Header-bg">Status</th>
 								<th class="history-Header-bg">Actions</th>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 							</tr>
 						</thead>
 
 						<tbody>
 						@foreach ($device_location as $devList)
-<<<<<<< HEAD
-			    			<tr>
-		    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array('title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
-								<?php 
-									if("0" < $devList->location_id ) {
-											echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
-=======
 							<tr>
 		    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array('title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
 								<?php 
 									if($devList->location_id != 0 ) {
 										echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 									} else {
 										echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
 									}
 								?>
-<<<<<<< HEAD
-								<td>{{ Form::label('', $devList->status, array('class' =>'label success radius', 'id' => 'fontSize-Device')) }}</a></td>
-								<td>
-									<?php
-										if("0" < $devList->location_id ) {
-											$locsName = $devList->location->name;
-											echo "<a href='#' class='button tiny large-5 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
-									} else {
-											echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
-									}
-									?>
-									{{ link_to('', 'Edit', array('onclick' => 'getDevProperty('. $devList->id .', "'. $devList->name .'")', 'class' => 'button tiny large-0 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	
-									{{ link_to('Device/delete/'. $devList->id.csrf_token(), 'Delete', array('class' => 'button tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $devList->id . csrf_token())) }}
-=======
 								</td>
 									@if($devList->status != 'Normal')
 										<td>{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
@@ -155,20 +80,10 @@
 											}
 										}
 									?>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 								</td>
 							</tr>
 						@endforeach
 			  			</tbody>
-<<<<<<< HEAD
-					</table>	
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-=======
 					</table>
 				</div>
 			</div>
@@ -194,11 +109,7 @@
 <div id="myModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'adddevice')) }}
 	<div class="row">
-<<<<<<< HEAD
-		<div class="large-7 columns">
-=======
 		<div class="large-7 columns large-centered">
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			<div class="row">
 				{{ Form::label('device', 'Device Name', array('id' => 'modalLbl')) }}
 			  	{{ Form::text('', '', $attributes = array('class' => 'radius', 'id' => 'textStyle', 'placeholder' => 'Enter the device name', 'name' => 'mydevice')) }}
@@ -210,13 +121,8 @@
 			  		{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
 			  	@endforeach
 
-<<<<<<< HEAD
-			{{ Form::hidden('itemId', $item->id . csrf_token() ) }}
-			{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-4 radius', 'name' => 'submit')) }}
-=======
 				{{ Form::hidden('itemId', $item->id ) }}
 				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-12 radius', 'name' => 'submit')) }}
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 		</div>
 		<a class="close-reveal-modal">&#215;</a>
@@ -229,20 +135,11 @@
 	{{ Form::open(array('url' => 'unassign')) }}
 	<div class="row">
 		<div class="large-7 columns">
-<<<<<<< HEAD
-
-			<div class="large-12 columns">
-					<label id="devFont"></label>
-					{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}
-					{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
-					</br>
-=======
 			<div class="large-12 columns">
 				<label id="devFont"></label>
 				{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}
 				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
 				</br>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 			<div class="large-12 columns">
 				{{ Form::label('', "You are about to dissociate the device stated above from the user.", array('id'=>'Font')) }}
@@ -254,15 +151,7 @@
 				</br>
 				{{ Form::label('', "Are you sure you want to dissociate the device?", array('id'=>'Font')) }}
 				</br>
-<<<<<<< HEAD
-				
 			</div>
-
-			</div>
-
-=======
-			</div>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			<div class="large-12 columns">
 				<div class="large-12 columns">
 					{{ Form::submit('Dissociate' , $attributes = array('class' => 'button tiny radius', 'name' => 'submit')) }}
@@ -279,10 +168,6 @@
 	{{ Form::open(array('url' => 'assign')) }}
 	<div class="row">
 		<div class="large-7 columns">
-<<<<<<< HEAD
-
-=======
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			<div class="large-12 columns">
 				<label id="devFont"></label>
 				{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'devLabel', 'class' => 'deviceLbl')) }}

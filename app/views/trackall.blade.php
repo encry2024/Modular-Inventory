@@ -35,11 +35,7 @@
 	<div class="large-11 columns large-Centered">
 		<div class="row">
 			<div class="large-12 columns">
-<<<<<<< HEAD
-				<h1 class="font">History</h1>
-=======
 				<h1>History</h1>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			</div>
 		</div>
 	</div>
@@ -56,11 +52,7 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
-</br>
-=======
 			</br>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 			@foreach ($audits as $audit)
 			<div class="row">
 				<div class="large-12 columns">
@@ -71,11 +63,7 @@
 						}
 						$audit_time = date('h:i A', strtotime($audit->created_at));
 					?>
-<<<<<<< HEAD
-						<label class='font'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
-=======
 					<label class='font'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
->>>>>>> 3dca606b07226acb79874b6a530be05e7eb3f184
 				</div>
 			</div>
 			@endforeach
