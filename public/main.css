@@ -1,0 +1,245 @@
+#header-panel {
+	background-color: #4e2700;
+	border-color: #4e2700;
+	height: 15%;
+	
+}
+
+#header-h3 {
+	color: WHITE;
+	font-family: Segoe UI;
+}
+
+h7 {
+	color: WHITE;
+	font-family: Segoe UI;
+}
+
+h8 {
+	font-family: Segoe UI;
+}
+
+#sidebarBg {
+	background-color: #f8a09c;
+}
+
+#hAlign {
+	text-align: center!important;
+}
+
+#menuPanel {
+
+	/* border-style: solid; */
+	border-style: solid;
+	border-width: 1px;
+	border-color: #d8d8d8;
+	margin-bottom: 0.0rem !important; 
+	
+	background: #f2f2f2;
+}
+
+#Font {
+	font-family: Segoe UI;
+}
+
+#TabStyle {
+	font-family: Segoe UI;
+	background: #f2f2f2;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #d8d8d8;
+}
+
+#btnColor {
+	font-family: Segoe UI;
+}
+
+#rowMargin {
+	margin-left: 4rem !important;
+	margin-top: 50 !important;
+}
+
+#panelMargin {
+	margin-left: 4rem !important;
+	width: 89.6% !important;
+	background-color: #4e2700;
+}
+
+#textMargin {
+	margin-left: 12rem !important;
+}
+
+#textboxStyle {
+	width: 30.66667%;
+	margin-left: 3rem !important;
+}
+
+/*#textStyle {
+	margin-left: 12rem !important;
+}*/
+
+#devFont {
+	margin-left: 12rem !important;
+	font-size: 30;
+	font-family: Segoe UI;
+	margin-bottom: 10;
+}
+
+#modalLbl {
+	font-size: 26;
+	font-family: Segoe UI;
+}
+
+#tbox-width {
+	width: 80%;
+	font-family: Segoe UI;
+}
+
+#removeLnk {
+	font-family: Segoe UI;
+	font-size: 10;
+}
+
+#txtMargin {
+	margin-left: 16rem !important;
+}
+
+.deviceLbl {
+	font-size: 26;
+	font-family: Segoe UI;
+}
+
+  .tableOne td,tr, table,thead,th {
+    text-align: center!important;
+    /*margin-left: 9rem !important;*/
+    width: 500rem;
+  }
+
+  button, .button {
+  	margin: 0 0 0.25rem !important;
+  	font-family: Segoe UI;
+    font-size: 11.5!important;
+  }
+
+  #tableTwo {
+  	margin-left: 0rem !important;
+    text-align: left!important;
+  }
+
+  .fontSize {
+  	font-size: 10 !important;
+  	font-family: Segoe UI!important;
+  }
+
+  #fontSize-Device {
+    font-size: 10 !important;
+    font-family: Segoe UI!important;
+    color: White!important;
+  }
+
+
+  .fontStyle {
+  	font-size: 30!important;
+	font-family: Segoe UI!important;
+  }
+
+  .fontStyleLabel {
+  	font-size: 20!important;
+  	font-family: Segoe UI!important;
+  }
+
+  .inputField {
+  	font-size: 19!important;
+  	font-family: Segoe UI!important;
+  	text-align: center;
+  }
+
+  .font {
+  	font-family: Segoe UI !important;
+  }
+
+  .weight {
+  	font-style: normal!important;
+  }
+
+  .fontColor {
+  	color: White!important;
+  }
+
+  .fontSize-1 {
+  	font-size: 20 !important;
+  }
+
+  .fontSize-2 {
+  	font-size: 17 !important;
+  }
+
+  .fontSize-3 {
+  	font-size: 22 !important;
+  }
+
+  .fontSize-4 {
+    font-size: 24 !important;
+  }
+
+  .font-1 {
+  	 font-family: Segoe UI !important;
+  }
+
+  #panelPadding-10 {
+    padding: 0.25rem !important;
+  }
+
+  .textAlign {
+    text-align: center !important;
+  }
+
+  .fontWeight {
+    font-weight: bold!important;
+  }
+
+  #trackAll-Style-panel-header {
+    text-align: center !important;
+    padding: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #device-Table-Width {
+    width: 110% !important;
+  }
+
+  #headerStyle {
+    width: 24% !important;
+  }
+
+  #headerStatus {
+    width: 24% !important
+  }
+
+  .item-title {
+    font-size: 27!important;
+  }
+
+  .history-Header-bg{
+    background-color: #4c4c4c !important;
+    color: White !important;
+    border-color: #4c4c4c !important;
+  }
+
+  .history-body-bg {
+    background-color: White !important;
+  }
+
+  .login-button {
+    font-family: "Open Sans" !important;
+    font-size: 24 !important;
+  }
+
+  .fontStyle-2 {
+    font-family: "Open Sans" !important;
+    font-size: 30 !important;
+  }
+
+  .fontWeight {
+    font-weight: bold;
+  }
