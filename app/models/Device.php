@@ -113,6 +113,8 @@ class Device extends Eloquent {
 	}
 
 	public static function update_device_infos($data) {
+		$audit_history = '';
+
 		foreach($data as $key=>$value) {
 			if(strpos($key,'field') !== false) {
 				//get id (field-1)
@@ -120,18 +122,25 @@ class Device extends Eloquent {
 				$id = $field_info[1];
 
 				//save in database
-				$info = Info::find($_POST["deviceId"]);
-				$info->field_id = $id;
+				$info = Info::find($id);
+				$info_OldValue = $info->value;
 				$info->value = $value;
 				$info->save();
 
-				$info_Id = $info->id;
+				$info_NewValue = $info->value;
 
 				$audits = new Audit();
-				$audits->username = Auth::user()->username;
-				$audits->user_id = Auth::user()->id;
-				$audits->info_id = $info_Id;
-				$audits->save();
+				$searchInfo = Info::where('id', $id)->get();
+
+				foreach ($searchInfo as $infoValues) {
+					if( $audits->history == $audit_history OR $audits->history != $audit_history) {
+						if ($info_OldValue != $info_NewValue) {
+							$audit_history = $audits->history;
+							$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_oldValue . " to " . $infoValues->value ." of the device ".$_POST["deviceName"].".";
+							$audits->save();
+						}
+					}
+				}
 			} else {
 				continue;
 			}
