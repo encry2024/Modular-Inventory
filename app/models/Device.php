@@ -132,20 +132,30 @@ class Device extends Eloquent {
 				$audits = new Audit();
 				$searchInfo = Info::where('id', $id)->get();
 
+				$device = Device::find($_POST["deviceId"]);
+				$deviceName = $device->name;
+
 				foreach ($searchInfo as $infoValues) {
-					if( $audits->history == $audit_history OR $audits->history != $audit_history) {
-						if ($info_OldValue != $info_NewValue) {
-							$audit_history = $audits->history;
-							$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_oldValue . " to " . $infoValues->value ." of the device ".$_POST["deviceName"].".";
-							$audits->save();
-						}
+					if ($info_OldValue != $info_NewValue) {
+						$audit_history = $audits->history;
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $infoValues->value ." of the device ".$deviceName.".";
+						$audits->save();
+						return Redirect::back()
+										->with('message', 'Device Information has been changed.');
+					} else {
+						$audit_history = $audits->history;
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " made no changes on Device Information.";
+						$audits->save();
+
+						return Redirect::back()
+										->with('message', 'There were no changes happened.');
 					}
 				}
 			} else {
 				continue;
 			}
 		}
-		return Redirect::back();
+		
 	}
 
 	public static function changeStatus($data) {
