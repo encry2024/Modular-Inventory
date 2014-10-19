@@ -46,7 +46,7 @@ class ItemsController extends BaseController {
 		//Get Item where id = $id
 		$item = Item::find($id);
 		//Get All Fields where item_id = $id
-		$fields = Field::where('item_id', $id)->get();
+		$fields = Info::with('field')->where('device_id', $id)->get();
 		if($item == true) {
 			return View::make('Edit')
 				->with('item', $item)

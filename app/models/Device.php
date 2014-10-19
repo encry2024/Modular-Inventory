@@ -160,5 +160,3 @@ class Device extends Eloquent {
 						->with('message', 'Device status updated.');
 	}
 }
-///Device has 1 info.
-///Info has many fields.
