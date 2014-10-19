@@ -1,7 +1,5 @@
 @extends('Templates.device')
 
-<?php $fields = $item->field; ?>
-
 @section('deviceHeader')
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
@@ -140,7 +138,7 @@
 					{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
 				</br>
 				  	@foreach ($fields as $device_field_info)
-					  	{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
+						{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
 					  	<div class="row">
 							<div class="large-12 columns large-centered">
 								<div class="row">
