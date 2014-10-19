@@ -138,18 +138,7 @@
 					{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
 				</br>
 				  	@foreach ($fields as $device_field_info)
-						{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
-					  	<div class="row">
-							<div class="large-12 columns large-centered">
-								<div class="row">
-									<div class="large-9 columns">
-										{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
-									</div>
-										{{ link_to('Device/delete/'.$device_field_info->id, 'Delete', array('class' => 'button tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $device_field_info->id)) }}
-									</a>
-								</div>
-							</div>
-						</div>
+						{{ var_dump($device_field_info->value) }}
 				  	@endforeach
 				  	<div class="large-11 columns">
 					{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}

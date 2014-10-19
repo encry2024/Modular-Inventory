@@ -48,7 +48,7 @@ class DeviceController extends BaseController {
 		//Get Devices with Location
 		$devices = Device::with('location')->where('id', $id)->get();
 		//Get Information value on Field
-		$fields = Info::with('field')->where('device_id', $id)->get();
+		$fields = Info::with('field.item')->where('id', $device_item_id)->get();
 
 		if($device == true) {
 				return View::make('trackdevice')
