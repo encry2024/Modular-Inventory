@@ -142,9 +142,16 @@ class Device extends Eloquent {
 	public static function changeStatus($data) {
 		$device = Device::find($data["devi_Id"]);
 		$device->status = $data["status"];
+		if ($device->status == 'Normal') {
+			$device->availability = 'Available';
+		}
+		else {
+			$device->availability = 'Not Available';
+		}
 		$device->save();
 		$device_name = $device->name;
 		$device_status = $device->status;
+
 		$audits = new Audit;
 		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has set the Device ". $device_name ." status to ". $device_status .".";
 		$audits->save();

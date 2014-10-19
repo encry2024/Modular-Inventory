@@ -61,7 +61,12 @@
 							@if ($dev->location_id != 0)
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->location->name }}</label>
 							@else
-								<label class="label Success font-1 fontSize-6 fontSize-Device radius">Available</label>
+								@if ($dev->status != 'Normal')
+									<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>
+								@else 
+									<label class="label success font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>
+								
+								@endif
 							@endif
 						@endforeach
 						</div>
@@ -103,7 +108,11 @@
 					@if ($dev->status == "Retired")
 						<li>{{ link_to('#', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
 					@else
-						<li>{{ link_to('', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
+						@if($dev->location_id == 0)
+							<li>{{ link_to('', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
+						@else
+							<li>{{ link_to('#', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
+							@endif
 					@endif
 				<li>{{ link_to('Device/delete/'. $device->id.csrf_token(), 'Delete', array('class' => 'button tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token())) }}</li>
 				</br>
@@ -115,7 +124,7 @@
 		</div>  
     </div>
 </div>
-
+<!--Edit Device Modal-->
 <div id="editDeviceModal" class="reveal-modal medium" data-reveal>
 	{{ Form::open(array('url' => 'updateDevice')) }}
 	<div class="large-12 columns large-centered">
@@ -173,7 +182,7 @@
 			  	<div class="large-9 columns">
 			  	</br>
 			  	</br>
-			  	{{Form::select('status', array('Retired'=>'Retired','Defective' =>'Defective'));}}
+			  	{{Form::select('status', array('Normal'=>'Normal','Defective' =>'Defective', 'Retired'=>'Retired'));}}
 				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
 				</div>
 			</div>

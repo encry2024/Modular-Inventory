@@ -58,7 +58,11 @@
 									if($devList->location_id != 0 ) {
 										echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
 									} else {
-										echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+										if ($devList->status != 'Normal') {
+											echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
+										} else {
+											echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+										}
 									}
 								?>
 								</td>
