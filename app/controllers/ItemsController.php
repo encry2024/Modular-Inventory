@@ -2,7 +2,6 @@
 
 class ItemsController extends BaseController {
 
-
 	public function addItem() {
 		$item = Item::registerItem(Input::all());
 		return $item;
@@ -12,13 +11,14 @@ class ItemsController extends BaseController {
 		//Search Item by id
 		$item = Item::find($id);
 		$locations = Location::lists('name','id');
+		$devices = Device::with('location')->where('item_id', $id)->get();
 
 		if($item == true) {
 			return View::make('Item')
 				->with('item', $item)
 				->with('devices', $item->devices)
 				->with('locations', $locations)
-				->with('device_location', $item->devices);
+				->with('device_location', $devices);
 		} else {
 			return View::make('404');
 		}
@@ -47,7 +47,7 @@ class ItemsController extends BaseController {
 		$item = Item::find($id);
 		//Get All Fields where item_id = $id
 		$fields = Field::where('item_id', $id)->get();
-
+		
 		if($item == true) {
 			return View::make('Edit')
 				->with('item', $item)
@@ -62,5 +62,3 @@ class ItemsController extends BaseController {
 		return $update_Item;
 	}
 }
-
-

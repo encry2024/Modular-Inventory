@@ -9,13 +9,13 @@
 	$location_name = "";
 ?>
 
+
 @section('itemHeader')
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	</ul>
-
 	<section class="top-bar-section">
     <!-- Right Nav Section -->
 		<ul class="right">
@@ -58,7 +58,11 @@
 									if($devList->location_id != 0 ) {
 										echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
 									} else {
-										echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+										if ($devList->status != 'Normal') {
+											echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
+										} else {
+											echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+										}
 									}
 								?>
 								</td>
@@ -97,7 +101,7 @@
 				</br>
 				</br>
 				</br>
-				<li>{{ link_to('', 'Return to Items', array("class"=>"button tiny large-12 radius"))}}</li>
+				<li>{{ link_to('', 'Return to Item', array("class"=>"button tiny large-12 radius"))}}</li>
 			</ul>
 		</div>
     </div>

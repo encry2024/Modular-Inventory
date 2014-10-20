@@ -89,12 +89,11 @@ class Device extends Eloquent {
 					$info->field_id = $id;
 					$info->value = $value;
 					$info->save();
-					
 					$field_id = $info->field_id;
 
 					$audits = new Audit();
 					$audit_history = $audits->history;
-					$field = Field::where('id', $field)->get();
+					$field = Field::where('id', $id)->get();
 					$info = Info::where('field_id', $field_id)->get();
 					foreach ($field as $field) {
 						foreach ($info as $fields_info) {
@@ -114,6 +113,8 @@ class Device extends Eloquent {
 	}
 
 	public static function update_device_infos($data) {
+		$audit_history = '';
+		$changesApplied = 0;
 		foreach($data as $key=>$value) {
 			if(strpos($key,'field') !== false) {
 				//get id (field-1)
@@ -121,31 +122,58 @@ class Device extends Eloquent {
 				$id = $field_info[1];
 
 				//save in database
-				$info = Info::find($_POST["deviceId"]);
-				$info->field_id = $id;
+				$info = Info::find($id);
+				$info_OldValue = $info->value;
 				$info->value = $value;
 				$info->save();
 
-				$info_Id = $info->id;
+				$info_NewValue = $info->value;
 
 				$audits = new Audit();
-				$audits->username = Auth::user()->username;
-				$audits->user_id = Auth::user()->id;
-				$audits->info_id = $info_Id;
-				$audits->save();
+				$searchInfo = Info::where('id', $id)->get();
+
+				$device = Device::find($_POST["deviceId"]);
+				$deviceName = $device->name;
+
+				foreach ($searchInfo as $infoValues) {
+					if ($info_OldValue != $info_NewValue) {
+						$audit_history = $audits->history;
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $infoValues->value ." of the device ".$deviceName.".";
+						$audits->save();
+						$changesApplied++;
+					} else {
+						$audit_history = $audits->history;
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " made no changes on ".$infoValues->value." Information of the Device: ".$deviceName.".";
+						$audits->save();
+					}
+				}
 			} else {
 				continue;
 			}
 		}
-		return Redirect::back();
+
+		if ($changesApplied != 0) {
+			return Redirect::back()
+				->with('message', 'Device Information has been changed.');
+		} else {
+			return Redirect::back()
+										->with('message', 'There were no changes happened.');
+		}
 	}
 
 	public static function changeStatus($data) {
 		$device = Device::find($data["devi_Id"]);
 		$device->status = $data["status"];
+		if ($device->status == 'Normal') {
+			$device->availability = 'Available';
+		}
+		else {
+			$device->availability = 'Not Available';
+		}
 		$device->save();
 		$device_name = $device->name;
 		$device_status = $device->status;
+
 		$audits = new Audit;
 		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has set the Device ". $device_name ." status to ". $device_status .".";
 		$audits->save();
@@ -154,5 +182,3 @@ class Device extends Eloquent {
 						->with('message', 'Device status updated.');
 	}
 }
-///Device has 1 info.
-///Info has many fields.

@@ -1,6 +1,7 @@
 @extends('Templates.mainPage')
 
 <?php 
+
 	//Declarations
 	$ctr = 0;
 	$ctr2 = 0;
@@ -29,6 +30,7 @@
 		</ul>
 	</section>
 </nav>
+
 @endsection
 
 @section('bodySection')

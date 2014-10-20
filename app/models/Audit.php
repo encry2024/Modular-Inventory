@@ -1,5 +1,6 @@
 <?php
 
+
 class Audit extends Eloquent {
 
 	public static function getAudits() {
@@ -8,6 +9,4 @@ class Audit extends Eloquent {
 		return View::make('trackall')
 				->with('audits', $audits);
 	}
-			
 }
-

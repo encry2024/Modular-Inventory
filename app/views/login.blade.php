@@ -35,6 +35,7 @@
 						</div>
 					</div>
 			    	{{ Form::close() }}
+
 			    	{{ link_to('register', 'Register User', array('class'=>'button small right')) }}
 
 					@if($errors->has()) 

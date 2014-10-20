@@ -23,8 +23,6 @@
         {{ HTML::style('packages/foundation-icons/foundation-icons.ttf') }}
         {{ HTML::style('main.css') }}
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/modernizr.js') }}
-	
-
 		
 		@yield('bdy')
 

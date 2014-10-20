@@ -1,3 +1,4 @@
+
 @extends('Templates.register')
 
 @section('registerBody')
@@ -23,26 +24,31 @@
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your password" name="password">
+
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="password" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Confirm your password" name="confirmPassword">
+
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="text" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your Firstname" name="firstName">
+
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="text" class="radius fontAlign font fontSize-3 fontWeight" placeholder="Enter your Lastname" name="lastName">
+
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
 							<input type="submit" class="button large alert expand login-button radius" />
+
 						</div>
 					</div>
 			    	{{ Form::close() }}

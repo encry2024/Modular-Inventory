@@ -47,7 +47,7 @@ class DeviceLocation extends Eloquent implements UserInterface, RemindableInterf
 		);
 
 		//rules
-		$rules =array(
+		$rules = array(
 			'device_id' => 'required'
 		);
 
