@@ -135,10 +135,10 @@ class Device extends Eloquent {
 				$device = Device::find($_POST["deviceId"]);
 				$deviceName = $device->name;
 
-				foreach ($searchInfo as $infoValues) {
+				// foreach ($searchInfo as $infoValues) {
 					if ($info_OldValue != $info_NewValue) {
 						$audit_history = $audits->history;
-						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $infoValues->value ." of the device ".$deviceName.".";
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $info_NewValue ." of the device ".$deviceName.".";
 						$audits->save();
 						return Redirect::back()
 										->with('message', 'Device Information has been changed.');
@@ -150,12 +150,11 @@ class Device extends Eloquent {
 						return Redirect::back()
 										->with('message', 'There were no changes happened.');
 					}
-				}
+				// }
 			} else {
 				continue;
 			}
 		}
-		
 	}
 
 	public static function changeStatus($data) {

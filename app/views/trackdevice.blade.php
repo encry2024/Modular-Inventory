@@ -137,8 +137,8 @@
 				<div class="large-12 columns">
 					{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
 				</br>
-				  	@foreach ($fields as $device_field_info)
-						{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
+				@foreach ($fields as $device_field_info)
+					{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
 					  	<div class="row">
 							<div class="large-12 columns large-centered">
 								<div class="row">
@@ -150,8 +150,8 @@
 								</div>
 							</div>
 						</div>
-				  	@endforeach
-					{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
+				@endforeach
+				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
 				</div>
 			</div>
 		</div>
@@ -178,7 +178,7 @@
 			  	<div class="large-9 columns">
 			  	</br>
 			  	</br>
-			  	{{Form::select('status', array('Normal'=>'Normal','Defective' =>'Defective', 'Retired'=>'Retired'));}}
+			  	{{ Form::select('status', array('Normal'=>'Normal','Defective' =>'Defective', 'Retired'=>'Retired')) }}
 				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
 				</div>
 			</div>

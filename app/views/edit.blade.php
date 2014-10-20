@@ -29,7 +29,7 @@
 @section('itemBody')
 </br>
 <div class="large-11 columns large-centered container">
-	<h1 class="fontStyle ">Edit {{ $item->name }} Field </h1>
+	<h1>Edit {{ $item->name }} Field </h1>
 </div>
 <div class="large-9 columns large-centered">
 	<div class="row">

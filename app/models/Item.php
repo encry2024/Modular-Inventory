@@ -117,6 +117,8 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 					$field_old_label = $field->item_label;
 					$field->item_label = $value;
 					$field->save();
+					//Get Field ID
+					$fieldId = $field->id;
 					//Get the latest field Value
 					$field_new_label = $field->item_label;
 
@@ -142,26 +144,34 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 		if (isset($_POST["mytext"]) != '') {
 			foreach($_POST["mytext"] as $labelField) {
 				if ($labelField != '') {
+
 					$field = new Field;
 					$field->item_id = $_POST["iId"];
 					$field->item_label = $labelField;
 					$field->save();
 
+					$field_id = $field->id;
+					$device = Device::where('item_id', $_POST["iId"])->get();
+					foreach ($device as $d) {
+						$info = new Info();
+						$info->device_id = $d->id;
+						$info->field_id = $field_id;
+						$info->value = "";
+						$info->save();
+					}
 					$newField = $field->item_label;
 
 					$audit_history = '';
 					$audits = new Audit;
 					//Save the added field on the History
 					if( $audits->history == $audit_history OR $audits->history != $audit_history) {
-
 						$audit_history = $audits->history;
 						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " Added a new " . $newField . " field on the item ".$_POST["iName"].".";
 						$audits->save();
-					$changesApplied++;
+						$changesApplied++;
 					}
 				}
 			}
-			
 		}
 		if ($changesApplied != 0) {
 			return Redirect::back()->with('message', 'Changes on Fields was successful.');

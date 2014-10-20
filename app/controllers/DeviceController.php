@@ -39,10 +39,8 @@ class DeviceController extends BaseController {
 	public function showTrack($id) {
 		//Search device id
 		$device = Device::find($id);
-		//Get item_id on Device
-		$device_item_id = $device->item_id;
 		//Get Item by the Device's item_id
-		$item = Item::find($device_item_id);
+		$item = Item::find($device->item_id);
 		//Get all the Location of a specific Device
 		$device_location = DeviceLocation::where('device_id', $id)->get();
 		//Get Devices with Location
@@ -52,7 +50,7 @@ class DeviceController extends BaseController {
 
 		if($device == true) {
 				return View::make('trackdevice')
-					->with('devices', $device_item_id)
+					->with('devices', $device->item_id)
 					->with('device_location', $device_location)
 					->with('device', $device)
 					->with('dvc', $devices)
