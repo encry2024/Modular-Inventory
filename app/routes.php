@@ -43,9 +43,17 @@ Route::get('Field/delete/{id}', function($id) {
 	$getItem = Item::where('id', $fieldItemId)->first ();
 	$itemName = $getItem->name;
 
-	$audits = new Audit;
-	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the field " .$field_name." on the item ". $itemName ." permanently.";
-	$audits->save();
+	$getInfo = Info::where('field_id', $id)->get();
+
+	foreach ($getInfo as $value) {
+		$audits = new Audit;
+		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the field " .$field_name." and its field(s): ".$value->value." on the item ". $itemName ." permanently.";
+		$audits->save();
+	}
+
+	foreach($getInfo as $info) {
+		$info->delete();
+	}
 	$field->delete();
 	return Redirect::back()
 			->with('deleteMessage', 'Field '.$field->item_label.' has been deleted.');
