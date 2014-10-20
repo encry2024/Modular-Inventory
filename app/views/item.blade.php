@@ -96,7 +96,11 @@
 	    <div class="panel">
 			<ul class="side-nav">
 				<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'button tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
-				<li><li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ')) }}</li></li>
+				@if (count($deviceList) == 0)
+					<li>{{ link_to('#', 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
+				@else
+					<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
+				@endif
 				<li>{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
 				</br>
 				</br>
@@ -112,7 +116,7 @@
 <div id="myModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'adddevice')) }}
 	<div class="row">
-		<div class="large-7 columns large-centered">
+		<div class="large-10 columns">
 			<div class="row">
 				{{ Form::label('device', 'Device Name', array('id' => 'modalLbl')) }}
 			  	{{ Form::text('', '', $attributes = array('class' => 'radius', 'id' => 'textStyle', 'placeholder' => 'Enter the device name', 'name' => 'mydevice')) }}
@@ -125,7 +129,7 @@
 			  	@endforeach
 
 				{{ Form::hidden('itemId', $item->id ) }}
-				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-12 radius', 'name' => 'submit')) }}
+				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-5 radius', 'name' => 'submit')) }}
 			</div>
 		</div>
 		<a class="close-reveal-modal">&#215;</a>
