@@ -114,7 +114,7 @@ class Device extends Eloquent {
 
 	public static function update_device_infos($data) {
 		$audit_history = '';
-
+		$changesApplied = 0;
 		foreach($data as $key=>$value) {
 			if(strpos($key,'field') !== false) {
 				//get id (field-1)
@@ -135,25 +135,29 @@ class Device extends Eloquent {
 				$device = Device::find($_POST["deviceId"]);
 				$deviceName = $device->name;
 
-				// foreach ($searchInfo as $infoValues) {
+				foreach ($searchInfo as $infoValues) {
 					if ($info_OldValue != $info_NewValue) {
 						$audit_history = $audits->history;
-						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $info_NewValue ." of the device ".$deviceName.".";
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " changed the information " . $info_OldValue . " to " . $infoValues->value ." of the device ".$deviceName.".";
 						$audits->save();
-						return Redirect::back()
-										->with('message', 'Device Information has been changed.');
+						$changesApplied++;
 					} else {
 						$audit_history = $audits->history;
-						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " made no changes on Device Information.";
+						$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " made no changes on ".$infoValues->value." Information of the Device: ".$deviceName.".";
 						$audits->save();
-
-						return Redirect::back()
-										->with('message', 'There were no changes happened.');
 					}
-				// }
+				}
 			} else {
 				continue;
 			}
+		}
+
+		if ($changesApplied != 0) {
+			return Redirect::back()
+				->with('message', 'Device Information has been changed.');
+		} else {
+			return Redirect::back()
+										->with('message', 'There were no changes happened.');
 		}
 	}
 
