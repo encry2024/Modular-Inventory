@@ -93,7 +93,7 @@
 	    <div class="panel">
 			<ul class="side-nav">
 				<li>{{ link_to('', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => 'button tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
-					<!--IF DEVICE STATUS IS NOT NORMA. DISABLE ASSIGN DEVICE-->
+					<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->
 					@foreach ($dvc as $dev)
 						@if ($dev->status != "Normal")
 							<li>{{ link_to('#', 'Assign Device', array("class"=>"button tiny large-12 radius", 'disabled')) }}</li>
@@ -151,9 +151,8 @@
 							</div>
 						</div>
 				  	@endforeach
-				  	<div class="large-11 columns">
-					{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
-				</div>
+						{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
+					
 				</div>
 			</div>
 		</div>
