@@ -151,8 +151,7 @@
 							</div>
 						</div>
 				  	@endforeach
-						{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
-					
+					{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
 				</div>
 			</div>
 		</div>

@@ -11,7 +11,7 @@ class ItemsController extends BaseController {
 		//Search Item by id
 		$item = Item::find($id);
 		$locations = Location::lists('name','id');
-		$devices = Device::with('location')->get();
+		$devices = Device::with('location')->where('item_id', $id)->get();
 
 		if($item == true) {
 			return View::make('Item')

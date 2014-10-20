@@ -93,7 +93,7 @@ class Device extends Eloquent {
 
 					$audits = new Audit();
 					$audit_history = $audits->history;
-					$field = Field::where('id', $field)->get();
+					$field = Field::where('id', $id)->get();
 					$info = Info::where('field_id', $field_id)->get();
 					foreach ($field as $field) {
 						foreach ($info as $fields_info) {
