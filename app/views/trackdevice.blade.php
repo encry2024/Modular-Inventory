@@ -63,7 +63,6 @@
 									<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>
 								@else 
 									<label class="label success font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>
-								
 								@endif
 							@endif
 						@endforeach
@@ -73,6 +72,12 @@
 			</div>
 		</br>
 		</br>
+		@if ($alert = Session::get('message'))
+			<div data-alert class="alert-box success small-8">
+    			{{ $alert }}
+    			<a href="#" class="close">&times;</a>
+			</div>
+		@endif
 		<table class="large-12 columns" id="tableTwo">
 			<thead>
 		   		<tr>
@@ -92,7 +97,11 @@
     <div class="large-2 pull-10 columns">
 	    <div class="panel">
 			<ul class="side-nav">
-				<li>{{ link_to('', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => 'button tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
+					@if ($dev->status != "Normal")
+						<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => 'button tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal', 'disabled')) }}	</li>
+					@else
+						<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => 'button tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
+					@endif
 					<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->
 					@foreach ($dvc as $dev)
 						@if ($dev->status != "Normal")
@@ -110,7 +119,7 @@
 							<li>{{ link_to('', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
 						@else
 							<li>{{ link_to('#', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
-							@endif
+						@endif
 					@endif
 				<li>{{ link_to('Device/delete/'. $device->id.csrf_token(), 'Delete', array('class' => 'button tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token())) }}</li>
 				</br>

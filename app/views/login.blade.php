@@ -45,10 +45,10 @@
 					@endif
 
 					@if ($alert = Session::get('message'))
-			    			<div data-alert class="alert-box alert round">
-			        			{{ $alert }}
-			        			<a href="#" class="close">&times;</a>
-			    			</div>
+		    			<div data-alert class="alert-box alert round">
+		        			{{ $alert }}
+		        			<a href="#" class="close">&times;</a>
+		    			</div>
 					@endif
 			</div>
 		</div>

@@ -151,13 +151,12 @@ class Device extends Eloquent {
 				continue;
 			}
 		}
-
 		if ($changesApplied != 0) {
 			return Redirect::back()
 				->with('message', 'Device Information has been changed.');
 		} else {
 			return Redirect::back()
-										->with('message', 'There were no changes happened.');
+				->with('message', 'No changes happened.');
 		}
 	}
 

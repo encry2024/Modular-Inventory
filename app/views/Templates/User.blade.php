@@ -12,7 +12,7 @@
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.topbar.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.reveal.js') }}
-         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.alert.js') }}
+        {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.alert.js') }}
         <!-- Other JS plugins can be included here -->
 
         {{ HTML::style('packages/foundation-5.3.3/css/normalize.css') }}
@@ -28,7 +28,6 @@
 			background-color: #4e2700;
 		}
 	</style>
-
 
 	</body>
 </html>
