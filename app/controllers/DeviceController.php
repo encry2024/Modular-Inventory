@@ -77,8 +77,8 @@ class DeviceController extends BaseController {
 						->with('getInfo', $getDevice)
 						->with('itemName', $item_name);
 		}else {
-				return View::make('404');
-			}
+			return View::make('404');
+		}
 	}
 
 	public function unassignDevice() {

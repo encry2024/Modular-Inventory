@@ -12,7 +12,7 @@ class ItemsController extends BaseController {
 		$item = Item::find($id);
 		$locations = Location::lists('name','id');
 		$devices = Device::with('location')->where('item_id', $id)->get();
-
+		
 		if($item == true) {
 			return View::make('Item')
 				->with('item', $item)

@@ -39,8 +39,8 @@ Route::get('Field/delete/{id}', function($id) {
 	$field = Field::find($id);
 	$fieldItemId = $field->item_id;
 	$field_name = $field->item_label;
-	
-	$getItem = Item::where('id', $fieldItemId)->first ();
+
+	$getItem = Item::where('id', $fieldItemId)->first();
 	$itemName = $getItem->name;
 
 	$getInfo = Info::where('field_id', $id)->get();

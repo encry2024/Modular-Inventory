@@ -141,18 +141,19 @@
 <div id="unAssignModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'unassign')) }}
 	<div class="row">
-		<div class="large-7 columns">
+		<div class="large-12 columns">
 			<div class="large-12 columns">
 				<label id="devFont"></label>
-				{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}
+				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}</h1>
 				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
-				</br>
 			</div>
 			<div class="large-12 columns">
 				{{ Form::label('', "You are about to dissociate the device stated above from the user.", array('id'=>'Font')) }}
 				</br>
+				</br>
 				{{ Form::label('', "Dissociate to:", array('class' => 'font-1')) }}
 				{{ Form::label('','', array('id'=>'location_label', 'class' => 'deviceLbl')) }}
+				</br>
 				</br>
 				</br>
 				</br>
@@ -160,9 +161,7 @@
 				</br>
 			</div>
 			<div class="large-12 columns">
-				<div class="large-12 columns">
-					{{ Form::submit('Dissociate' , $attributes = array('class' => 'button tiny radius', 'name' => 'submit')) }}
-				</div>
+				{{ Form::submit('Dissociate' , $attributes = array('class' => 'button tiny radius large-12', 'name' => 'submit')) }}
 			</div>
 		</div>
 		<a class="close-reveal-modal">&#215;</a>
@@ -174,19 +173,17 @@
 <div id="assignModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'assign')) }}
 	<div class="row">
-		<div class="large-7 columns">
+		<div class="large-12 columns">
 			<div class="large-12 columns">
 				<label id="devFont"></label>
-				{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'devLabel', 'class' => 'deviceLbl')) }}
-				<br>
-				<br>
+				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'devLabel', 'class' => 'deviceLbl')) }}</h1>
 				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_textbox' )) }}
 				{{ Form::hidden('itemID', $item->id) }}
 				{{ Form::label('','Choose below where you want to assign the Device stated above.', array('class'=>'font-1 radius')) }}
-				<br>
+				<br></br></br>
 				{{ Form::label('', "Location's name", array('id'=>'Font')) }}
 				{{ Form::select('locationList', $locations, Input::old('locationList'), array('class'=>'font-1')) }}
-				{{ Form::submit('Deploy' , $attributes = array('onclick'=>'getLocation(id)', 'class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
+				{{ Form::submit('Deploy' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
 				</div>
 			</div>
 		</div>
@@ -259,10 +256,10 @@
 		document.getElementById("device_id").value = id;
 	}
 
-		$(".delete_user").click(function(){
-			if (!confirm("This devices will be permanently deleted and cannot be recovered. Are you sure?")) {
-			return false;
-			}
-		});
+	$(".delete_user").click(function(){
+		if (!confirm("This devices will be permanently deleted and cannot be recovered. Are you sure?")) {
+		return false;
+		}
+	});
 	</script>
 @endsection
