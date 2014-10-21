@@ -5,6 +5,10 @@
 	
 }
 
+.text-bg {
+  background-color: White !important;
+}
+
 #header-h3 {
 	color: WHITE;
 	font-family: Segoe UI;

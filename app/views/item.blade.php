@@ -39,7 +39,7 @@
 	<div class="large-10 push-2 columns">
 		
 		<div class="row">
-			<div class="large-10 columns large-centered">
+			<div class="large-10 columns">
 			<h1>{{ $item->name }} Devices</h1>
 				<table class="large-12 columns table-item-align">
 		  			<thead>
@@ -125,7 +125,7 @@
 			  		{{ Form::label('itemName', $devField->item_label, array('id' => 'Font')) }}
 
 			  		@if ($devField->item_label == "Purchased Date")
-						{{ Form::text('date', '', array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
+						{{ Form::text('date', '', array('class'=>'text-bg radius', 'placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
 			  		@else
 			  			{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
 			  		@endif
