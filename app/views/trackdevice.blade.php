@@ -109,7 +109,6 @@
 							<li>{{ link_to('', 'Assign Device', array("class"=>"button tiny large-12 radius")) }}</li>
 						@endif
 					@endforeach
-					
 					<!--IF DEVICE STATUS IS RETIRED. DISABLE CHANGE STATUS-->
 					@if ($dev->status == "Retired")
 						<li>{{ link_to('#', 'Change Status', array("class"=>"button tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
@@ -121,10 +120,9 @@
 						@endif
 					@endif
 				<li>{{ link_to('Device/delete/'. $device->id.csrf_token(), 'Delete', array('class' => 'button tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token())) }}</li>
-				</br>
-				</br>
-				</br>
-				</br>
+				
+				</br></br></br></br>
+				
 				<li>{{ link_to('Item/'. $devices, 'Return to Devices', $attributes = array('class' => 'button tiny radius large-12', 'title' => 'Return to Devices', 'id'=>$devices  . csrf_token())) }}</li>
 			</ul>
 		</div>  
@@ -143,20 +141,20 @@
 					</br>
 				</div>
 				<div class="large-12 columns">
-					{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
+				{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
 				</br></br>
 				@foreach ($fields as $device_field_info)
 					{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
-					  	<div class="row">
-							<div class="large-12 columns large-centered">
-								<div class="row">
-									<div class="large-12 columns">
-										{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
-									</div>
-									</a>
+				  	<div class="row">
+						<div class="large-12 columns large-centered">
+							<div class="row">
+								<div class="large-12 columns">
+									{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
 								</div>
+								</a>
 							</div>
 						</div>
+					</div>
 				@endforeach
 				</br>
 				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
@@ -184,8 +182,7 @@
 				</div>
 				</br>
 			  	<div class="large-9 columns">
-			  	</br>
-			  	</br>
+			  	</br></br>
 			  	{{ Form::select('status', array('Normal'=>'Normal','Defective' =>'Defective', 'Retired'=>'Retired')) }}
 				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
 				</div>

@@ -49,22 +49,21 @@ class DeviceController extends BaseController {
 		$fields = Info::with('field')->where('device_id', $device->id)->get();
 
 		if($device == true) {
-				return View::make('trackdevice')
-					->with('devices', $device->item_id)
-					->with('device_location', $device_location)
-					->with('device', $device)
-					->with('dvc', $devices)
-					->with('item', $item)
-					->with('fields', $fields);
-			} else {
-				return View::make('404');
+			return View::make('trackdevice')
+				->with('devices', $device->item_id)
+				->with('device_location', $device_location)
+				->with('device', $device)
+				->with('dvc', $devices)
+				->with('item', $item)
+				->with('fields', $fields);
+		} else {
+			return View::make('404');
 		}
 	}
 
 	public function showTracks($id) {
 		//Get Device: ID, Name
 		$getDevice = Device::find($id);
-
 		//Get Item: Name
 		$getItemName = Item::find($getDevice->item_id);
 		$item_name = $getItemName->name;

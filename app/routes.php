@@ -20,6 +20,7 @@ Route::get('logout', function() {
 
 Route::get('Device/delete/{id}', function($id) {
 	$device = Device::find($id);
+	$deviceItemId = $device->item_id;
 	$device_name = $device->name;
 	$device->delete();
 
@@ -29,7 +30,7 @@ Route::get('Device/delete/{id}', function($id) {
 	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the device ".$device_name." permanently.";
 	$audits->save();
 
-	return  Redirect::back()
+	return  Redirect::to('Item/'.$deviceItemId)
 		->with('deleteMessage', 'Device deleted');
 });
 
