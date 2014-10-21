@@ -80,6 +80,11 @@ h8 {
 	margin-left: 12rem !important;
 }*/
 
+
+table {
+  text-align: center !important;
+}
+
 #devFont {
 	margin-left: 12rem !important;
 	font-size: 30;
@@ -250,4 +255,8 @@ h8 {
 
   .fontSegoe{
     font-family: "Segoe UI Semibold" !important;
+  }
+
+  .itemLink {
+    font-size: 15 !important;
   }

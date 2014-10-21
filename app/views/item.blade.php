@@ -38,7 +38,6 @@
 <div class="row">
 	<div class="large-10 push-2 columns">
 		<h1>{{ $item->name }} Devices</h1>
-		
 		<div class="row">
 			<div class="large-12 columns">
 				<table class="large-12 columns tableOne">
@@ -54,7 +53,7 @@
 					<tbody>
 					@foreach ($device_location as $devList)
 						<tr>
-	    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array('title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
+	    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>'itemLink' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
 							<?php 
 								if($devList->location_id != 0 ) {
 									echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
@@ -123,9 +122,9 @@
 				{{ Form::label('item', 'Informations', array('id' => 'modalLbl')) }}
 			  	@foreach ($fields as $devField)
 			  		{{ Form::label('itemName', $devField->item_label, array('id' => 'Font')) }}
-			  		
+
 			  		@if ($devField->item_label == "Purchased Date")
-					{{ Form::text('date', '', array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
+						{{ Form::text('date', '', array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
 			  		@else
 			  			{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
 			  		@endif
@@ -237,7 +236,7 @@
 	<script>
 
 	$('#dp1').pickadate({
-		format: 'yyyy-mm-dd',
+		format: 'yyyy-mmmm-dd',
 	});
 
 	function getLocation() {
