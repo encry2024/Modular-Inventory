@@ -41,38 +41,38 @@
 		<div class="row">
 			<div class="large-10 columns large-centered">
 			<h1>{{ $item->name }} Devices</h1>
-				<table class="large-12 columns tableOne">
+				<table class="large-12 columns table-item-align">
 		  			<thead>
 		   				<tr>
-			      			<th id="headerStyle" class="history-Header-bg">Device Name</th>
-							<th id="headerStyle" class="history-Header-bg">Availability</th>
-							<th id="headerStyle" class="history-Header-bg">Status</th>
-							<th class="history-Header-bg">Actions</th>
+			      			<th id="headerStyle" class="history-Header-bg table-item-align">Device Name</th>
+							<th id="headerStyle" class="history-Header-bg table-item-align">Availability</th>
+							<th id="headerStyle" class="history-Header-bg table-item-align">Status</th>
+							<th class="history-Header-bg table-item-align">Actions</th>
 						</tr>
 					</thead>
 
 					<tbody>
 					@foreach ($device_location as $devList)
 						<tr>
-	    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>'itemLink' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
+	    					<td class="table-item-align">{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>'itemLink' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
 							<?php 
 								if($devList->location_id != 0 ) {
-									echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
+									echo "<td class='table-item-align'><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
 								} else {
 									if ($devList->status != 'Normal') {
-										echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
+										echo "<td class='table-item-align'><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
 									} else {
-										echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+										echo "<td class='table-item-align'><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
 									}
 								}
 							?>
 							</td>
 								@if($devList->status != 'Normal')
-									<td>{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
 								@else
-									<td>{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
 								@endif
-							<td>
+							<td class="table-item-align">
 								<?php
 									if($devList->location_id != 0) {
 										$locsName = $devList->location->name;

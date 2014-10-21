@@ -81,14 +81,14 @@
 		<table class="large-12 columns" id="tableTwo">
 			<thead>
 		   		<tr>
-					<th>Track Assigned Locations</th>
+					<th class="table-item-align">Track Assigned Locations</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				@foreach ($device_location as $devList)
 					<tr>
-						<td> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
+						<td class="table-item-align"> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
 					</tr>
 				@endforeach
 			</tbody>

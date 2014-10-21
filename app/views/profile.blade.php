@@ -76,18 +76,18 @@
 			<table class="large-12 columns tableOne ">
 	  			<thead>
 	   				<tr>
-      					<th class="font weight history-Header-bg">Item List</th>
-      					<th class="font weight history-Header-bg">No. of Device in an Item</th>
-      					<th class="font weight history-Header-bg">Actions</th>
+      					<th class="font weight history-Header-bg table-item-align">Item List</th>
+      					<th class="font weight history-Header-bg table-item-align">No. of Device in an Item</th>
+      					<th class="font weight history-Header-bg table-item-align">Actions</th>
 					</tr>
 				</thead>
 
 				<tbody>
 		  			@foreach ($items as $item)
 		    			<tr>
-							<td class="font weight">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
-							<td class="font weight">{{ count($item->device) }}</td>
-							<td class="font weight">
+							<td class="font weight table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
+							<td class="font weight table-item-align">{{ count($item->device) }}</td>
+							<td class="font weight table-item-align">
 								{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'button large-3 tiny radius', 'title' => 'Edit a Device')) }}
 								{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-3 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
 							</td>
