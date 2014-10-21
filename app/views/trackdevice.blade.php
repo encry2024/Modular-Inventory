@@ -17,7 +17,6 @@
 				</ul>
 			</li>
 		</ul>
-
     <!-- Left Nav Section -->
 		<ul class="left">
 			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
@@ -132,40 +131,40 @@
     </div>
 </div>
 <!--Edit Device Modal-->
-<div id="editDeviceModal" class="reveal-modal medium" data-reveal>
+<div id="editDeviceModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'updateDevice')) }}
 	<div class="large-12 columns large-centered">
 		<div class="row">
 			<div class="large-12 columns ">
 				<div class="large-12 columns">
 					<label id="devFont"></label>
-						{{ Form::label('','', array('name' => 'deviceName', 'id'=>'device_name', 'class' => 'deviceLbl')) }}
+						<h1>{{ Form::label('',' - Edit', array('name' => 'deviceName', 'id'=>'device_name', 'class' => 'deviceLbl')) }}</h1>
 						{{ Form::hidden('', '', array('name' => 'deviceId', 'id'=>'device_id')) }}
 					</br>
 				</div>
 				<div class="large-12 columns">
 					{{ Form::label('item', 'Change Information', array('id' => 'modalLbl')) }}
-				</br>
+				</br></br>
 				@foreach ($fields as $device_field_info)
 					{{ Form::label('itemName', $device_field_info->field->item_label, array('id' => 'Font')) }}
 					  	<div class="row">
 							<div class="large-12 columns large-centered">
 								<div class="row">
-									<div class="large-9 columns">
+									<div class="large-12 columns">
 										{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
 									</div>
-										{{ link_to('Device/delete/'.$device_field_info->id, 'Delete', array('class' => 'button tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $device_field_info->id)) }}
 									</a>
 								</div>
 							</div>
 						</div>
 				@endforeach
-				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-2 radius', 'name' => 'submit')) }}
+				</br>
+				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
 				</div>
 			</div>
 		</div>
 	</div>
-		<a class="close-reveal-modal">&#215;</a>
+	<a class="close-reveal-modal">&#215;</a>
 	{{ Form::close() }}
 </div>
 <!--CHANGE STATUS MODAL-->
@@ -176,7 +175,7 @@
 			<div class="large-12 columns ">
 				<div class="large-12 columns">
 					<label id="devFont"></label>
-					{{ Form::label('','', array('name' => 'devi_Name', 'id'=>'dev_name', 'class' => 'deviceLbl')) }}
+					<h1>{{ Form::label('','', array('name' => 'devi_Name', 'id'=>'dev_name', 'class' => 'deviceLbl')) }}</h1>
 					{{ Form::hidden('', '', array('name' => 'devi_Id', 'id'=>'dev_id')) }}
 					</br>
 				</div>
@@ -193,7 +192,7 @@
 			</div>
 		</div>
 	</div>
-		<a class="close-reveal-modal">&#215;</a>
+	<a class="close-reveal-modal">&#215;</a>
 	{{ Form::close() }}
 </div>
 

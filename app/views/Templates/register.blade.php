@@ -1,15 +1,10 @@
 <html>
 	<head>
-		@section('headSection')
-
-		@endsection
 	</head>
-
 	<title>
 		Northstar Inventory
 	</title>
-
-		@yield('registerBody')
+	@yield('registerBody')
         {{ HTML::script('packages/foundation-5.3.3/js/vendor/jquery.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.js') }}
         {{ HTML::script('packages/foundation-5.3.3/js/foundation/foundation.topbar.js') }}

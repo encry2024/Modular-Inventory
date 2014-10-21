@@ -13,13 +13,12 @@
 
 #GET
 Route::get('login', 'LoginController@showLogin');
-Route::get('logout', function(){
+Route::get('logout', function() {
 	Auth::logout();
 	return Redirect::to('login');
 });
 
-Route::get('Device/delete/{id}', function($id)
-{
+Route::get('Device/delete/{id}', function($id) {
 	$device = Device::find($id);
 	$device_name = $device->name;
 	$device->delete();
@@ -59,8 +58,7 @@ Route::get('Field/delete/{id}', function($id) {
 			->with('deleteMessage', 'Field '.$field->item_label.' has been deleted.');
 });
 
-Route::get('Item/delete/{id}', function($id)
-{
+Route::get('Item/delete/{id}', function($id) {
 	$item = Item::find($id);
 	$item_name = $item->name;
 	$audits = new Audit;

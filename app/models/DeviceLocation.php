@@ -58,7 +58,6 @@ class DeviceLocation extends Eloquent implements UserInterface, RemindableInterf
 			return Redirect::back()
 				->withErrors($validation);
 		} else {
-
 			//Add Device and location on Pivot Table
 			$device_location = new DeviceLocation;
 			$device_location->location_id = $data["locationList"];
