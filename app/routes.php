@@ -19,13 +19,14 @@ Route::get('logout', function() {
 });
 
 Route::get('Device/delete/{id}', function($id) {
+	//Search ID then get item_id, and name before delete
 	$device = Device::find($id);
 	$deviceItemId = $device->item_id;
 	$device_name = $device->name;
+	//Delete the device
 	$device->delete();
-
 	$deviceID = $device->id;
-
+	//Save action to history
 	$audits = new Audit;
 	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the device ".$device_name." permanently.";
 	$audits->save();
@@ -67,7 +68,7 @@ Route::get('Item/delete/{id}', function($id) {
 	$audits->save();
 	$item->delete();
 
-	return  Redirect::back()
+	return  Redirect::to('/')
 		->with('deleteMessage', 'Item deleted');
 });
 Route::get('/register', 'RegisterController@showRegister');

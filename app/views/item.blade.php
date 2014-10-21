@@ -38,59 +38,59 @@
 <div class="row">
 	<div class="large-10 push-2 columns">
 		<h1>{{ $item->name }} Devices</h1>
-			<div class="row">
-				<div class="large-12 columns">
-					<table class="large-12 columns tableOne">
-			  			<thead>
-			   				<tr>
-				      			<th id="headerStyle" class="history-Header-bg">Device Name</th>
-								<th id="headerStyle" class="history-Header-bg">Availability</th>
-								<th id="headerStyle" class="history-Header-bg">Status</th>
-								<th class="history-Header-bg">Actions</th>
-							</tr>
-						</thead>
+		<div class="row">
+			<div class="large-12 columns">
+				<table class="large-12 columns tableOne">
+		  			<thead>
+		   				<tr>
+			      			<th id="headerStyle" class="history-Header-bg">Device Name</th>
+							<th id="headerStyle" class="history-Header-bg">Availability</th>
+							<th id="headerStyle" class="history-Header-bg">Status</th>
+							<th class="history-Header-bg">Actions</th>
+						</tr>
+					</thead>
 
-						<tbody>
-						@foreach ($device_location as $devList)
-							<tr>
-		    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array('title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
-								<?php 
-									if($devList->location_id != 0 ) {
-										echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
+					<tbody>
+					@foreach ($device_location as $devList)
+						<tr>
+	    					<td>{{ link_to('Device/Track/'.$devList->id , $devList->name, array('title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
+							<?php 
+								if($devList->location_id != 0 ) {
+									echo "<td><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
+								} else {
+									if ($devList->status != 'Normal') {
+										echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
+									} else {
+										echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+									}
+								}
+							?>
+							</td>
+								@if($devList->status != 'Normal')
+									<td>{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+								@else
+									<td>{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+								@endif
+							<td>
+								<?php
+									if($devList->location_id != 0) {
+										$locsName = $devList->location->name;
+										echo "<a href='#' class='button tiny large-5 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
 									} else {
 										if ($devList->status != 'Normal') {
-											echo "<td><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
+											echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal' disabled>Assign</a>";
 										} else {
-											echo "<td><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
+											echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
 										}
 									}
 								?>
-								</td>
-									@if($devList->status != 'Normal')
-										<td>{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
-									@else
-										<td>{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
-									@endif
-								<td>
-									<?php
-										if($devList->location_id != 0) {
-											$locsName = $devList->location->name;
-											echo "<a href='#' class='button tiny large-5 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
-										} else {
-											if ($devList->status != 'Normal') {
-												echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal' disabled>Assign</a>";
-											} else {
-												echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
-											}
-										}
-									?>
-								</td>
-							</tr>
-						@endforeach
-			  			</tbody>
-					</table>
-				</div>
+							</td>
+						</tr>
+					@endforeach
+		  			</tbody>
+				</table>
 			</div>
+		</div>
 	</div>
     <div class="large-2 pull-10 columns">
 	    <div class="panel">
@@ -102,9 +102,7 @@
 					<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
 				@endif
 				<li>{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
-				</br>
-				</br>
-				</br>
+				</br></br></br>
 				<li>{{ link_to('', 'Return to Item', array("class"=>"button tiny large-12 radius"))}}</li>
 			</ul>
 		</div>
