@@ -31,7 +31,7 @@
 
 					<div class="row">
 						<div class="large-12 columns">
-							 <input type="submit" value="Login" class="button large alert expand login-button" name="Login" />
+							 <input type="submit" value="Login" class="button tiny expand login-button" name="Login" />
 						</div>
 					</div>
 			    	{{ Form::close() }}
