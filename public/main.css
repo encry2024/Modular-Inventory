@@ -260,3 +260,7 @@ table {
   .itemLink {
     font-size: 15 !important;
   }
+
+  .table-item-align {
+    text-align: center !important;
+  }

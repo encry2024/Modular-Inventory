@@ -37,9 +37,10 @@
 @section('bdy')
 <div class="row">
 	<div class="large-10 push-2 columns">
-		<h1>{{ $item->name }} Devices</h1>
+		
 		<div class="row">
-			<div class="large-12 columns">
+			<div class="large-10 columns large-centered">
+			<h1>{{ $item->name }} Devices</h1>
 				<table class="large-12 columns tableOne">
 		  			<thead>
 		   				<tr>
@@ -190,7 +191,6 @@
 	{{ Form::close() }}
 </div>
 
-
 <!-- EDIT DEVICE MODAL -->
 <div id="editDeviceModal" class="reveal-modal medium" data-reveal>
 	{{ Form::open(array('url' => 'updateDevice')) }}
@@ -234,7 +234,6 @@
 <!--SCRIPTS MODAL-->
 
 	<script>
-
 	$('#dp1').pickadate({
 		format: 'yyyy-mmmm-dd',
 	});

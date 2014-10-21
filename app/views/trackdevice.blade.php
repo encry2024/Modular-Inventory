@@ -150,7 +150,11 @@
 						<div class="large-12 columns large-centered">
 							<div class="row">
 								<div class="large-12 columns">
-									{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
+								@if ($device_field_info->field->item_label == "Purchased Date")
+									{{ Form::text('date', $device_field_info->value , array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$device_field_info->id)) }}
+						  		@else
+						  			{{ Form::text('', $device_field_info->value , $attributes = array('class'=>'radius center', 'name' => 'field-'. $device_field_info->id)) }}
+						  		@endif
 								</div>
 								</a>
 							</div>
@@ -193,9 +197,13 @@
 	<a class="close-reveal-modal">&#215;</a>
 	{{ Form::close() }}
 </div>
-@endsection
+
 <!--SCRIPTS-->
 <script>
+	$('#dp1').pickadate({
+		format: 'yyyy-mmmm-dd',
+	});
+
 	function getDevProperty(id, name) {
 		document.getElementById("device_name").innerHTML = name;
 		document.getElementById("device_id").value = id;
@@ -206,3 +214,4 @@
 		document.getElementById("dev_id").value = id;
 	}
 </script>
+@endsection
