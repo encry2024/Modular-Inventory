@@ -126,7 +126,6 @@
 
 			  		@if ($devField->item_label == "Purchased Date")
 						{{ Form::text('date', '', array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
-						
 			  		@else
 			  			{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
 			  		@endif
