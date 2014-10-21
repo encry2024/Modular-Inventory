@@ -26,12 +26,10 @@
 		<script>
         	$(document).foundation();
         </script>
-
-		<style type="text/css">
-			body {
-				background-color: #4e2700;
-			}
-		</style>
-
+        	<style type="text/css">
+        		body {
+        			background-color: #4e2700;
+        		}
+        	</style>
 	</body>
 </html>

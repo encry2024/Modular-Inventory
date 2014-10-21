@@ -26,13 +26,13 @@ class DeviceController extends BaseController {
 		$item = Item::find($id);
 		$devices = Device::where('item_id', $id)->get();
 		$location = Location::all();
-			if($item == true) {
-				return View::make('Device')
-					->with('items', $item)
-					->with('devices', $devices)
-					->with('locations', $location);
-			} else {
-				return View::make('404');
+		if($item == true) {
+			return View::make('Device')
+				->with('items', $item)
+				->with('devices', $devices)
+				->with('locations', $location);
+		} else {
+			return View::make('404');
 		}
 	}
 

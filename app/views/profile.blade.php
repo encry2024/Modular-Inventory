@@ -19,6 +19,7 @@
 		<ul class="right">
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
+					<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
 					<li class="active">{{ link_to('changePassword', 'Change Password') }}</a></li>
 				</ul>
@@ -109,12 +110,15 @@
 				  	<input type="text" placeholder="Enter the device name" id="textStyle" name="itemTb" class="radius">
 				</div>
 			</div>
+			</br></br>
 			<div class="row">
 				<div class="large-12 columns large-centered">
 					<div class="row">
 						<div class="large-10 columns">
 							<label id="modalLbl">Item-Data</label>
-								<input type="text" name="mytext[]" placeholder="Enter device data-field">
+								<input type="text" value="Manufacturer" name="mytext[]" placeholder="Enter device data-field">
+								<input type="text" value="Department" name="mytext[]" placeholder="Enter device data-field">
+								<input type="text" value="Purchased Date" name="mytext[]" placeholder="Enter device data-field">
 						</div>
 					</div>
 				</div>
@@ -134,7 +138,6 @@
 </div>
 
 <script>
-
 	$(".delete_field").click(function(){
 		if (!confirm("This Item and all its Devices will be permanently deleted and cannot be recovered. Are you sure?")) {
 		return false;

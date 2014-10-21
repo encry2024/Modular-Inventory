@@ -12,6 +12,7 @@
 		<ul class="right">
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
+				<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
 					<li class="active"><a href="#">Change Password</a></li>
 				</ul>
@@ -192,9 +193,8 @@
 	<a class="close-reveal-modal">&#215;</a>
 	{{ Form::close() }}
 </div>
-
 @endsection
-
+<!--SCRIPTS-->
 <script>
 	function getDevProperty(id, name) {
 		document.getElementById("device_name").innerHTML = name;

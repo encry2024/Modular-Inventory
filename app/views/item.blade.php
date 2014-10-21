@@ -9,7 +9,6 @@
 	$location_name = "";
 ?>
 
-
 @section('itemHeader')
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
@@ -21,6 +20,7 @@
 		<ul class="right">
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
+				<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
 					<li class="active"><a href="#">Change Password</a></li>
 				</ul>
@@ -38,6 +38,7 @@
 <div class="row">
 	<div class="large-10 push-2 columns">
 		<h1>{{ $item->name }} Devices</h1>
+		
 		<div class="row">
 			<div class="large-12 columns">
 				<table class="large-12 columns tableOne">
@@ -120,12 +121,16 @@
 			  	{{ Form::text('', '', $attributes = array('class' => 'radius', 'id' => 'textStyle', 'placeholder' => 'Enter the device name', 'name' => 'mydevice')) }}
 				</br>
 				{{ Form::label('item', 'Informations', array('id' => 'modalLbl')) }}
-
 			  	@foreach ($fields as $devField)
 			  		{{ Form::label('itemName', $devField->item_label, array('id' => 'Font')) }}
-			  		{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
-			  	@endforeach
+			  		
+			  		@if ($devField->item_label == "Purchased Date")
+					{{ Form::text('date', '', array('placeholder' => 'Enter Purchased Date', 'id' => 'dp1', 'name'=>'field-'.$devField->id)) }}
+			  		@else
+			  			{{ Form::text('','', array('class' => 'radius', 'placeholder' => "Enter device's ". $devField->item_label, 'name' => 'field-'. $devField->id)) }}
+			  		@endif
 
+			  	@endforeach
 				{{ Form::hidden('itemId', $item->id ) }}
 				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-5 radius', 'name' => 'submit')) }}
 			</div>
@@ -147,14 +152,10 @@
 			</div>
 			<div class="large-12 columns">
 				{{ Form::label('', "You are about to dissociate the device stated above from the user.", array('id'=>'Font')) }}
-				</br>
-				</br>
+				</br></br>
 				{{ Form::label('', "Dissociate to:", array('class' => 'font-1')) }}
 				{{ Form::label('','', array('id'=>'location_label', 'class' => 'deviceLbl')) }}
-				</br>
-				</br>
-				</br>
-				</br>
+				</br></br></br></br>
 				{{ Form::label('', "Are you sure you want to dissociate the device?", array('id'=>'Font')) }}
 				</br>
 			</div>
@@ -234,6 +235,11 @@
 <!--SCRIPTS MODAL-->
 
 	<script>
+
+	$('#dp1').pickadate({
+		format: 'yyyy-mm-dd',
+	});
+
 	function getLocation() {
     document.getElementById("location_ID").value = value;
 	}
@@ -253,8 +259,7 @@
 		document.getElementById("device_name").innerHTML = name;
 		document.getElementById("device_id").value = id;
 	}
-
-	$(".delete_user").click(function(){
+	$(".delete_user").click(function() {
 		if (!confirm("This devices will be permanently deleted and cannot be recovered. Are you sure?")) {
 		return false;
 		}

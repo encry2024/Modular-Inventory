@@ -16,12 +16,12 @@
 		<ul class="right">
 			<li class="has-dropdown"><a href="">Welcome, {{ Auth::user()->firstname }}</a><a href="#"></a>
 				<ul class="dropdown">
+				<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
 					<li class="active"><a href="#">Change Password</a></li>
 				</ul>
 			</li>
 		</ul>
-
     		<!-- Left Nav Section -->
 		<ul class="left">
 			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
@@ -61,7 +61,7 @@
 							$initDate = date('F d, Y', strtotime($audit->created_at));
 							echo "<div class='panel font textAlign history-Header-bg' id='trackAll-Style-panel-header'><b>".$initDate."</b></div>";
 						}
-						$audit_time = date('h:i A', strtotime($audit->created_at));
+						$audit_time = date('h:i A D', strtotime($audit->created_at));
 					?>
 					<label class='font'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
 				</div>
