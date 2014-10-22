@@ -10,7 +10,7 @@
 ?>
 
 @section('itemHeader')
-<nav class="top-bar" data-topbar role="navigation">
+<nav class="top-bar small-12" data-topbar role="navigation">
 	<ul class="title-area">
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -22,26 +22,41 @@
 				<ul class="dropdown">
 				<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
-					<li class="active"><a href="#">Change Password</a></li>
+					<li>{{ link_to('changePassword', 'Change Password') }}</li>
 				</ul>
 			</li>
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solution Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
 @endsection
 
 @section('bdy')
+<div class="large-2 small-12 columns">
+	<div class="sidebar">
+		<ul class="side-nav">
+			<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
+			@if (count($deviceList) == 0)
+				<li>{{ link_to('#', 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
+			@else
+				<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
+			@endif
+			<li>{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'large-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
+			</br></br></br>
+			<li>{{ link_to('', 'Return to Item', array("class"=>"tiny large-12 radius"))}}</li>
+		</ul>
+	</div>
+</div>
+
 <div class="row">
-	<div class="large-10 push-2 columns">
-		
+	<div class="large-11 small-12 columns">
 		<div class="row">
-			<div class="large-10 columns">
+			<div class="large-12 small-12 columns">
 			<h1>{{ $item->name }} Devices</h1>
-				<table class="large-12 columns table-item-align">
+				<table class="large-12 small-12 columns table-item-align">
 		  			<thead>
 		   				<tr>
 			      			<th id="headerStyle" class="history-Header-bg table-item-align">Device Name</th>
@@ -93,29 +108,16 @@
 			</div>
 		</div>
 	</div>
-    <div class="large-2 pull-10 columns">
-	    <div class="panel">
-			<ul class="side-nav">
-				<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'button tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
-				@if (count($deviceList) == 0)
-					<li>{{ link_to('#', 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
-				@else
-					<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'button radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
-				@endif
-				<li>{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
-				</br></br></br>
-				<li>{{ link_to('', 'Return to Item', array("class"=>"button tiny large-12 radius"))}}</li>
-			</ul>
-		</div>
-    </div>
 </div>
+
+
 <!-- MODALS -->
 
 <!-- ADD DEVICE MODAL -->
 <div id="myModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'adddevice')) }}
 	<div class="row">
-		<div class="large-10 columns">
+		<div class="large-10 small-10 columns large-centered">
 			<div class="row">
 				{{ Form::label('device', 'Device Name', array('id' => 'modalLbl')) }}
 			  	{{ Form::text('', '', $attributes = array('class' => 'radius', 'id' => 'textStyle', 'placeholder' => 'Enter the device name', 'name' => 'mydevice')) }}
@@ -132,7 +134,7 @@
 
 			  	@endforeach
 				{{ Form::hidden('itemId', $item->id ) }}
-				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-5 radius', 'name' => 'submit')) }}
+				{{ Form::submit('Add ' . $item->name , $attributes = array('class' => 'button small large-12 radius', 'name' => 'submit')) }}
 			</div>
 		</div>
 		<a class="close-reveal-modal">&#215;</a>

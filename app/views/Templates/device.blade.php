@@ -9,7 +9,6 @@
 		{{ HTML::style('assets/css/foundation-datepicker.css') }}
 		{{ HTML::style('main.css') }}
 		{{ HTML::style('assets/css/main.css') }}
-		{{ HTML::style('assets/css/classic.css') }}
 		{{ HTML::style('assets/css/classic.date.css') }}
 	</head>
 

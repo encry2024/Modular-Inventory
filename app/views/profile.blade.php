@@ -21,7 +21,7 @@
 				<ul class="dropdown">
 					<li class="divider"></li>
 					<li>{{ link_to('logout','Logout') }} </li>
-					<li class="active">{{ link_to('changePassword', 'Change Password') }}</a></li>
+					<li>{{ link_to('changePassword', 'Change Password') }}</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -39,11 +39,11 @@
 	<h1>Inventory</h1>
 </div>
 
-<div class=" large-10 columns large-centered">
+<div class=" large-10 small-12 columns large-centered">
 	<div class="row">
-		<div class="large-9 columns">
+		<div class="large-9 small-12 columns">
 			<div class="row">
-				<div class="large-10 columns">
+				<div class="large-10 small-12 columns">
 					{{ link_to('', ' Add Item', array('class' => 'button tiny radius', 'data-reveal-id' => 'myModal')) }}
 					{{ link_to('/Location', 'Location', $attributes = array('class' => 'button tiny radius', 'title' => 'Add a Location for the Device')) }}
 					{{ link_to('All/Track' , 'History', $attributes = array('class' => 'button tiny radius', 'title' => "Check all the actions taken on history.")) }}
@@ -72,8 +72,8 @@
 	</div>
 	<div class="row">
 		{{ Form::open(array('url' => 'Item/{itmName}')) }}
-		<div class="large-12 columns ">
-			<table class="large-12 columns tableOne ">
+		<div class="large-12 small-12 columns ">
+			<table class="large-12 small-12 columns tableOne ">
 	  			<thead>
 	   				<tr>
       					<th class="font weight history-Header-bg table-item-align">Item List</th>
@@ -85,11 +85,11 @@
 				<tbody>
 		  			@foreach ($items as $item)
 		    			<tr>
-							<td class="font weight table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
+							<td class="font weight table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 small-12 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
 							<td class="font weight table-item-align">{{ count($item->device) }}</td>
 							<td class="font weight table-item-align">
-								{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'button large-3 tiny radius', 'title' => 'Edit a Device')) }}
-								{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-3 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
+								{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'button large-3 small-12 tiny radius', 'title' => 'Edit a Device')) }}
+								{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'button large-3 small-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
 							</td>
 		   				</tr>
 		    		@endforeach
@@ -103,22 +103,22 @@
 <div id="myModal" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'additem')) }}
 	<div class="row">
-		<div class="large-12 columns input_fields_wrap">
+		<div class="large-12 small-12 columns input_fields_wrap">
 			<label id="modalLbl">Add Item</label>
 			<div class="row">
-				<div class="large-10 columns">
+				<div class="large-10 small-12 columns">
 				  	<input type="text" placeholder="Enter the device name" id="textStyle" name="itemTb" class="radius">
 				</div>
 			</div>
 			</br></br>
 			<div class="row">
-				<div class="large-12 columns large-centered">
+				<div class="large-12 small-12 columns large-centered">
 					<div class="row">
-						<div class="large-10 columns">
+						<div class="large-10 small-12 columns">
 							<label id="modalLbl">Item-Data</label>
-								<input type="text" value="Manufacturer" name="mytext[]" placeholder="Enter device data-field">
-								<input type="text" value="Department" name="mytext[]" placeholder="Enter device data-field">
-								<input type="text" value="Purchased Date" name="mytext[]" placeholder="Enter device data-field">
+							<input type="text" value="Manufacturer" name="mytext[]" placeholder="Enter device data-field">
+							<input type="text" value="Department" name="mytext[]" placeholder="Enter device data-field">
+							<input type="text" value="Purchased Date" name="mytext[]" placeholder="Enter device data-field">
 						</div>
 					</div>
 				</div>

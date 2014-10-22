@@ -14,6 +14,11 @@
 	font-family: Segoe UI;
 }
 
+.sidePanel {
+  border-width: 0 !important;
+  background-color: #404040 !important;
+}
+
 h7 {
 	color: WHITE;
 	font-family: Segoe UI;
@@ -24,7 +29,7 @@ h8 {
 }
 
 #sidebarBg {
-	background-color: #f8a09c;
+	background-color: #404040;
 }
 
 #hAlign {
