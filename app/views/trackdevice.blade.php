@@ -6,7 +6,6 @@
      	<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	</ul>
-
 	<section class="top-bar-section">
     <!-- Right Nav Section -->
 		<ul class="right">
@@ -67,13 +66,19 @@
 		<h1> {{ $device->name }}
 			<div class="row"> 
 			 	<div class="large-12 columns">
-			 	{{ Form::label('', 'Informations: ', array('class'=>'font-1 fontSize-6 fontWeight')) }}
 				 	<div class="row">
-				 	@foreach ($fields as $device_field_info)
-				 		<div class="large-4 columns">
-						 	{{ Form::label('', $device_field_info->field->item_label . ': '.$device_field_info->value, array('class'=>'font-1 fontSize-6 fontWeight')) }}
-				 		</div>
-				 	@endforeach
+				 		<div class="large-12 columns">
+						 	<label class="font-1 large-12 fontSize-6 fontWeight">
+						 	<nav class="breadcrumbs remodelNav">
+						 		@foreach ($fields as $device_field_info)
+						 		<li class="liRemodel">
+						 			{{$device_field_info->field->item_label .": ". $device_field_info->value . " " }}
+					 			</li>
+						 		@endforeach
+						 	</nav>
+						 	</label>
+						 </div>
+				 	</div>
 			 	</div>
 		 	</div>
 		</h1>

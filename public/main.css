@@ -19,6 +19,10 @@
   background-color: #404040 !important;
 }
 
+h1 {
+  font-family: Calibri !important;
+}
+
 h7 {
 	color: WHITE;
 	font-family: Segoe UI;
@@ -30,6 +34,20 @@ h8 {
 
 #sidebarBg {
 	background-color: #404040;
+}
+
+.remodelNav {
+  background-color: White !important;
+  border-color: White !important;
+  padding: 0.5625rem 0rem 0.5625rem !important;
+  border-width: 0!important;
+  cursor: default !important;
+}
+
+.liRemodel, .liRemodel:before {
+  text-transform: none !important;
+  margin: 0 1px !important;
+  cursor: default !important;
 }
 
 #hAlign {
