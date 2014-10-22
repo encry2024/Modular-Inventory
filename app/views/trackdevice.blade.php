@@ -67,17 +67,12 @@
 			<div class="row"> 
 			 	<div class="large-12 columns">
 				 	<div class="row">
-				 		<div class="large-12 columns">
-						 	<label class="font-1 large-12 fontSize-6 fontWeight">
-						 	<nav class="breadcrumbs remodelNav">
-						 		@foreach ($fields as $device_field_info)
-						 		<li class="liRemodel">
-						 			{{$device_field_info->field->item_label .": ". $device_field_info->value . " " }}
-					 			</li>
-						 		@endforeach
-						 	</nav>
-						 	</label>
+				 	@foreach ($fields as $device_field_info)
+				 		<div class="large-2 columns">
+						 {{ Form::label('', $device_field_info->field->item_label . ': ', array('class'=>'font-1 fontSize-6 fontWeight')) }}	
 						 </div>
+						 {{ Form::label('', $device_field_info->value, array('class'=>'font-1 fontSize-6 fontWeight') ) }}
+					@endforeach
 				 	</div>
 			 	</div>
 		 	</div>

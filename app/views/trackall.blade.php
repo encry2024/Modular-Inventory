@@ -32,7 +32,7 @@
 
 @section('deviceBody')
 <div class="row">
-	<div class="large-11 columns large-Centered">
+	<div class="large-12 columns large-Centered">
 		<div class="row">
 			<div class="large-12 columns">
 				<h1>History</h1>
@@ -55,18 +55,23 @@
 			</br>
 			@foreach ($audits as $audit)
 			<div class="row">
-				<div class="large-12 columns">
+				<div class="large-11 columns large-centered">
 					<?php
 						if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
 							$initDate = date('F d, Y', strtotime($audit->created_at));
-							echo "<div class='panel font textAlign history-Header-bg' id='trackAll-Style-panel-header'><b>".$initDate."</b></div>";
+							echo "<br>";
+							echo "<li class='divider font-1 fontSize-1 fontWeight'> Tracks on ".$initDate."</li>";
+
 						}
 						$audit_time = date('h:i A D', strtotime($audit->created_at));
 					?>
-					<label class='font'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
+				<li class="liBorder">
+					<label class='font auditItem'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
+				</li>
 				</div>
 			</div>
 			@endforeach
+			<br>
 		</div>
 	</div>
 </div>

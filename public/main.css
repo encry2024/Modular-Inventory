@@ -50,6 +50,16 @@ h8 {
   cursor: default !important;
 }
 
+.liBorder {
+  border-left: 7 solid #d1d1d1;
+}
+
+.auditItem {
+  line-height: 1 !important;
+  margin-left: 1.5rem !important;
+  cursor: default;
+}
+
 #hAlign {
 	text-align: center!important;
 }
@@ -237,7 +247,8 @@ table {
   #trackAll-Style-panel-header {
     text-align: center !important;
     padding: 0.25rem !important;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 2rem !important;
+    margin: 0 !important;
   }
 
   #device-Table-Width {
