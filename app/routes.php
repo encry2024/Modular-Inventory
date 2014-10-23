@@ -41,20 +41,25 @@ Route::get('Field/delete/{id}', function($id) {
 	$fieldItemId = $field->item_id;
 	$field_name = $field->item_label;
 
+	//Get Item where ID = fieldItemId and get the name of the result...
 	$getItem = Item::where('id', $fieldItemId)->first();
 	$itemName = $getItem->name;
 
+	//Get the Info where field_id = $id (id of a field)
 	$getInfo = Info::where('field_id', $id)->get();
 
+	//Loop through each Info and save to audit before deletion..
 	foreach ($getInfo as $value) {
 		$audits = new Audit;
 		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the field " .$field_name." and its field(s): ".$value->value." on the item ". $itemName ." permanently.";
 		$audits->save();
 	}
-
+	//Loop through info. If Info found; Delete the info...
 	foreach($getInfo as $info) {
 		$info->delete();
 	}
+
+	//After deleting the information of the selected field. Delete the Field...
 	$field->delete();
 	return Redirect::back()
 			->with('deleteMessage', 'Field '.$field->item_label.' has been deleted.');
@@ -73,29 +78,7 @@ Route::get('Item/delete/{id}', function($id) {
 });
 Route::get('/register', 'RegisterController@showRegister');
 Route::get('/', 'ProfileController@showProfile');
-
-Route::get('Item/{id}', function($id) {
-
-	$item = Item::find($id);
-	$device = Device::where('item_id', $id)->get();
-	$locations = DB::select('SELECT * FROM inv_locations WHERE id NOT IN (SELECT location_id FROM inv_devices WHERE item_id = '.$id.')');
-	$devices = Device::with('location')->where('item_id', $id)->get();
-	
-	if(count($device) != 0) {
-		return View::make('Item')
-			->with('item', $item)
-			->with('devices', $item->devices)
-			->with('locations', $locations)
-			->with('device_location', $devices)
-			->with('dvce', $device);
-	} else {
-		return View::make('Item')
-			->with('item', $item)
-			->with('devices', $item->devices)
-			->with('device_location', $devices)
-			->with('dvce', $device);
-	}
-});
+Route::get('Item/{id}', 'ItemsController@showItem');
 Route::get('Device/{id}', 'DeviceController@showDevice');
 Route::get('Device/Track/{id}', 'DeviceController@showTrack');
 Route::get('All/Track', 'AuditController@trackAll');

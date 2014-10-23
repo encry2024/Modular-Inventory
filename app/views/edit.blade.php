@@ -20,7 +20,7 @@
 
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-3')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -39,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="large-6 columns">
-					{{ link_to('/', 'Home', $attributes = array('class' => 'button tiny large-3 radius', 'title' => 'Return Home')) }}
+					{{ link_to('Item/'.$item->id, 'Home', $attributes = array('class' => 'button tiny large-3 radius', 'title' => 'Return Home')) }}
 				</div>
 			</div>
 		</div>

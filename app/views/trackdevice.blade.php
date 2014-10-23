@@ -33,17 +33,24 @@
 				@if ($dev->status != "Normal")
 					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal', 'disabled')) }}	</li>
 				@else
-					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
+					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius ', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
 				@endif
 			@endforeach
 				<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->
-			@foreach ($dvc as $dev)
-				@if ($dev->status != "Normal")
-					<li>{{ link_to('#', 'Assign Device', array("class"=>" tiny large-12 radius", 'disabled')) }}</li>
-				@else
-					<li>{{ link_to('', 'Assign Device', array("class"=>" tiny large-12 radius")) }}</li>
-				@endif
-			@endforeach
+				<?php
+				foreach ($dvc as $dev) {
+					if($dev->location_id != 0) {
+						$locsName = $dev->location->name;
+						echo "<li><a href='#' class=' tiny large-12 ' onclick='dissociateDeviceProperty($dev->id, \"$dev->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a></li>";
+					} else {
+						if ($dev->status != 'Normal') {
+							echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal' disabled>Assign Device</a></li>";
+						} else {
+							echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal'>Assign Device</a></li>";
+						}
+					}
+				}
+				?>
 				<!--IF DEVICE STATUS IS RETIRED. DISABLE CHANGE STATUS-->
 				@if ($dev->status == "Retired")
 					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
@@ -61,11 +68,11 @@
 	</div>
 </div>
 
-
 <div class="large-10 columns">
 	<div class="row">
 		<div class="large-11 columns">
 			<h1>{{ $device->name }}</h1>
+			<br>
 		</div>
 		<div class="large-11 columns">
 			<div class="row">
@@ -122,14 +129,15 @@
 			 	</div>
 			</div>
 			<br>
+			@if ($alert = Session::get('message'))
+				<div data-alert class="alert-box success radius">
+					{{ $alert }}
+					<a href="#" class="close">&times;</a>
+				</div>
+			@endif
+			<br>
 		</div>
 		</br>
-		@if ($alert = Session::get('message'))
-			<div data-alert class="alert-box success small-8">
-				{{ $alert }}
-				<a href="#" class="close">&times;</a>
-			</div>
-		@endif
 		<div class="large-11 columns">
 			<table class="large-12 columns" id="tableTwo">
 				<thead>
@@ -141,7 +149,8 @@
 				<tbody>
 					@foreach ($device_location as $devList)
 						<tr>
-							<td> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
+							<td>{{ Form::label('', date('F d, Y / h:i A D', strtotime($devList->created_at)). ' -' . $devList->device->name . ' was assigned to '. $devList->location->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
+							 
 						</tr>
 					@endforeach
 				</tbody>
@@ -149,6 +158,62 @@
 			{{ $device_location->links() }}
 		</div>
 	</div>
+</div>
+<!--MODAL-->
+
+<!--ASSIGN MODALS-->
+<div id="assignModal" class="reveal-modal small" data-reveal>
+	{{ Form::open(array('url' => 'assign')) }}
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<label id="devFont"></label>
+				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'devLabel', 'class' => 'deviceLbl')) }}</h1>
+				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_textbox' )) }}
+				{{ Form::hidden('itemID', $item->id) }}
+				{{ Form::label('','Choose below where you want to assign the Device stated above.', array('class'=>'font-1 radius')) }}
+				<br></br></br>
+				{{ Form::label('', "Location's name", array('id'=>'Font')) }}
+				<select name="locationList">
+					@foreach ($locations as $loc)
+						<option value= {{ $loc->id }}>{{ $loc->name }}</option>
+					@endforeach
+				</select>
+				{{ Form::submit('Deploy' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
+				</div>
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
+</div>
+
+<!--Dissociate MODAL-->
+<div id="unAssignModal" class="reveal-modal small" data-reveal>
+	{{ Form::open(array('url' => 'unassign')) }}
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<label id="devFont"></label>
+				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}</h1>
+				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
+			</div>
+			<div class="large-12 columns">
+				{{ Form::label('', "You are about to dissociate the device stated above from the user.", array('id'=>'Font')) }}
+				</br></br>
+				{{ Form::label('', "Dissociate to:", array('class' => 'font-1')) }}
+				{{ Form::label('','', array('id'=>'location_label', 'class' => 'deviceLbl')) }}
+				</br></br></br></br>
+				{{ Form::label('', "Are you sure you want to dissociate the device?", array('id'=>'Font')) }}
+				</br>
+			</div>
+			<div class="large-12 columns">
+				{{ Form::submit('Dissociate' , $attributes = array('class' => 'button tiny radius large-12', 'name' => 'submit')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
 </div>
 
 <!--Edit Device Modal-->
@@ -225,6 +290,21 @@
 	$('#dp1').pickadate({
 		format: 'yyyy-mmmm-dd',
 	});
+
+	function getLocation() {
+    document.getElementById("location_ID").value = value;
+	}
+
+	function assignDeviceProperty(id, name) {
+		document.getElementById("devLabel").innerHTML = name;
+		document.getElementById("id_textbox").value = id;
+	}
+
+	function dissociateDeviceProperty(id, name, loc_name) {
+		document.getElementById("deviLabel").innerHTML = name;
+		document.getElementById("id_txtbox").value = id;
+		document.getElementById("location_label").innerHTML = loc_name;
+	}
 
 	function getDevProperty(id, name) {
 		document.getElementById("device_name").innerHTML = name;

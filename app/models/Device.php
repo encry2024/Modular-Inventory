@@ -180,4 +180,38 @@ class Device extends Eloquent {
 		return Redirect::back()
 						->with('message', 'Device status updated.');
 	}
+
+	public static function retrieveTrack($id) {
+		# code...
+		//Search device id
+		$device = Device::find($id);
+		//Get Item by the Device's item_id
+		$item = Item::find($device->item_id);
+		$itemId = $item->id;
+		//Get all the Location of a specific Device
+		$device_location = DeviceLocation::where('device_id', $id)->paginate(20);
+		//Get Devices with Location
+		$devices = Device::with('location')->where('id', $id)->get();
+		//Get Information value on Field
+		$fields = Info::with('field')->where('device_id', $device->id)->get();
+
+		$locations = Location::whereNotIn('id', function($query) use ($itemId) {
+			    $query->select(['location_id']); 
+			    $query->from('devices');
+			    $query->where('item_id', $itemId); 
+				})->get();
+
+		if($device == true) {
+			return View::make('trackdevice')
+				->with('devices', $device->item_id)
+				->with('device_location', $device_location)
+				->with('device', $device)
+				->with('dvc', $devices)
+				->with('item', $item)
+				->with('fields', $fields)
+				->with('locations', $locations);
+		} else {
+			return View::make('404');
+		}
+	}
 }

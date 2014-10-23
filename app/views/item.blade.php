@@ -39,6 +39,7 @@
 	<div class="sidebar">
 		<ul class="side-nav">
 			<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
+			<li>{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'large-12 small-12 tiny radius', 'title' => 'Edit a Device')) }}</li>
 			@if (count($deviceList) == 0)
 				<li>{{ link_to('#', 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
 			@else
@@ -52,7 +53,7 @@
 </div>
 
 <div class="row">
-	<div class="large-10 small-12 columns">
+	<div class="large-11 small-12 columns">
 		<div class="row">
 			<div class="large-12 small-12 columns">
 			<h1>{{ $item->name }} Devices</h1>
@@ -62,7 +63,7 @@
 			      			<th id="headerStyle" class="history-Header-bg table-item-align">Device Name</th>
 							<th id="headerStyle" class="history-Header-bg table-item-align">Availability</th>
 							<th id="headerStyle" class="history-Header-bg table-item-align">Status</th>
-							<th class="history-Header-bg table-item-align">Actions</th>
+							<th class="history-Header-bg table-item-align">Date / Time Added</th>
 						</tr>
 					</thead>
 
@@ -87,19 +88,8 @@
 								@else
 									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
 								@endif
-							<td class="table-item-align">
-								<?php
-									if($devList->location_id != 0) {
-										$locsName = $devList->location->name;
-										echo "<a href='#' class='button tiny large-8 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
-									} else {
-										if ($devList->status != 'Normal') {
-											echo "<a href='#' class='button tiny large-8 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal' disabled>Assign</a>";
-										} else {
-											echo "<a href='#' class='button tiny large-8 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
-										}
-									}
-								?>
+							<td class="font weight table-item-align">
+								{{ Form::label('', date('F d, Y / h:i A D', strtotime($devList->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}
 							</td>
 						</tr>
 					@endforeach

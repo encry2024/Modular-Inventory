@@ -10,4 +10,9 @@ class ProfileController extends BaseController {
 		 		->with('items', $items)
 		 		->with('devices', $devices);
 	}
+
+	public function showAll() {
+		$retrieveAll = User::action_SearchAll(Input::all());
+		return $retrieveAll;
+	}
 }

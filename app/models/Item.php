@@ -179,4 +179,30 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 			return Redirect::back()->with('message', 'Nothing were applied.');
 		}
 	}
+
+	public static function rtvItems($id) {
+		$item = Item::find($id);
+		$device = Device::where('item_id', $id)->get();
+		$locations = Location::whereNotIn('id', function($query) use ($id) {
+					    $query->select(['location_id']); 
+					    $query->from('devices');
+					    $query->where('item_id', $id); 
+						})->get();
+		$devices = Device::with('location')->where('item_id', $id)->get();
+
+		if(count($device) != 0) {
+			return View::make('Item')
+				->with('item', $item)
+				->with('devices', $item->devices)
+				->with('locations', $locations)
+				->with('device_location', $devices)
+				->with('dvce', $device);
+		} else {
+			return View::make('Item')
+				->with('item', $item)
+				->with('devices', $item->devices)
+				->with('device_location', $devices)
+				->with('dvce', $device);
+		}
+	}
 }

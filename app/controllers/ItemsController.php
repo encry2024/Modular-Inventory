@@ -7,10 +7,10 @@ class ItemsController extends BaseController {
 		return $item;
 	}
 
-	// public function showItem($id) {
-	// 	//Search Item by id
-		
-	// }
+	public function showItem($id) {
+		$retrieveItems = Item::rtvItems($id);
+		return $retrieveItems;
+	}
 
 	public function showTracks($id) {
 		//Find Item where id = $id
