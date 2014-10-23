@@ -7,22 +7,10 @@ class ItemsController extends BaseController {
 		return $item;
 	}
 
-	public function showItem($id) {
-		//Search Item by id
-		$item = Item::find($id);
-		$locations = Location::lists('name','id');
-		$devices = Device::with('location')->where('item_id', $id)->get();
+	// public function showItem($id) {
+	// 	//Search Item by id
 		
-		if($item == true) {
-			return View::make('Item')
-				->with('item', $item)
-				->with('devices', $item->devices)
-				->with('locations', $locations)
-				->with('device_location', $devices);
-		} else {
-			return View::make('404');
-		}
-	}
+	// }
 
 	public function showTracks($id) {
 		//Find Item where id = $id

@@ -21,7 +21,7 @@
 
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -39,7 +39,9 @@
 	</br>
 		<div class="row">
 			<div class="large-12 columns">
-				{{ link_to('Item/'. $getInfo->item_id, 'Return to ' . $getInfo->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
+			@foreach ($getInfo as $deviceinfo)
+				{{ link_to('Item/'. $deviceinfo->item_id, 'Return to ' . $deviceinfo->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
+			@endforeach
 			</div>
 		</div>
 

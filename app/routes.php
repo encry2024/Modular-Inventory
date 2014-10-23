@@ -73,7 +73,29 @@ Route::get('Item/delete/{id}', function($id) {
 });
 Route::get('/register', 'RegisterController@showRegister');
 Route::get('/', 'ProfileController@showProfile');
-Route::get('Item/{id}', 'ItemsController@showItem');
+
+Route::get('Item/{id}', function($id) {
+
+	$item = Item::find($id);
+	$device = Device::where('item_id', $id)->get();
+	$locations = DB::select('SELECT * FROM inv_locations WHERE id NOT IN (SELECT location_id FROM inv_devices WHERE item_id = '.$id.')');
+	$devices = Device::with('location')->where('item_id', $id)->get();
+	
+	if(count($device) != 0) {
+		return View::make('Item')
+			->with('item', $item)
+			->with('devices', $item->devices)
+			->with('locations', $locations)
+			->with('device_location', $devices)
+			->with('dvce', $device);
+	} else {
+		return View::make('Item')
+			->with('item', $item)
+			->with('devices', $item->devices)
+			->with('device_location', $devices)
+			->with('dvce', $device);
+	}
+});
 Route::get('Device/{id}', 'DeviceController@showDevice');
 Route::get('Device/Track/{id}', 'DeviceController@showTrack');
 Route::get('All/Track', 'AuditController@trackAll');

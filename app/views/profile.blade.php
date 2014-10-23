@@ -27,7 +27,7 @@
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -85,7 +85,7 @@
 				<tbody>
 		  			@foreach ($items as $item)
 		    			<tr>
-							<td class="font weight table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 small-12 radius fontSize-Device', 'title' => "Go to Item's Profile", 'id' => $item->id)) }}</td>
+							<td class="font weight table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class' => 'tiny large-3 small-12 radius fontSize-Device', 'title' => "Go to Item's Profile", 'name' => 'item-' . $item->id)) }}</td>
 							<td class="font weight table-item-align">{{ count($item->device) }}</td>
 							<td class="font weight table-item-align">
 								{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'button large-3 small-12 tiny radius', 'title' => 'Edit a Device')) }}

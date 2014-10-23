@@ -20,7 +20,7 @@
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'NORTHSTAR SOLUTIONS INC.', array('class'=>'font-1 fontSize-3')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>

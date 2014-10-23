@@ -181,7 +181,13 @@
 				{{ Form::label('','Choose below where you want to assign the Device stated above.', array('class'=>'font-1 radius')) }}
 				<br></br></br>
 				{{ Form::label('', "Location's name", array('id'=>'Font')) }}
-				{{ Form::select('locationList', $locations, Input::old('locationList'), array('class'=>'font-1')) }}
+				<select name="locationList">
+				@if (count($dvce) !=0)
+					@foreach ($locations as $loc)
+						<option value= {{ $loc->id }}>{{ $loc->name }}</option>
+					@endforeach
+				@endif
+				</select>
 				{{ Form::submit('Deploy' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
 				</div>
 			</div>
