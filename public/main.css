@@ -9,9 +9,39 @@
   background-color: White !important;
 }
 
+ul.pagination {
+  margin-left: 23rem !important;
+}
+
 #header-h3 {
 	color: WHITE;
 	font-family: Segoe UI;
+}
+
+.infoLabel {
+  border-top: 2px straight #FF0000;
+  position: relative;
+  text-align: center;
+}
+
+.infoLabel {
+  border-top: 2px solid #ddd;
+  position: relative;
+
+}
+h6 {
+  position: absolute;
+  top: -18px;
+  text-align:center;
+  width:100%;
+  padding:0;
+  margin:0px;
+  font-size: 15 !important;
+}
+h6 span {
+  background:#fff;
+  display: inline-block;
+  padding: 5px;
 }
 
 .sidePanel {

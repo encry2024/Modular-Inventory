@@ -42,7 +42,7 @@ class DeviceController extends BaseController {
 		//Get Item by the Device's item_id
 		$item = Item::find($device->item_id);
 		//Get all the Location of a specific Device
-		$device_location = DeviceLocation::where('device_id', $id)->get();
+		$device_location = DeviceLocation::where('device_id', $id)->paginate(30);
 		//Get Devices with Location
 		$devices = Device::with('location')->where('id', $id)->get();
 		//Get Information value on Field

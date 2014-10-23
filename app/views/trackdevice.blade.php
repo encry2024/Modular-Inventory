@@ -61,48 +61,36 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="large-11 columns">
-		<h1> {{ $device->name }}
-			<div class="row"> 
-			 	<div class="large-12 columns">
-				 	<div class="row">
-				 	@foreach ($fields as $device_field_info)
-				 		<div class="large-2 columns">
-						 {{ Form::label('', $device_field_info->field->item_label . ': ', array('class'=>'font-1 fontSize-6 fontWeight')) }}	
-						 </div>
-						 {{ Form::label('', $device_field_info->value, array('class'=>'font-1 fontSize-6 fontWeight') ) }}
-					@endforeach
-				 	</div>
-			 	</div>
-		 	</div>
-		</h1>
+
+<div class="large-10 columns">
+	<div class="row">
+		<div class="large-11 columns">
+			<h1>{{ $device->name }}</h1>
+		</div>
+		<div class="large-11 columns">
 			<div class="row">
 				<div class="large-12 columns">
 					<div class="row">
-						<div class="large-4 columns">
-							{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
-						</div>
-						<div class="large-7 pull-3 columns">
 						<!--IF DEVICE STATUS IS NOT NORMAL CHANGE LABEL TO ALERT-->
 						@foreach ($dvc as $dev)
+						<div class="large-2 columns"> 
+							{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
+						</div>
 							@if ($dev->status != "Normal")
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->status }}</label>
 							@else
 								<label class="label Success font-1 fontSize-6 fontSize-Device radius">Normal</label>
 							@endif
 						@endforeach
-						</div>
 					</div>
 				</div>
 				<br>
 				<div class="large-12 columns">
-					<div class="row">
-						<div class="large-4 columns">
-							{{ Form::label('', 'Currently Assigned:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
-						</div>
-						<div class="large-7 pull-3 columns">
+					<div class="row"> 
 						@foreach ($dvc as $dev)
+							<div class="large-2 columns">
+								{{ Form::label('', 'Currently Assigned:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
+							</div>
 							@if ($dev->location_id != 0)
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->location->name }}</label>
 							@else
@@ -113,35 +101,54 @@
 								@endif
 							@endif
 						@endforeach
-						</div>
 					</div>
 				</div>
+				<br><br>
+				<div class="large-9 columns large-centered">
+				 	<div class="infoLabel">
+				 		<h6><span>Device Information</span><h6>
+			 		</div>
+			 		<br>
+			 	</div>
+			 	<div class="large-12 columns">
+				 	<div class="row">
+					 	@foreach ($fields as $device_field_info)
+					 		<div class="large-2 columns">
+						 		{{ Form::label('', $device_field_info->field->item_label . ': ', array('class'=>'font-1 fontSize-6 fontWeight')) }}	
+						 	</div>
+						 	{{ Form::label('', $device_field_info->value, array('class'=>'font-1 fontSize-6 fontWeight') ) }}
+						@endforeach
+				 	</div>
+			 	</div>
 			</div>
-		</br>
+			<br>
+		</div>
 		</br>
 		@if ($alert = Session::get('message'))
 			<div data-alert class="alert-box success small-8">
-    			{{ $alert }}
-    			<a href="#" class="close">&times;</a>
+				{{ $alert }}
+				<a href="#" class="close">&times;</a>
 			</div>
 		@endif
-		<table class="large-12 columns" id="tableTwo">
-			<thead>
-		   		<tr>
-					<th id="headerStyle" class="history-Header-bg table-item-align">Track Assigned Locations</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				@foreach ($device_location as $devList)
-					<tr>
-						<td> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
+		<div class="large-11 columns">
+			<table class="large-12 columns" id="tableTwo">
+				<thead>
+			   		<tr>
+						<th id="headerStyle" class="history-Header-bg table-item-align">Track Assigned Locations</th>
 					</tr>
-				@endforeach
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					@foreach ($device_location as $devList)
+						<tr>
+							<td> <b>{{ $devList->created_at }} -</b> <b>{{ $devList->device->name }}</b> was assigned to <b>{{ $devList->location->name }}</b> </td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+			{{ $device_location->links() }}
+		</div>
 	</div>
-	
 </div>
 
 <!--Edit Device Modal-->

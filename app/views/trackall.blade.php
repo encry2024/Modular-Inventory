@@ -53,24 +53,24 @@
 				</div>
 			</div>
 			</br>
-			@foreach ($audits as $audit)
-			<div class="row">
-				<div class="large-11 columns large-centered">
-					<?php
-						if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
-							$initDate = date('F d, Y', strtotime($audit->created_at));
-							echo "<br>";
-							echo "<li class='divider font-1 fontSize-1 fontWeight'> Tracks on ".$initDate."</li>";
+				@foreach ($audits as $audit)
+				<div class="row">
+					<div class="large-11 columns large-centered">
+						<?php
+							if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
+								$initDate = date('F d, Y', strtotime($audit->created_at));
+								echo "<br>";
+								echo "<li class='divider font-1 fontSize-1 fontWeight'> Tracks on ".$initDate."</li>";
 
-						}
-						$audit_time = date('h:i A D', strtotime($audit->created_at));
-					?>
-				<li class="liBorder">
-					<label class='font auditItem'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
-				</li>
+							}
+							$audit_time = date('h:i A D', strtotime($audit->created_at));
+						?>
+					<li class="liBorder">
+						<label class='font auditItem'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
+					</li>
+					</div>
 				</div>
-			</div>
-			@endforeach
+				@endforeach
 			<br>
 		</div>
 	</div>

@@ -52,7 +52,7 @@
 </div>
 
 <div class="row">
-	<div class="large-11 small-12 columns">
+	<div class="large-10 small-12 columns">
 		<div class="row">
 			<div class="large-12 small-12 columns">
 			<h1>{{ $item->name }} Devices</h1>
@@ -91,12 +91,12 @@
 								<?php
 									if($devList->location_id != 0) {
 										$locsName = $devList->location->name;
-										echo "<a href='#' class='button tiny large-5 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
+										echo "<a href='#' class='button tiny large-8 radius' onclick='dissociateDeviceProperty($devList->id, \"$devList->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a>";
 									} else {
 										if ($devList->status != 'Normal') {
-											echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal' disabled>Assign</a>";
+											echo "<a href='#' class='button tiny large-8 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal' disabled>Assign</a>";
 										} else {
-											echo "<a href='#' class='button tiny large-5 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
+											echo "<a href='#' class='button tiny large-8 radius' onclick='assignDeviceProperty($devList->id, \"$devList->name\")' data-reveal-id = 'assignModal'>Assign</a>";
 										}
 									}
 								?>
@@ -109,8 +109,6 @@
 		</div>
 	</div>
 </div>
-
-
 <!-- MODALS -->
 
 <!-- ADD DEVICE MODAL -->
