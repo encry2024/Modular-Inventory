@@ -33,7 +33,7 @@
 	<div class="large-10 columns large-centered">
 		<div class="row">
 			<div class="large-12 columns">
-				<h3>-Track All {{$itemName}}-</h3>
+				<h1>Track All {{$itemName}}</h1>
 			</div>
 		</div>
 	</br>
@@ -42,11 +42,11 @@
 				{{ link_to('Item/'. $itemId, 'Return to ' . $itemName, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
 			</div>
 		</div>
-
+		<br>
 			<table class="large-12 columns" id="tableTwo">
 				<thead>
 				   	<tr>
-						<th>Actions Taken</th>
+						<th class="history-Header-bg table-item-align">Associate & Dissociate {{ $itemName }}</th>
 					</tr>
 				</thead>
 
@@ -55,7 +55,7 @@
 						@foreach ($device_location->devicelog as $dl)
 							<tr>
 								<td>
-									{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($dl->created_at)). ' -' . $dl->device->name . ' was '.$dl->action_taken.' to '. $dl->location->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}
+									{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($dl->created_at)). ' -' . $dl->device->name . ' was '.$dl->action_taken.' to '. $dl->location->name , array('class'=>'font-1 fontSize-6 fontWeight')) }}
 								</td>
 							</tr>
 						@endforeach
