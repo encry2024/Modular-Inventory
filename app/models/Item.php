@@ -41,6 +41,10 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Audit');
 	}
 
+    public function devicelog() {
+        return $this->hasManyThrough('DeviceLog', 'Device', 'item_id', 'device_id')->orderBy('created_at', 'desc');
+    }
+
 	public static function registerItem($data) {
 
 		$values = array(
@@ -188,7 +192,7 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 					    $query->from('devices');
 					    $query->where('item_id', $id); 
 						})->get();
-		$devices = Device::with('location')->where('item_id', $id)->get();
+		$devices = Device::with('location')->where('item_id', $id)->paginate(20);
 
 		if(count($device) != 0) {
 			return View::make('Item')

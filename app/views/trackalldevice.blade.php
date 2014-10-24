@@ -39,9 +39,7 @@
 	</br>
 		<div class="row">
 			<div class="large-12 columns">
-			@foreach ($getInfo as $deviceinfo)
-				{{ link_to('Item/'. $deviceinfo->item_id, 'Return to ' . $deviceinfo->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
-			@endforeach
+				{{ link_to('Item/'. $itemId, 'Return to ' . $itemName, $attributes = array('class' => 'button tiny radius', 'title' => 'Devices')) }}
 			</div>
 		</div>
 
@@ -54,11 +52,13 @@
 
 				<tbody>
 					@foreach ($device_locations as $device_location)
-						<tr>
-							<td>
-								<b>{{ $device_location->created_at }} -</b> Device <b> {{ $device_location->device->name }} </b> was assigned to <b> {{ $device_location->location->name }} </b>
-							</td>
-						</tr>
+						@foreach ($device_location->devicelog as $dl)
+							<tr>
+								<td>
+									{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($dl->created_at)). ' -' . $dl->device->name . ' was '.$dl->action_taken.' to '. $dl->location->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}
+								</td>
+							</tr>
+						@endforeach
 					@endforeach
 				</tbody>
 			</table>

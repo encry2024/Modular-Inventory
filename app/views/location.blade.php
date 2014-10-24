@@ -49,20 +49,26 @@
 			<table class="large-12 columns tableOne ">
 	  			<thead>
 	   				<tr>
-      					<th class="font weight history-Header-bg">Locations</th>
-      					<th class="font weight history-Header-bg">Devices</th>
-      					<th class="font weight history-Header-bg">Date Created</th>
+      					<th class="font weight history-Header-bg table-item-align">Locations</th>
+      					<th class="font weight history-Header-bg table-item-align">Assigned Devices</th>
+      					<th class="font weight history-Header-bg table-item-align">Date Created</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					@foreach ($location as $locations)
-			    			<tr>
-								<td class="font weight">{{ Form::label('', $locations->name) }}</td>
-								<td class="font weight">{{ Form::label('', '', '') }}</td>
-								<td class="font weight">{{ Form::label('', $locations->created_at, '') }}</td>
-			   				</tr>
-			   			@endforeach
+		    			<tr>
+							<td class="table-item-align">{{ Form::label('', $locations->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
+							<td class="table-item-align">
+							@foreach ($locations->device as $locationDevice)
+							<label>
+							{{ link_to('Device/Track/'.$locationDevice->id , $locationDevice->name, array('class'=>'font-1 fontSize-6 fontWeight' ,'title' => "Click to check this device's tracks.")) }}	
+							</label>
+							@endforeach
+							</td>
+							<td class="table-item-align">{{ Form::label('', date('F d, Y / h:i A D', strtotime($locations->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
+		   				</tr>
+		   			@endforeach
 	  			</tbody>
 			</table>
 		</div>

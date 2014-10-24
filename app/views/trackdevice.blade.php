@@ -37,30 +37,30 @@
 				@endif
 			@endforeach
 				<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->
-				<?php
-				foreach ($dvc as $dev) {
-					if($dev->location_id != 0) {
-						$locsName = $dev->location->name;
-						echo "<li><a href='#' class=' tiny large-12 ' onclick='dissociateDeviceProperty($dev->id, \"$dev->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a></li>";
+			<?php
+			foreach ($dvc as $dev) {
+				if($dev->location_id != 0) {
+					$locsName = $dev->location->name;
+					echo "<li><a href='#' class=' tiny large-12 ' onclick='dissociateDeviceProperty($dev->id, \"$dev->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a></li>";
+				} else {
+					if ($dev->status != 'Normal') {
+						echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal' disabled>Assign Device</a></li>";
 					} else {
-						if ($dev->status != 'Normal') {
-							echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal' disabled>Assign Device</a></li>";
-						} else {
-							echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal'>Assign Device</a></li>";
-						}
+						echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal'>Assign Device</a></li>";
 					}
 				}
-				?>
-				<!--IF DEVICE STATUS IS RETIRED. DISABLE CHANGE STATUS-->
-				@if ($dev->status == "Retired")
-					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
+			}
+			?>
+			<!--IF DEVICE STATUS IS RETIRED. DISABLE CHANGE STATUS-->
+			@if ($dev->status == "Retired")
+				<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
+			@else
+				@if($dev->location_id == 0)
+					<li>{{ link_to('', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
 				@else
-					@if($dev->location_id == 0)
-						<li>{{ link_to('', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
-					@else
-						<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
-					@endif
+					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
 				@endif
+			@endif
 			<li>{{ link_to('Device/delete/'. $device->id.csrf_token(), 'Delete', array('class' => ' tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token())) }}</li>
 			</br></br></br>
 			<li>{{ link_to('Item/'. $devices, 'Return to Devices', $attributes = array('class' => ' tiny radius large-12', 'title' => 'Return to Devices', 'id'=>$devices  . csrf_token())) }}</li>
@@ -80,9 +80,9 @@
 					<div class="row">
 						<!--IF DEVICE STATUS IS NOT NORMAL CHANGE LABEL TO ALERT-->
 						@foreach ($dvc as $dev)
-						<div class="large-2 columns"> 
-							{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
-						</div>
+							<div class="large-2 columns"> 
+								{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
+							</div>
 							@if ($dev->status != "Normal")
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->status }}</label>
 							@else
@@ -149,13 +149,12 @@
 				<tbody>
 					@foreach ($device_location as $devList)
 						<tr>
-							<td>{{ Form::label('', date('F d, Y / h:i A D', strtotime($devList->created_at)). ' -' . $devList->device->name . ' was assigned to '. $devList->location->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
-							 
+							<td>{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($devList->created_at)). ' -' . $devList->device->name . ' was '.$devList->action_taken.' to '. $devList->location->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
 						</tr>
 					@endforeach
 				</tbody>
+				{{ $device_location->links() }}
 			</table>
-			{{ $device_location->links() }}
 		</div>
 	</div>
 </div>

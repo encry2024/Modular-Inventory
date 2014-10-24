@@ -26,8 +26,8 @@ class Device extends Eloquent {
 		return $this->belongsTo('Location');
 	}
 
-	public function deviceLocations() {
-		return $this->hasMany('DeviceLocation');
+	public function devicelog() {
+		return $this->hasMany('DeviceLog');
 	}
 
 	public function audit() {
@@ -112,6 +112,8 @@ class Device extends Eloquent {
 		}
 	}
 
+	//UPDATE DEVICE INFORMATION
+
 	public static function update_device_infos($data) {
 		$audit_history = '';
 		$changesApplied = 0;
@@ -160,6 +162,8 @@ class Device extends Eloquent {
 		}
 	}
 
+	//CHANGE DEVICE STATUS
+
 	public static function changeStatus($data) {
 		$device = Device::find($data["devi_Id"]);
 		$device->status = $data["status"];
@@ -181,6 +185,8 @@ class Device extends Eloquent {
 						->with('message', 'Device status updated.');
 	}
 
+	//RETRIEVE TRACKS
+
 	public static function retrieveTrack($id) {
 		# code...
 		//Search device id
@@ -189,7 +195,7 @@ class Device extends Eloquent {
 		$item = Item::find($device->item_id);
 		$itemId = $item->id;
 		//Get all the Location of a specific Device
-		$device_location = DeviceLocation::where('device_id', $id)->paginate(20);
+		$device_location = DeviceLog::where('device_id', $id)->paginate(20);
 		//Get Devices with Location
 		$devices = Device::with('location')->where('id', $id)->get();
 		//Get Information value on Field
@@ -213,5 +219,86 @@ class Device extends Eloquent {
 		} else {
 			return View::make('404');
 		}
+	}
+
+
+	public static function action_AssignDevice($data) {
+		$values = array(
+			'device_id' => $data["idTb"],
+			'location_id' => $data["locationList"]
+		);
+
+		//rules
+		$rules = array(
+			'device_id' => 'required',
+			'location_id' => 'required'
+		);
+
+		$validation = Validator::make($values, $rules);
+
+		//check if validation successful
+		if($validation->fails()) {
+			return Redirect::back()
+				->withErrors($validation);
+		} else {
+			//Add Device and location on Pivot Table
+			$deviceLog = new DeviceLog;
+			$deviceLog->device_id = $_POST["idTb"];
+			$deviceLog->location_id = $data["locationList"];
+			$deviceLog->action_taken = "assigned" ;
+			$deviceLog->save();
+
+			//Get Device Name and Id
+			$device = Device::find($_POST["idTb"]);
+			$device_name = $device->name;
+			$deviceId = $device->id;
+
+			//Get Location: Name, ID
+			$locations = Location::find($data["locationList"]);
+			$locationName = $locations->name;
+			$getLocationId = $locations->id;
+			
+			//Save Location ID on Device and availability to Assigned
+			$devices = Device::find($_POST["idTb"]);
+			$devices->availability = "Assigned";
+			$devices->location_id = $getLocationId;
+			$devices->save();
+
+			//Save the action taken to Audit
+			$audits = new Audit;
+			$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname ." has assigned the device ".$device_name . " to the location ". $locationName .".";
+			$audits->save();
+
+			return Redirect::back()
+				->with('message', 'The device '.$device_name.' has been assigned to '. $locationName .'.')
+				->with('locations_name', $locationName);
+		}
+	}
+
+	public static function unAssignDevice($data) {
+		$device = Device::find($data["idTb"]);
+		$device->availability = "Available";
+		$getLocation_id = $device->location_id;
+		$device->location_id = "0";
+		$device->save();
+
+		$device_name = $device->name;
+		$device_id = $device->id;
+
+		$getLocation = Location::find($getLocation_id);
+		$getLocation_name = $getLocation->name;
+		$getLocation_Id = $getLocation->id;
+
+		$deviceLog = new DeviceLog;
+		$deviceLog->device_id = $device_id;
+		$deviceLog->location_id = $getLocation_Id;
+		$deviceLog->action_taken = "dissociated" ;
+		$deviceLog->save();
+
+		$audits = new Audit;
+		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname ." has dissociated the device ".$device_name." from Location ".$getLocation_name.".";
+		$audits->save();
+
+		return Redirect::back();
 	}
 }

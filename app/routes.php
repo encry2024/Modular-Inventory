@@ -73,8 +73,7 @@ Route::get('Item/delete/{id}', function($id) {
 	$audits->save();
 	$item->delete();
 
-	return  Redirect::to('/')
-		->with('deleteMessage', 'Item deleted');
+	return  Redirect::to('/')->with('deleteMessage', 'Item deleted');
 });
 Route::get('/register', 'RegisterController@showRegister');
 Route::get('/', 'ProfileController@showProfile');

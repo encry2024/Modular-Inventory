@@ -15,8 +15,8 @@ class Location extends Eloquent {
 		return $this->hasMany('Audit');
 	}
 
-	public function deviceLocations() {
-		return $this->hasMany('DeviceLocation');
+	public function devicelog() {
+		return $this->hasMany('DeviceLog');
 	}
 
 	public static function create_location($data) {

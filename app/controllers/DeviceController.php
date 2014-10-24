@@ -13,8 +13,14 @@ class DeviceController extends BaseController {
 	}
 
 	public function assignDevice() {
-		$dev_loc = DeviceLocation::action_Register_Device_Location(Input::all());
-		return $dev_loc;
+		//$dev_loc = DeviceLocation::action_Register_Device_Location(Input::all());
+		$assign_device = Device::action_AssignDevice(Input::all());
+		return $assign_device;
+	}
+
+	public function unassignDevice() {
+		$device_location = Device::unAssignDevice(Input::all());
+		return $device_location;
 	}
 
 	public function changeStatus() {
@@ -45,23 +51,21 @@ class DeviceController extends BaseController {
 		//Get Device: ID, Name
 		$getDevice = Device::where('item_id', $id)->get();
 		//Get Item: Name
-		$getItemName = Item::find($id);
-		$item_name = $getItemName->name;
+		$getItem = Item::find($id);
+		$item_name = $getItem->name;
+		$item_id = $getItem->id;
+		$device = Device::all();
 
-		$device_location = DeviceLocation::with('location.device')->where('item_id', $id)->get();
-
+		$device_location = Item::with('devicelog')->where('id', $item_id)->orderBy('created_at', 'asc')->get();
 		if ($device_location == true) {
 			return View::make('trackalldevice')
 						->with('device_locations', $device_location)
 						->with('getInfo', $getDevice)
-						->with('itemName', $item_name);
+						->with('itemName', $item_name)
+						->with('itemId', $item_id);
 		} else {
 			return View::make('404');
 		}
 	}
 
-	public function unassignDevice() {
-		$device_location = DeviceLocation::unAssignDevice(Input::all());
-		return $device_location;
-	}
 }

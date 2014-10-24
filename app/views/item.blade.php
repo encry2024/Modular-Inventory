@@ -52,11 +52,12 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="large-11 small-12 columns">
+
+	<div class="large-10 small-12 columns">
 		<div class="row">
 			<div class="large-12 small-12 columns">
 			<h1>{{ $item->name }} Devices</h1>
+			<br><br>
 				<table class="large-12 small-12 columns table-item-align">
 		  			<thead>
 		   				<tr>
@@ -70,7 +71,7 @@
 					<tbody>
 					@foreach ($device_location as $devList)
 						<tr>
-	    					<td class="table-item-align">{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>'itemLink' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
+	    					<td class="table-item-align">{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>' font-1 fontSize-8 fontWeight' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
 							<?php 
 								if($devList->location_id != 0 ) {
 									echo "<td class='table-item-align'><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
@@ -89,16 +90,16 @@
 									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
 								@endif
 							<td class="font weight table-item-align">
-								{{ Form::label('', date('F d, Y / h:i A D', strtotime($devList->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}
+								{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($devList->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}
 							</td>
 						</tr>
 					@endforeach
 		  			</tbody>
+		  			{{ $device_location->links() }}
 				</table>
 			</div>
 		</div>
 	</div>
-</div>
 <!-- MODALS -->
 
 <!-- ADD DEVICE MODAL -->

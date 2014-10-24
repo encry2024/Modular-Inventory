@@ -5322,7 +5322,7 @@ table {
     background: whitesmoke; }
     table thead tr th,
     table thead tr td {
-      padding: 0.5rem 0.625rem 0.625rem;
+      padding: 0.5rem 1.625rem 0.625rem;
       font-size: 0.875rem;
       font-weight: bold;
       color: #222222; }
