@@ -15,7 +15,7 @@ class Device extends Eloquent {
 	);
 
 	public function item() {
-		return $this->belongsTo('Item');
+		return $this->belongsTo('Item')->withTrashed();
 	}
 
 	public function info() {
