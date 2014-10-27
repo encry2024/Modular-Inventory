@@ -1,7 +1,13 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Location extends Eloquent {
 
+	use SoftDeletingTrait;
+	protected $softDelete = true;
+	protected $dates = ['deleted_at'];
+	
 	protected $fillable = array(
 		'id',
 		'name'

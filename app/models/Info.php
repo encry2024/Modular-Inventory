@@ -1,7 +1,12 @@
 <?php 
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Info extends Eloquent {
 
+	use SoftDeletingTrait;
+	protected $softDelete = true;
+	protected $dates = ['deleted_at'];
 	protected $fillable = array(
 		'dev_id',
 		'label_id',
@@ -13,7 +18,7 @@ class Info extends Eloquent {
 	}
 
 	public function field() {
-		return $this->belongsTo('Field');
+		return $this->belongsTo('Field')->withTrashed();
 	}
 
 	public function audit() {

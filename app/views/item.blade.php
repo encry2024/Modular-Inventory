@@ -4,6 +4,7 @@
 	//declarations
 	$ctr = 0;
 	$ctr2 = 0;
+	$devId = "";
 	$deviceList = $item->device;
 	$fields = $item->field;
 	$location_name = "";
@@ -28,7 +29,7 @@
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'Northstar Solution Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -39,67 +40,72 @@
 	<div class="sidebar">
 		<ul class="side-nav">
 			<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
-			<li>{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'large-12 small-12 tiny radius', 'title' => 'Edit a Device')) }}</li>
+			<li>{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'large-12 small-12 tiny radius', 'title' => 'Edit Device')) }}</li>
 			@if (count($deviceList) == 0)
 				<li>{{ link_to('#', 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
 			@else
 				<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
 			@endif
-			<li>{{ link_to('Item/delete/'.$item->id.csrf_token(), 'Delete', $attributes = array('class' => 'large-12 tiny radius delete_user', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
+			<li>{{ link_to('#', 'Delete', $attributes = array( 'name'=>'_token' , 'class' => 'large-12 tiny radius delete_user', 'data-reveal-id' => 'deleteModal', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
 			</br></br></br>
 			<li>{{ link_to('', 'Return to Item', array("class"=>"tiny large-12 radius"))}}</li>
 		</ul>
 	</div>
 </div>
 
-
-	<div class="large-10 small-12 columns">
-		<div class="row">
-			<div class="large-11 small-12 columns" >
-			<h1>{{ $item->name }} Devices</h1>
-			<br>
-				<table class="large-12 small-12 columns large-centered table-item-align" id="tableTwo">
-		  			<thead>
-		   				<tr>
-			      			<th id="headerStyle" class="history-Header-bg table-item-align">Device Name</th>
-							<th id="headerStyle" class="history-Header-bg table-item-align">Availability</th>
-							<th id="headerStyle" class="history-Header-bg table-item-align">Status</th>
-							<th class="history-Header-bg table-item-align">Date/Time Added</th>
-						</tr>
-					</thead>
-
-					<tbody>
-					@foreach ($device_location as $devList)
-						<tr>
-	    					<td class="table-item-align">{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>' font-1 fontSize-8 fontWeight' ,'title' => "Click to check this device's tracks.", 'id' => $item->id)) }}
-							<?php 
-								if($devList->location_id != 0 ) {
-									echo "<td class='table-item-align'><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
+<div class="large-10 small-12 columns">
+	<div class="row">
+		<div class="large-11 small-12 columns" >
+		<h1>{{ $item->name }} Devices</h1>
+			<table class="display" id="tableSearch" cellspacing="0" width="100%">
+	  			<thead>
+	   				<tr>
+		      			<th>Device Name</th>
+						<th>Availability</th>
+						<th>Status</th>
+						<th>Date/Time Added</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
+				<tbody>
+				@foreach ($device_location as $devList)
+					<tr>
+    					<td class="table-item-align">{{ link_to('Device/Track/'.$devList->id , $devList->name, array( 'class'=>' font-1 fontSize-8 fontWeight' ,'title' => "Click to check ".$devList->name." Informations.", 'id' => $item->id)) }}
+						<?php 
+							if($devList->location_id != 0 ) {
+								echo "<td class='table-item-align'><a class='label alert ' id='fontSize-Device' >".$devList->availability ." to ".$devList->location->name." </td>";	
+							} else {
+								if ($devList->status != 'Normal') {
+									echo "<td class='table-item-align'><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
 								} else {
-									if ($devList->status != 'Normal') {
-										echo "<td class='table-item-align'><a class='label alert' id='fontSize-Device' >".$devList->availability."</a></td>";
-									} else {
-										echo "<td class='table-item-align'><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
-									}
+									echo "<td class='table-item-align'><a class='label success' id='fontSize-Device' >".$devList->availability."</a></td>";
 								}
-							?>
-							</td>
-								@if($devList->status != 'Normal')
-									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
-								@else
-									<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
-								@endif
-							<td class="font weight table-item-align">
-								{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($devList->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}
-							</td>
-						</tr>
-					@endforeach
-		  			</tbody>
-		  			{{ $device_location->links() }}
-				</table>
-			</div>
+							}
+						?>
+						</td>
+							@if($devList->status != 'Normal')
+								<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label alert radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+							@else
+								<td class="table-item-align">{{ Form::label('', $devList->status, array('class' =>'label success radius fontSourceCode', 'id' => 'fontSize-Device')) }}</td>
+							@endif
+						<td class="font weight table-item-align">
+							{{ Form::label('', date('F d, Y [ h:i A D ]', strtotime($devList->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}
+						</td>
+					</tr>
+				@endforeach
+	  			</tbody>
+	  			{{ $device_location->links() }}
+			</table>
 		</div>
 	</div>
+</div>
 <!-- MODALS -->
 
 <!-- ADD DEVICE MODAL -->
@@ -188,6 +194,28 @@
 	{{ Form::close() }}
 </div>
 
+<!--DELETE MODAL-->
+<div id="deleteModal" class="reveal-modal small" data-reveal>
+	{{ Form::open(array('url' => 'Item/'.$item->id.'/delete')) }}
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3">You are about to Delete this Item</h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('', "This Item and it's Devices will be permanently deleted.", array( 'class'=>'font-1 radius')) }}
+				<br>
+				{{ Form::label('', 'Are you sure you want to delete Item '.$item->name.'?', array('class'=>'font-1 radius')) }}
+				<br><br>
+				{{ Form::submit('Delete' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
+</div>
+
 <!-- EDIT DEVICE MODAL -->
 <div id="editDeviceModal" class="reveal-modal medium" data-reveal>
 	{{ Form::open(array('url' => 'updateDevice')) }}
@@ -229,8 +257,8 @@
 </div>
 
 <!--SCRIPTS MODAL-->
-
 	<script>
+
 	$('#dp1').pickadate({
 		format: 'mmmm dd, yyyy',
 	});
@@ -254,10 +282,5 @@
 		document.getElementById("device_name").innerHTML = name;
 		document.getElementById("device_id").value = id;
 	}
-	$(".delete_user").click(function() {
-		if (!confirm("This devices will be permanently deleted and cannot be recovered. Are you sure?")) {
-		return false;
-		}
-	});
 	</script>
 @endsection

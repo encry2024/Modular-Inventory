@@ -19,7 +19,7 @@
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'Northstar Solution Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -92,13 +92,13 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<div class="large-12 columns">
-				<h1 class="fontSize-3">Delete Location - {{$locationName}} </h1>
+				<h1 class="fontSize-3">You are about to Delete this location</h1>
 			</div>
 
 			<div class="large-12 columns">
-				{{ Form::label('','This location will be permanently deleted.', array( 'class'=>'fontSize-6 fontColor-black' , 'id' => 'modalLbl')) }}
+				{{ Form::label('','This location will be permanently deleted.', array( 'class'=>'font-1 radius')) }}
 				<br>
-				{{ Form::label('', 'Are you sure you want to delete Location '.$locationName.'?', array( 'class'=>'fontSize-6 fontColor-black' , 'id' => 'modalLbl')) }}
+				{{ Form::label('', 'Are you sure you want to delete Location '.$locationName.'?', array('class'=>'font-1 radius')) }}
 				<br><br>
 				{{ Form::submit('Delete' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
 			</div>

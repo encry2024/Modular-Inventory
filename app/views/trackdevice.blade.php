@@ -19,7 +19,7 @@
 		</ul>
     <!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'Northstar Solution Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -61,7 +61,7 @@
 					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
 				@endif
 			@endif
-			<li>{{ link_to('Device/delete/'. $device->id.csrf_token(), 'Delete', array('class' => ' tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token())) }}</li>
+			<li>{{ link_to('#', 'Delete', array('class' => ' tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token(), 'data-reveal-id' => 'deleteModal')) }}</li>
 			</br></br></br>
 			<li>{{ link_to('Item/'. $devices, 'Return to Devices', $attributes = array('class' => ' tiny radius large-12', 'title' => 'Return to Devices', 'id'=>$devices  . csrf_token())) }}</li>
 		</ul>
@@ -208,6 +208,28 @@
 			</div>
 			<div class="large-12 columns">
 				{{ Form::submit('Dissociate' , $attributes = array('class' => 'button tiny radius large-12', 'name' => 'submit')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
+</div>
+
+<!--DELETE MODAL-->
+<div id="deleteModal" class="reveal-modal small" data-reveal>
+	{{ Form::open(array('url' => 'Device/'.$device_id.'/delete')) }}
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3">Delete Device - {{ $device_name }} </h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('','This Device will be permanently deleted.', array( 'class'=>'fontSize-6 fontColor-black fontWeight' , 'id' => 'modalLbl')) }}
+				<br>
+				{{ Form::label('', 'Are you sure you want to delete Device '.$device_name.'?', array( 'class'=>'fontSize-6 fontColor-black fontWeight' , 'id' => 'modalLbl')) }}
+				<br>
+				{{ Form::submit('Delete' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
 			</div>
 		</div>
 		<a class="close-reveal-modal">&#215;</a>

@@ -28,7 +28,7 @@
 
 @section('deviceBody')
 <div class="large-11 columns large-centered">
-	<h1 class="font">Locations</h1>
+	<h1>Locations</h1>
 </div>
 
 <div class=" large-10 columns large-centered">

@@ -210,6 +210,8 @@ class Device extends Eloquent {
 		if($device == true) {
 			return View::make('trackdevice')
 				->with('devices', $device->item_id)
+				->with('device_id', $device->id)
+				->with('device_name', $device->name)
 				->with('device_location', $device_location)
 				->with('device', $device)
 				->with('dvc', $devices)

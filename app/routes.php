@@ -18,25 +18,7 @@ Route::get('logout', function() {
 	return Redirect::to('login');
 });
 
-Route::get('Device/delete/{id}', function($id) {
-	//Search ID then get item_id, and name before delete
-	$device = Device::find($id);
-	$deviceItemId = $device->item_id;
-	$device_name = $device->name;
-	//Delete the device
-	$device->delete();
-	$deviceID = $device->id;
-	//Save action to history
-	$audits = new Audit;
-	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the device ".$device_name." permanently.";
-	$audits->save();
-
-	return  Redirect::to('Item/'.$deviceItemId)
-		->with('deleteMessage', 'Device deleted');
-});
-
 Route::get('Field/delete/{id}', function($id) {
-
 	$field = Field::find($id);
 	$fieldItemId = $field->item_id;
 	$field_name = $field->item_label;
@@ -54,6 +36,7 @@ Route::get('Field/delete/{id}', function($id) {
 		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the field " .$field_name." and its field(s): ".$value->value." on the item ". $itemName ." permanently.";
 		$audits->save();
 	}
+
 	//Loop through info. If Info found; Delete the info...
 	foreach($getInfo as $info) {
 		$info->delete();
@@ -61,20 +44,10 @@ Route::get('Field/delete/{id}', function($id) {
 
 	//After deleting the information of the selected field. Delete the Field...
 	$field->delete();
-	return Redirect::back()
-			->with('deleteMessage', 'Field '.$field->item_label.' has been deleted.');
+	return Redirect::back()->with('deleteMessage', 'Field '.$field->item_label.' has been deleted.');
 });
 
-Route::get('Item/delete/{id}', function($id) {
-	$item = Item::find($id);
-	$item_name = $item->name;
-	$audits = new Audit;
-	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the Item " .$item_name." permanently.";
-	$audits->save();
-	$item->delete();
 
-	return  Redirect::to('/')->with('deleteMessage', 'Item deleted');
-});
 
 Route::get('/register', 'RegisterController@showRegister');
 Route::get('/', 'ProfileController@showProfile');
@@ -87,6 +60,7 @@ Route::get('Edit/{id}', 'ItemsController@editItem');
 Route::get('/Location', 'LocationController@viewLocation');
 Route::get('changePassword', 'UserController@showChangePass');
 Route::get('Location/Profile/{id}', 'LocationController@viewProfile');
+Route::get('Search/{id}/Devices', 'DeviceController@showSearchedDevice');
 
 #POST
 Route::post('authenticate', 'LoginController@authenticate');
@@ -110,4 +84,39 @@ Route::post('Location/{id}/delete', function($id) {
 	$location->delete();
 
 	return  Redirect::to('Location')->with('deleteMessage', 'Location deleted');
+});
+Route::post('Device/{id}/delete', function($id) {
+	//Search ID then get item_id, and name before delete
+	$device = Device::find($id);
+	$deviceItemId = $device->item_id;
+	$device_name = $device->name;
+
+	//Delete the device
+	$device->delete();
+
+	//Save action to history
+	$audits = new Audit;
+	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the device ".$device_name." permanently.";
+	$audits->save();
+
+	return  Redirect::to('Item/'.$deviceItemId)
+		->with('deleteMessage', 'Device deleted');
+});
+Route::post('Item/{id}/delete', function($id) {
+	//Search Item where id = $id
+	$item = Item::find($id);
+	$item_name = $item->name;
+	//Delete each device that has item_id of $id
+	$devices = Device::where('item_id', $id)->get();
+	foreach ($devices as $device) {
+		$device->delete();
+	}
+	//Save action taken on the Item.
+	$audits = new Audit;
+	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the Item " .$item_name." and all its devices permanently.";
+	$audits->save();
+	//Delete Item
+	$item->delete();
+
+	return  Redirect::to('/')->with('deleteMessage', 'Item deleted');
 });
