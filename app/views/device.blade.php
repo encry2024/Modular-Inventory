@@ -35,7 +35,7 @@
 			<h3>-Track {{ $items->name }} Device Added Dates-</h3>
 		</div>
 	</div>
-</br>
+	</br>
 	<div class="row">
 		<div class="large-5 columns">
 			{{ link_to('Item/'. $items->id, 'Return to ' . $items->name, $attributes = array('class' => 'button tiny radius', 'title' => 'Return to device page')) }}
@@ -51,16 +51,41 @@
 				</thead>
 				<tbody>
 					@foreach ($devices as $device)
-							<tr>
-								<td>
-									{{ Form::label('deviceName', ' Device ' . $device->name . ' was added to the database on ' . $device->created_at , array('id' => 'Font', 'class' => 'large-12 columns')) }}
-								</td>
-							</tr>
+						<tr>
+							<td>
+								{{ Form::label('deviceName', ' Device ' . $device->name . ' was added to the database on ' . $device->created_at , array('id' => 'Font', 'class' => 'large-12 columns')) }}
+							</td>
+						</tr>
 					@endforeach
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+<!--MODALS-->
+<div id="editName" class="reveal-modal small" data-reveal>
 
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<label id="devFont"></label>
+				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'devLabel', 'class' => 'deviceLbl')) }}</h1>
+				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_textbox' )) }}
+				{{ Form::hidden('itemID', $item->id) }}
+				{{ Form::label('','Choose below where you want to assign the Device stated above.', array('class'=>'font-1 radius')) }}
+				<br></br></br>
+				{{ Form::label('', "Location's name", array('id'=>'Font')) }}
+				<select name="locationList">
+					@foreach ($locations as $loc)
+						<option value= {{ $loc->id }}>{{ $loc->name }}</option>
+					@endforeach
+				</select>
+				{{ Form::submit('Deploy' , $attributes = array('class' => 'button tiny large-12 radius', 'name' => 'submit')) }}
+				</div>
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
+</div>
 @endsection

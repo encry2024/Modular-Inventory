@@ -1,7 +1,6 @@
 @extends('Templates.device')
 
 @section('deviceHeader')
-
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -27,7 +26,6 @@
 
 @endsection
 
-
 @section('deviceBody')
 <div class="large-11 columns large-centered">
 	<h1 class="font">Locations</h1>
@@ -50,7 +48,7 @@
 	  			<thead>
 	   				<tr>
       					<th class="font weight history-Header-bg table-item-align">Locations</th>
-      					<th class="font weight history-Header-bg table-item-align">Assigned Devices</th>
+      					<th class="font weight history-Header-bg table-item-align">Current Devices</th>
       					<th class="font weight history-Header-bg table-item-align">Date Created</th>
 					</tr>
 				</thead>
@@ -58,12 +56,12 @@
 				<tbody>
 					@foreach ($location as $locations)
 		    			<tr>
-							<td class="table-item-align">{{ Form::label('', $locations->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
+							<td class="table-item-align">{{ link_to('Location/Profile/'.$locations->id, $locations->name, array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
 							<td class="table-item-align">
 							@foreach ($locations->device as $locationDevice)
-							<label>
-							{{ link_to('Device/Track/'.$locationDevice->id , $locationDevice->name, array('class'=>'font-1 fontSize-6 fontWeight' ,'title' => "Click to check this device's tracks.")) }}	
-							</label>
+								<label>
+									{{ link_to('Device/Track/'.$locationDevice->id , $locationDevice->name, array('class'=>'font-1 fontSize-6 fontWeight' ,'title' => "Click to check this device's tracks.")) }}	
+								</label>
 							@endforeach
 							</td>
 							<td class="table-item-align">{{ Form::label('', date('F d, Y / h:i A D', strtotime($locations->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}</td>
@@ -83,7 +81,6 @@
 	<div class="row">
 		<div class="large-8 columns">
 			<div class="large-12 columns">
-				
 				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_textbox' )) }}
 			</br>
 			</div>

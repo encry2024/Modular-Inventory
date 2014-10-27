@@ -55,16 +55,16 @@
 
 	<div class="large-10 small-12 columns">
 		<div class="row">
-			<div class="large-12 small-12 columns">
+			<div class="large-11 small-12 columns" >
 			<h1>{{ $item->name }} Devices</h1>
-			<br><br>
-				<table class="large-12 small-12 columns table-item-align">
+			<br>
+				<table class="large-12 small-12 columns large-centered table-item-align" id="tableTwo">
 		  			<thead>
 		   				<tr>
 			      			<th id="headerStyle" class="history-Header-bg table-item-align">Device Name</th>
 							<th id="headerStyle" class="history-Header-bg table-item-align">Availability</th>
 							<th id="headerStyle" class="history-Header-bg table-item-align">Status</th>
-							<th class="history-Header-bg table-item-align">Date / Time Added</th>
+							<th class="history-Header-bg table-item-align">Date/Time Added</th>
 						</tr>
 					</thead>
 

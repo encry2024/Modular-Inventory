@@ -9,7 +9,9 @@
   background-color: White !important;
 }
 
-
+.itemAlign {
+  margin-left: 10rem;
+}
 
 #header-h3 {
 	color: WHITE;
@@ -89,6 +91,10 @@ h8 {
   line-height: 1 !important;
   margin-left: 1.5rem !important;
   cursor: default;
+}
+
+.hAlign {
+  text-align: center!important;
 }
 
 #hAlign {
@@ -206,6 +212,9 @@ table {
     color: White!important;
   }
 
+  .fontColor-black {
+    color: black;
+  }
 
   .fontStyle {
   	font-size: 30!important;

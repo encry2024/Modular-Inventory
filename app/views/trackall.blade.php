@@ -24,7 +24,7 @@
 		</ul>
     		<!-- Left Nav Section -->
 		<ul class="left">
-			<li>{{ link_to('/', 'Northstar Solutions Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
+			<li>{{ link_to('/', 'Northstar Solution Inc.', array('class'=>'font-1 fontSize-5')) }}</li>
 		</ul>
 	</section>
 </nav>
@@ -55,12 +55,12 @@
 			</br>
 				@foreach ($audits as $audit)
 				<div class="row">
-					<div class="large-11 columns large-centered">
+					<div class="large-12 columns large-centered">
 						<?php
 							if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
 								$initDate = date('F d, Y', strtotime($audit->created_at));
 								echo "<br>";
-								echo "<li class='divider font-1 fontSize-1 fontWeight'> Tracks on ".$initDate."</li>";
+								echo "<li class='divider font-1 fontSize-1 fontWeight'>".$initDate."</li>";
 							}
 							$audit_time = date('h:i A D', strtotime($audit->created_at));
 						?>

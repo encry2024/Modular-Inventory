@@ -75,6 +75,7 @@ Route::get('Item/delete/{id}', function($id) {
 
 	return  Redirect::to('/')->with('deleteMessage', 'Item deleted');
 });
+
 Route::get('/register', 'RegisterController@showRegister');
 Route::get('/', 'ProfileController@showProfile');
 Route::get('Item/{id}', 'ItemsController@showItem');
@@ -85,6 +86,7 @@ Route::get('Track/{id}', 'DeviceController@showTracks');
 Route::get('Edit/{id}', 'ItemsController@editItem');
 Route::get('/Location', 'LocationController@viewLocation');
 Route::get('changePassword', 'UserController@showChangePass');
+Route::get('Location/Profile/{id}', 'LocationController@viewProfile');
 
 #POST
 Route::post('authenticate', 'LoginController@authenticate');
@@ -98,3 +100,14 @@ Route::post('assign', 'DeviceController@assignDevice');
 Route::post('unassign', 'DeviceController@unassignDevice');
 Route::post('changestatus', 'DeviceController@changeStatus');
 Route::post('changepass', 'UserController@changeUserPass');
+Route::post('editLocation', 'LocationController@editLocationName');
+Route::post('Location/{id}/delete', function($id) {
+	$location = Location::find($id);
+	$location_name = $location->name;
+	$audits = new Audit;
+	$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has deleted the Location " .$location_name." permanently.";
+	$audits->save();
+	$location->delete();
+
+	return  Redirect::to('Location')->with('deleteMessage', 'Location deleted');
+});

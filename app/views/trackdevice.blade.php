@@ -26,14 +26,14 @@
 @endsection
 
 @section('deviceBody')
-<div class="large-2  small-12 columns">
+<div class="large-2 small-12 columns">
     <div class="sidebar">
 		<ul class="side-nav">
 			@foreach ($dvc as $dev)
 				@if ($dev->status != "Normal")
-					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal', 'disabled')) }}	</li>
+					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius', 'title' => 'Edit Device', 'data-reveal-id' => 'editDeviceModal', 'disabled')) }}	</li>
 				@else
-					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius ', 'title' => 'Edit a Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
+					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius ', 'title' => 'Edit Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
 				@endif
 			@endforeach
 				<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->

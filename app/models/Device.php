@@ -58,7 +58,7 @@ class Device extends Eloquent {
 			//add new device in device_tbl
 			$device = new Device();
 			$device->item_id = $data["itemId"];
-			$device->name = $data['mydevice'];
+			$device->name = trim($data['mydevice']);
 			$device->status = "Normal";
 			$device->availability = "Available";
 			$device->save();
