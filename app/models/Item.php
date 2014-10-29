@@ -69,9 +69,11 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 			$item = new Item;
 			$item->name = $data['itemTb'];
 			$item->save();
+
 			//get name and id
 			$item_name = $item->name;
 			$insertedId = $item->id;
+
 			//save actions in audit
 			$audits = new Audit;
 			$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " added the item " . $item_name . " on the database.";
@@ -83,11 +85,13 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 			foreach($_POST["mytext"] as $labelField) {
 				if($labelField != '') {
 					$field = new Field;
+
 					//$field = new Item;
 					$field->item_id = $insertedId;
 					$field->item_label = $labelField;
 					$field->save();
 					$field_name = $field->item_label;
+
 					//Separate each field with comma ,
 					$field_array = implode(", ", array_values(($_POST["mytext"])));
 
@@ -115,14 +119,18 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 					//get id (field-1)
 					$field_info = explode("-", $key);
 					$id = $field_info[1];
+
 					//Search, and update the field on the database
 					$field = Field::find($id);
+
 					//Get first the label before Update
 					$field_old_label = $field->item_label;
 					$field->item_label = $value;
 					$field->save();
+
 					//Get Field ID
 					$fieldId = $field->id;
+
 					//Get the latest field Value
 					$field_new_label = $field->item_label;
 
@@ -167,6 +175,7 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 
 					$audit_history = '';
 					$audits = new Audit;
+					
 					//Save the added field on the History
 					if( $audits->history == $audit_history OR $audits->history != $audit_history) {
 						$audit_history = $audits->history;

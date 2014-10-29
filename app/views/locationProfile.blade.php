@@ -40,7 +40,7 @@
 		<div class="large-11 columns">
 			<h1>
 				{{ $locationName }} - 
-				<div<a href="#" title="Edit location's name." data-reveal-id="editName"><i class="general foundicon-edit size-18"></i></a>
+				<a href="#" title="Edit location's name." data-reveal-id="editName"><i class="general foundicon-edit size-18"></i></a>
 				<a href="#" title="Delete location." data-reveal-id="deleteModal"><i class="general foundicon-trash size-18"></i></a>
 			</h1>
 			</div>

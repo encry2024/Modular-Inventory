@@ -9,6 +9,7 @@
 		{{ HTML::style('packages/foundation-icons/foundation-icons.css') }}
 		{{ HTML::style('packages/foundation-icons/preview.html') }}
 		{{ HTML::style('packages/foundation-icons/foundation-icons.ttf') }}
+		{{ HTML::style('packages/foundation-icons-general/stylesheets/general_foundicons.css') }}
 		{{ HTML::style('assets/css/foundation-datepicker.css') }}
 		{{ HTML::style('main.css') }}
 		{{ HTML::style('assets/css/main.css') }}
@@ -35,17 +36,14 @@
 			})
 			$(document).ready(function() {
 				    // Setup - add a text input to each footer cell
-				    $('#tableSearch tfoot th').each( function () {
-				        var title = $('#tableSearch thead th').eq( $(this).index() ).text();
-				        $(this).html( '' );
-				    } );
+
 				 
 				    // DataTable
 				    var table = $('#tableSearch').DataTable();
 				 
 				    // Apply the search
 				    table.columns().eq( 0 ).each( function ( colIdx ) {
-				        $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+				        $( 'input', table.column( colIdx ) ).on( 'keyup change', function () {
 				            table
 				                .column( colIdx )
 				                .search( this.value )

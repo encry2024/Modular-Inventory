@@ -8,6 +8,24 @@
   font-family: "calibri";
 }
 
+.textWidth1 {
+  width: 25%;
+}
+
+.textWidth2 {
+  width: 52%;
+}
+
+.separator {
+  border-top-color: Black !important;
+  border-top-width: 3px !important;
+}
+
+.h1Custom {
+  background-color: Whitesmoke;
+  font-size: 25;
+  text-align: center;
+}
 
 .text-bg {
   background-color: White !important;

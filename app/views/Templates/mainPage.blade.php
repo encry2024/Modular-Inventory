@@ -21,8 +21,11 @@
         {{ HTML::style('packages/foundation-icons/foundation-icons.css') }}
         {{ HTML::style('packages/foundation-icons/preview.html') }}
         {{ HTML::style('packages/foundation-icons/foundation-icons.ttf') }}
+        {{ HTML::style('packages/foundation-icons-general/stylesheets/general_foundicons.css') }}
+        {{ HTML::style('assets/css/foundation-datepicker.css') }}
         {{ HTML::style('main.css') }}
-        {{ HTML::script('packages/foundation-5.3.3/js/vendor/modernizr.js') }}
+        {{ HTML::style('assets/css/main.css') }}
+        {{ HTML::style('assets/css/classic.date.css') }}
         
         @yield('bodySection')
         

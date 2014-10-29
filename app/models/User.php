@@ -131,4 +131,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 							 ->with('message', 'Your old password is incorrect.');
 		}
 	}
+
+	public static function action_SearchAll($searchTb, $dateTb) {
+		# code...
+		// Audit::where('history' , 'LIKE', '%'.$searchTb.'%')
+		// 				->where("DATE_FORMAT(created_at, '%m/%d/%Y')", 'LIKE', '%'.$dateTb.'%')->get()
+		$audit = DB::select("SELECT * FROM inv_audits WHERE DATE_FORMAT(created_at, '%m/%d/%Y') LIKE '%".$dateTb."%' AND history LIKE '%".$searchTb."%'");
+		$devices = DB::select("SELECT * FROM inv_devices WHERE DATE_FORMAT(created_at, '%m/%d/%Y') LIKE '%".$dateTb."%' AND name LIKE '%".$searchTb."%' OR deleted_at = ''");
+		$items = DB::select("SELECT * FROM inv_items WHERE DATE_FORMAT(created_at, '%m/%d/%Y') LIKE '%".$dateTb."%' AND name LIKE '%".$searchTb."%' OR deleted_at = ''");
+		$locations = DB::select("SELECT * FROM inv_locations WHERE DATE_FORMAT(created_at, '%m/%d/%Y') LIKE '%".$dateTb."%' AND name LIKE '%".$searchTb."%' OR deleted_at = ''");
+
+		return View::make('Search')->with('audit', $audit)
+								->with('devices', $devices)
+								->with('items', $items)
+								->with('locations', $locations);
+	}
 }

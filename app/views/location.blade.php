@@ -60,7 +60,7 @@
 							<td class="table-item-align">
 							@foreach ($locations->device as $locationDevice)
 								<label>
-									{{ link_to('Device/Track/'.$locationDevice->id , $locationDevice->name, array('class'=>'font-1 fontSize-6 fontWeight' ,'title' => "Click to check this device's tracks.")) }}	
+									{{ link_to('Device/Track/'.$locationDevice->id , $locationDevice->name, array('class'=>'font-1 fontSize-6 fontWeight' ,'title' => "Click to check this device's tracks.")) }}
 								</label>
 							@endforeach
 							</td>

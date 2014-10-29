@@ -60,9 +60,9 @@ Route::get('Edit/{id}', 'ItemsController@editItem');
 Route::get('/Location', 'LocationController@viewLocation');
 Route::get('changePassword', 'UserController@showChangePass');
 Route::get('Location/Profile/{id}', 'LocationController@viewProfile');
-Route::get('Search/{id}/Devices', 'DeviceController@showSearchedDevice');
-
+Route::get('/Search', 'UserController@showSearchPage');
 #POST
+Route::post('getSearch', 'UserController@searchAll');
 Route::post('authenticate', 'LoginController@authenticate');
 Route::post('registeruser', 'RegisterController@registerUser');
 Route::post('additem','ItemsController@addItem');

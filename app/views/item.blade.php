@@ -66,14 +66,7 @@
 						<th>Date/Time Added</th>
 					</tr>
 				</thead>
-				<tfoot>
-					<tr>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</tfoot>
+
 				<tbody>
 				@foreach ($device_location as $devList)
 					<tr>

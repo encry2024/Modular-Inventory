@@ -73,10 +73,4 @@ class DeviceController extends BaseController {
 		}
 	}
 
-	public function showSearchedDevice($id) {
-		$item = Item::find($id);
-		$item_name = $item->name;
-		return View::make('search')->with('item_name', $item_name);
-	}
-
 }
