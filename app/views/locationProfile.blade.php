@@ -47,7 +47,6 @@
 					<a href="#" title="Delete location." data-reveal-id="deleteModal"><i class="general foundicon-trash size-18"></i></a>
 				@endif
 			</h1>
-		
  		<div class="large-12 columns">
  			{{ Form::label('', 'Assigned Devices', array('class'=>'font-1 fontSize-8 fontWeight hAlign')) }}
 		</div>
