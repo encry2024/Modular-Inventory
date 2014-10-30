@@ -19,6 +19,7 @@ class LocationController extends BaseController {
 		$location = Location::find($id);
 		$locationLog = DeviceLog::where('location_id', $id)->orderBy('created_at','desc')->get();
 		$devices = Device::where('location_id', $id)->get();
+		
 		return View::make('locationProfile')->with('locationLog', $locationLog)
 											->with('locationName', $location->name)
 											->with('locationId', $location->id)

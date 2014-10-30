@@ -60,7 +60,7 @@
 							if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
 								$initDate = date('F d, Y', strtotime($audit->created_at));
 								echo "<br>";
-								echo "<h1>".$initDate."</h1>";
+								echo "<h1 class='hAlign'>".$initDate."</h1>";
 							}
 							$audit_time = date('h:i A D', strtotime($audit->created_at));
 						?>

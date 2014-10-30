@@ -82,8 +82,8 @@
 					<div class="row">
 						<!--IF DEVICE STATUS IS NOT NORMAL CHANGE LABEL TO ALERT-->
 						@foreach ($dvc as $dev)
-							<div class="large-2 columns"> 
-								{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
+							<div class="large-3 columns"> 
+								{{ Form::label('', 'Device Status:', array('class'=>'font-1 fontWeight')) }}
 							</div>
 							@if ($dev->status != "Normal")
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->status }}</label>
@@ -97,11 +97,11 @@
 				<div class="large-12 columns">
 					<div class="row"> 
 						@foreach ($dvc as $dev)
-							<div class="large-2 columns">
-								{{ Form::label('', 'Currently Assigned:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
+							<div class="large-3 columns">
+								{{ Form::label('', 'Currently Assigned:', array('class'=>'font-1 fontWeight')) }}
 							</div>
 							@if ($dev->location_id != 0)
-								<label class="label alert font-1 fontSize-6 fontSize-Device radius ">{{ link_to('/Location/Profile/'.$dev->location_id , $dev->location->name, array('class'=>'locationLink', 'title'=>'Click here to go to locations profile.')) }}</label>
+								{{ link_to('/Location/Profile/'.$dev->location_id , $dev->location->name, array('title'=>'Click here to go to locations profile.')) }}
 							@else
 								@if ($dev->status != 'Normal')
 									<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>

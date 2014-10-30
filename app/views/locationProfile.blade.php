@@ -41,35 +41,39 @@
 			<h1>
 				{{ $locationName }} - 
 				<a href="#" title="Edit location's name." data-reveal-id="editName"><i class="general foundicon-edit size-18"></i></a>
-				<a href="#" title="Delete location." data-reveal-id="deleteModal"><i class="general foundicon-trash size-18"></i></a>
+				@if (count($devices) != 0)
+					<a href="#" title="Delete location." data-reveal-id="deleteModal" disabled><i class="general foundicon-trash size-18"></i></a>
+				@else
+					<a href="#" title="Delete location." data-reveal-id="deleteModal"><i class="general foundicon-trash size-18"></i></a>
+				@endif
 			</h1>
-			</div>
-	 		<div class="large-12 columns">
-	 			{{ Form::label('', 'Assigned Devices', array('class'=>'font-1 fontSize-6 fontWeight hAlign')) }}
- 			</div>
- 			<br><br>
-		 	<div class="large-12 columns">
-			 	<div class="row">
-				 	@foreach ($devices as $device)
-				 		@if ($device->deleted_at == '')
-				 		<div class="large-2 columns">
-					 		{{ Form::label('', $device->item->name . ': ', array('class'=>'font-1 fontSize-6 fontWeight')) }}	
-					 	</div>
-					 	<label>
-					 		{{ link_to('Device/Track/'.$device->id, $device->name, array('class'=>'font-1 fontSize-6 fontWeight') ) }}
-						</label>
-						@endif
-					@endforeach
-					</br>
-			 	</div>
+		
+ 		<div class="large-12 columns">
+ 			{{ Form::label('', 'Assigned Devices', array('class'=>'font-1 fontSize-8 fontWeight hAlign')) }}
+		</div>
+		<br><br>
+	 	<div class="large-12 columns">
+		 	<div class="row">
+			 	@foreach ($devices as $device)
+			 		@if ($device->deleted_at == '')
+			 		<div class="large-2 columns">
+				 		{{ Form::label('', $device->item->name . ': ', array('class'=>'font-1 fontSize-8 fontWeight')) }}	
+				 	</div>
+				 	<label>
+				 		{{ link_to('Device/Track/'.$device->id, $device->name, array('class'=>'font-1 fontSize-8 fontWeight') ) }}
+					</label>
+					@endif
+				@endforeach
+				</br>
 		 	</div>
 	 	</div>
+	 	</div>
 		</br>
-		<div class="large-11 columns">
+		<div class="large-11 columns ">
 			<table class="large-12 columns" id="tableTwo">
 				<thead>
 			   		<tr>
-						<th id="headerStyle" class="history-Header-bg table-item-align"> H I S T O R Y </th>
+						<th id="headerStyle" class="history-Header-bg table-item-align"> History </th>
 					</tr>
 				</thead>
 
@@ -84,6 +88,7 @@
 		</div>
 	</div>
 </div>
+</div>
 <!--MODAL-->
 
 <!--DELETE MODAL-->
@@ -94,7 +99,6 @@
 			<div class="large-12 columns">
 				<h1 class="fontSize-3">You are about to Delete this location</h1>
 			</div>
-
 			<div class="large-12 columns">
 				{{ Form::label('','This location will be permanently deleted.', array( 'class'=>'font-1 radius')) }}
 				<br>

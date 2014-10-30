@@ -58,7 +58,7 @@
 									<div class="large-10 columns">
 										{{ Form::text('',$itemField->item_label, array('name' => 'field-'.$itemField->id, 'class'=>'inputField radius')) }}
 									</div>
-										{{ link_to('Field/delete/'.$itemField->id, 'Delete', $attributes = array('class' => 'button tiny radius delete_field', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
+										{{ link_to('Field/delete/'.$itemField->id, 'Remove', $attributes = array('class' => 'button tiny radius delete_field', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	
 									</a>
 								</div>
 							</div>

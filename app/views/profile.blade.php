@@ -119,9 +119,9 @@
 					<div class="row">
 						<div class="large-10 small-12 columns">
 							<label id="modalLbl">Item-Data</label>
-							<input type="text" value="Manufacturer" name="mytext[]" placeholder="Enter device data-field">
-							<input type="text" value="Department" name="mytext[]" placeholder="Enter device data-field">
-							<input type="text" value="Purchased Date" name="mytext[]" placeholder="Enter device data-field">
+							<input type="text" value="Manufacturer" name="mytext[]" placeholder="Enter device data-field" readonly>
+							<input type="text" value="Department" name="mytext[]" placeholder="Enter device data-field" readonly>
+							<input type="text" value="Purchased Date" name="mytext[]" placeholder="Enter device data-field" readonly>
 						</div>
 					</div>
 				</div>
