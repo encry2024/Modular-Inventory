@@ -41,13 +41,18 @@
 		<ul class="side-nav">
 			<li>{{ link_to('adddevice', 'Add', $attributes = array('class' => 'tiny large-12 radius', 'title' => 'Add a Device', 'data-reveal-id' => 'myModal')) }}</li>
 			<li>{{ link_to('Edit/'.$item->id, 'Edit', array( 'class' => 'large-12 small-12 tiny radius', 'title' => 'Edit Device')) }}</li>
+			
 			@if (count($deviceList) == 0)
-				<li>{{ link_to('#', 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ', 'disabled')) }}</li>
+				<li>{{ link_to('#', 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status. ')) }}</li>
 			@else
 				<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
 			@endif
-			<li>{{ link_to('#', 'Delete', $attributes = array( 'name'=>'_token' , 'class' => 'large-12 tiny radius delete_user', 'data-reveal-id' => 'deleteModal', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
 
+			@if (count($dev) == 0)
+				<li>{{ link_to('#', 'Delete', $attributes = array( 'name'=>'_token' , 'class' => 'large-12 tiny radius delete_user', 'data-reveal-id' => 'deleteModal', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
+			@else
+				<li>{{ link_to('#', 'Delete', $attributes = array( 'name'=>'_token' , 'class' => 'large-12 tiny radius delete_user', 'data-reveal-id' => 'errorModal', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token())) }}	</li>
+			@endif
 			</br></br></br>
 			<li>{{ link_to('', 'Return to Item', array("class"=>"tiny large-12 radius"))}}</li>
 		</ul>
@@ -208,6 +213,24 @@
 		<a class="close-reveal-modal">&#215;</a>
 	</div>
 	{{ Form::close() }}
+</div>
+
+<!--ERROR MESSAGE MODAL-->
+<div id="errorModal" class="reveal-modal small" data-reveal>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3 error-message">ERROR!</h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('', "You cannot delete this item.", array( 'class'=>'font-1 ')) }}
+				<br>
+				{{ Form::label('', 'There are devices that are currently in use. Locations must return the devices from this item first before you can delete this item.', array('class'=>'font-1 font-6')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
 </div>
 
 <!-- EDIT DEVICE MODAL -->

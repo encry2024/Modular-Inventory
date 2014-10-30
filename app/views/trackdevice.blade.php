@@ -41,7 +41,7 @@
 			foreach ($dvc as $dev) {
 				if($dev->location_id != 0) {
 					$locsName = $dev->location->name;
-					echo "<li><a href='#' class=' tiny large-12 ' data-reveal-id = deleteModal' disabled>Delete</a></li>";
+					echo "<li><a href='#' class=' tiny large-12 ' data-reveal-id = 'errorModal' >Delete</a></li>";
 					echo "<li><a href='#' class=' tiny large-12 ' onclick='dissociateDeviceProperty($dev->id, \"$dev->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a></li>";
 				} else {
 					echo "<li><a href='#' class='tiny large-12' data-reveal-id = 'deleteModal'>Delete</a></li>";
@@ -60,7 +60,7 @@
 				@if($dev->location_id == 0)
 					<li>{{ link_to('', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus'))}}</li>
 				@else
-					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
+					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'warningModal'))}}</li>
 				@endif
 			@endif
 			
@@ -216,6 +216,44 @@
 	</div>
 	{{ Form::close() }}
 </div>
+
+<!--ERROR MESSAGE MODAL-->
+<div id="errorModal" class="reveal-modal small" data-reveal>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3 error-message">ERROR!</h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('', "You cannot delete this item.", array( 'class'=>'font-1 ')) }}
+				<br>
+				{{ Form::label('', 'Someone is still using this Device. This device must be return first before you can delete this.', array('class'=>'font-1 font-6')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+</div>
+
+
+<!--ERROR MESSAGE MODAL-->
+<div id="warningModal" class="reveal-modal small" data-reveal>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3 error-message">ERROR!</h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('', "You cannot Change this Device's status while its on use.", array( 'class'=>'font-1 ')) }}
+				<br>
+				{{ Form::label('', 'This device must be returned first before you can edit this.', array('class'=>'font-1 font-6')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+</div>
+
 
 <!--DELETE MODAL-->
 <div id="deleteModal" class="reveal-modal small" data-reveal>

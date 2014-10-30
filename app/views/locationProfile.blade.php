@@ -42,7 +42,7 @@
 				{{ $locationName }} - 
 				<a href="#" title="Edit location's name." data-reveal-id="editName"><i class="general foundicon-edit size-18"></i></a>
 				@if (count($devices) != 0)
-					<a href="#" title="Delete location." data-reveal-id="deleteModal" disabled><i class="general foundicon-trash size-18"></i></a>
+					<a href="#" title="Delete location." data-reveal-id="errorModal"><i class="general foundicon-trash size-18"></i></a>
 				@else
 					<a href="#" title="Delete location." data-reveal-id="deleteModal"><i class="general foundicon-trash size-18"></i></a>
 				@endif
@@ -110,6 +110,25 @@
 	</div>
 	{{ Form::close() }}
 </div>
+
+<!--ERROR MESSAGE MODAL-->
+<div id="errorModal" class="reveal-modal small" data-reveal>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="large-12 columns">
+				<h1 class="fontSize-3 error-message">ERROR!</h1>
+			</div>
+
+			<div class="large-12 columns">
+				{{ Form::label('', "You cannot delete this Location.", array( 'class'=>'font-1 radius')) }}
+				<br>
+				{{ Form::label('', 'There are still some devices that is associated with this Location. The Location must return first the associated devices before you can delete this. ', array('class'=>'font-1 radius')) }}
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+</div>
+
 <!--EDIT MODAL-->
 <div id="editName" class="reveal-modal small" data-reveal>
 	{{ Form::open(array('url' => 'editLocation')) }}

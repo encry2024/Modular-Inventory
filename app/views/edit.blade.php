@@ -55,6 +55,7 @@
 						<div class="row">
 							<div class="large-12 columns large-centered">
 								<div class="row">
+								
 									<div class="large-10 columns">
 										{{ Form::text('',$itemField->item_label, array('name' => 'field-'.$itemField->id, 'class'=>'inputField radius')) }}
 									</div>

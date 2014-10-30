@@ -8,6 +8,10 @@
   font-family: "calibri";
 }
 
+.error-message {
+  color: Red;
+}
+
 .locationLink {
   color: White !important;
 }

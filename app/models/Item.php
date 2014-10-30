@@ -195,6 +195,7 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function rtvItems($id) {
 		$item = Item::find($id);
+		$dev = Device::where('item_id', $id)->where('location_id', '!=', '')->get();
 		$device = Device::where('item_id', $id)->get();
 		$locations = Location::whereNotIn('id', function($query) use ($id) {
 					    $query->select(['location_id']); 
@@ -209,7 +210,8 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 				->with('devices', $item->devices)
 				->with('locations', $locations)
 				->with('device_location', $devices)
-				->with('dvce', $device);
+				->with('dvce', $device)
+				->with('dev', $dev);
 		} else {
 			return View::make('Item')
 				->with('item', $item)
