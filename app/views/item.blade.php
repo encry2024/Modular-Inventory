@@ -47,6 +47,7 @@
 				<li>{{ link_to('Track/'.$item->id, 'History', $attributes = array('class' => 'radius tiny large-12 ', 'title' => 'Track ' . $item->name . 's Update, Date Assigned or Status.')) }}</li>
 			@endif
 			<li>{{ link_to('#', 'Delete', $attributes = array( 'name'=>'_token' , 'class' => 'large-12 tiny radius delete_user', 'data-reveal-id' => 'deleteModal', 'title' => 'Delete selected Device', 'id' => $item->id .csrf_token() )) }}	</li>
+
 			</br></br></br>
 			<li>{{ link_to('', 'Return to Item', array("class"=>"tiny large-12 radius"))}}</li>
 		</ul>

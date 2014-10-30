@@ -36,13 +36,15 @@
 					<li>{{ link_to('#', 'Edit', array('onclick' => 'getDevProperty('. $device->id .', "'. $device->name .'")', 'class' => ' tiny large-12 radius ', 'title' => 'Edit Device', 'data-reveal-id' => 'editDeviceModal')) }}	</li>
 				@endif
 			@endforeach
-				<!--IF DEVICE STATUS IS NOT NORMAL. DISABLE ASSIGN DEVICE-->
+				<!--IF DEVICE IS NOT NORMAL AND IF DEVICE IS ASSIGNED. DISABLE ASSIGN DEVICE AND DELETE-->
 			<?php
 			foreach ($dvc as $dev) {
 				if($dev->location_id != 0) {
 					$locsName = $dev->location->name;
+					echo "<li><a href='#' class=' tiny large-12 ' data-reveal-id = deleteModal' disabled>Delete</a></li>";
 					echo "<li><a href='#' class=' tiny large-12 ' onclick='dissociateDeviceProperty($dev->id, \"$dev->name\", \"$locsName\");' data-reveal-id = 'unAssignModal'>Dissociate</a></li>";
 				} else {
+					echo "<li><a href='#' class='tiny large-12' data-reveal-id = 'deleteModal'>Delete</a></li>";
 					if ($dev->status != 'Normal') {
 						echo "<li><a href='#' class=' tiny large-12 ' onclick='assignDeviceProperty($dev->id, \"$dev->name\")' data-reveal-id = 'assignModal' disabled>Assign Device</a></li>";
 					} else {
@@ -61,7 +63,7 @@
 					<li>{{ link_to('#', 'Change Status', array("class"=>" tiny large-12 radius", 'onclick' => 'getValue('. $device->id .', "'. $device->name .'")', 'data-reveal-id' => 'updateStatus', 'disabled'))}}</li>
 				@endif
 			@endif
-			<li>{{ link_to('#', 'Delete', array('class' => ' tiny large-12 radius delete_user', 'title' => 'Delete selected Device', 'id' => $device->id . csrf_token(), 'data-reveal-id' => 'deleteModal')) }}</li>
+			
 			</br></br></br>
 			<li>{{ link_to('Item/'. $devices, 'Return to Devices', $attributes = array('class' => ' tiny radius large-12', 'title' => 'Return to Devices', 'id'=>$devices  . csrf_token())) }}</li>
 		</ul>
@@ -99,7 +101,7 @@
 								{{ Form::label('', 'Currently Assigned:', array('class'=>'font-1 fontSize-6 fontWeight')) }}
 							</div>
 							@if ($dev->location_id != 0)
-								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->location->name }}</label>
+								<label class="label alert font-1 fontSize-6 fontSize-Device radius ">{{ link_to('/Location/Profile/'.$dev->location_id , $dev->location->name, array('class'=>'locationLink', 'title'=>'Click here to go to locations profile.')) }}</label>
 							@else
 								@if ($dev->status != 'Normal')
 									<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->availability }}</label>

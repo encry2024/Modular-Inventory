@@ -60,11 +60,11 @@
 							if($initDate == '' OR $initDate != date('F d, Y', strtotime($audit->created_at))) {
 								$initDate = date('F d, Y', strtotime($audit->created_at));
 								echo "<br>";
-								echo "<li class='divider font-1 fontSize-1 fontWeight'>".$initDate."</li>";
+								echo "<h1>".$initDate."</h1>";
 							}
 							$audit_time = date('h:i A D', strtotime($audit->created_at));
 						?>
-					<li class="liBorder">
+					<li >
 						<label class='font auditItem'><b>{{ $audit_time }}</b> - {{ $audit->history }} </label>
 					</li>
 					</div>

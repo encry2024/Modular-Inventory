@@ -40,8 +40,9 @@
 		<ul class="side-nav">
 			<li>{{ link_to('', ' Add Item', array('class' => ' tiny radius', 'data-reveal-id' => 'myModal')) }}</li>
 			<li>{{ link_to('/Location', 'Location', $attributes = array('class' => ' tiny radius', 'title' => 'Add a Location for the Device')) }}</li>
-			<li>{{ link_to('All/Track' , 'History', $attributes = array('class' => ' tiny radius', 'title' => "Check all the actions taken on history.")) }}</li>
 			<li>{{ link_to('/Search', 'Search', array("class"=>"tiny large-12 radius"))}}</li>
+			<li>{{ link_to('All/Track' , 'History', $attributes = array('class' => ' tiny radius', 'title' => "Check all the actions taken on history.")) }}</li>
+			<li>{{ link_to('/LiveReport', 'Live Report', array("class"=>"tiny large-12 radius", "title"=>"Check all the Device that is being used.")) }}</li>
 		</ul>
 	</div>
 </div>
@@ -86,10 +87,10 @@
 					<tbody>
 			  			@foreach ($items as $item)
 			    			<tr>
-								<td class=" table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class'=>'font-1 fontSize-6 fontWeight', 'title' => "Go to Item's Profile", 'name' => 'item-' . $item->id)) }}</td>
+								<td class=" table-item-align">{{ link_to('Item/'. $item->id , $item->name, array('class'=>'font-1 fontSize-8 fontWeight', 'title' => "Go to Item's Profile", 'name' => 'item-' . $item->id)) }}</td>
 								<td class=" table-item-align">{{ count($item->device) }}</td>
 								<td class=" table-item-align">
-									{{ Form::label('', date('F d, Y / h:i A D', strtotime($item->created_at)), array('class'=>'font-1 fontSize-6 fontWeight')) }}	
+									{{ Form::label('', date('F d, Y / h:i A D', strtotime($item->created_at)), array('class'=>'font-1 fontSize-8 fontWeight')) }}	
 								</td>
 			   				</tr>
 			    		@endforeach

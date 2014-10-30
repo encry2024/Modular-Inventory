@@ -8,6 +8,10 @@
   font-family: "calibri";
 }
 
+.locationLink {
+  color: White !important;
+}
+
 .textWidth1 {
   width: 25%;
 }

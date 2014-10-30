@@ -12,6 +12,11 @@ class DeviceController extends BaseController {
 		return $device;
 	}
 
+	public function action_RetrieveReport() {
+		$devices = Device::where('location_id', '!=' ,'')->get();
+		return View::make('liveReport')->with('device', $devices);
+	}
+
 	public function assignDevice() {
 		$assign_device = Device::action_AssignDevice(Input::all());
 		return $assign_device;

@@ -61,6 +61,9 @@ Route::get('/Location', 'LocationController@viewLocation');
 Route::get('changePassword', 'UserController@showChangePass');
 Route::get('Location/Profile/{id}', 'LocationController@viewProfile');
 Route::get('/Search', 'UserController@showSearchPage');
+Route::get('LiveReport', 'DeviceController@action_RetrieveReport');
+
+
 #POST
 Route::post('getSearch', 'UserController@searchAll');
 Route::post('authenticate', 'LoginController@authenticate');
