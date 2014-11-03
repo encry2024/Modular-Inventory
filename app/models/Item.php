@@ -204,6 +204,7 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 						})->get();
 		$devices = Device::with('location')->where('item_id', $id)->paginate(20);
 
+
 		if(count($device) != 0) {
 			return View::make('Item')
 				->with('item', $item)
@@ -214,10 +215,11 @@ class Item extends Eloquent implements UserInterface, RemindableInterface {
 				->with('dev', $dev);
 		} else {
 			return View::make('Item')
-				->with('item', $item)
-				->with('devices', $item->devices)
-				->with('device_location', $devices)
-				->with('dvce', $device);
+			->with('item', $item)
+			->with('devices', $item->devices)
+			->with('device_location', $devices)
+			->with('dvce', $device)
+			->with('dev', $dev);;
 		}
 	}
 }

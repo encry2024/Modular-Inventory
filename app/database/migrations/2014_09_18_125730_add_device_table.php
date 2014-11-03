@@ -21,6 +21,7 @@ class AddDeviceTable extends Migration {
 			$table->integer('location_id')->unsigned();
 			$table->string('name');
 			$table->string('status');
+			$table->string('comment');
 			$table->string('availability');
 			$table->timestamps();
 			$table->softDeletes();

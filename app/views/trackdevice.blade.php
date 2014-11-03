@@ -87,13 +87,16 @@
 							</div>
 							@if ($dev->status != "Normal")
 								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->status }}</label>
+								<label class="label alert font-1 fontSize-6 fontSize-Device radius">{{ $dev->comment }}</label>
+								
 							@else
 								<label class="label Success font-1 fontSize-6 fontSize-Device radius">Normal</label>
 							@endif
 						@endforeach
+						<br>
 					</div>
 				</div>
-				<br>
+				<br><br>
 				<div class="large-12 columns">
 					<div class="row"> 
 						@foreach ($dvc as $dev)
@@ -197,7 +200,7 @@
 			<div class="large-12 columns">
 				<label id="devFont"></label>
 				<h1>{{ Form::label('','', array('name' => 'labelDevice', 'id'=>'deviLabel', 'class' => 'deviceLbl')) }}</h1>
-				{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
+					{{ Form::hidden('idTb', '', array('name' => 'idTb', 'id'=>'id_txtbox' )) }}
 			</div>
 			<div class="large-12 columns">
 				{{ Form::label('', "You are about to dissociate the device stated above from the user.", array('id'=>'Font')) }}
@@ -318,8 +321,9 @@
 	<a class="close-reveal-modal">&#215;</a>
 	{{ Form::close() }}
 </div>
+
 <!--CHANGE STATUS MODAL-->
-<div id="updateStatus" class="reveal-modal small" data-reveal>
+<div id="updateStatus" class="reveal-modal medium" data-reveal>
 	{{ Form::open(array('url' => 'changestatus')) }}
 	<div class="large-12 columns large-centered">
 		<div class="row">
@@ -327,17 +331,19 @@
 				<div class="large-12 columns">
 					<label id="devFont"></label>
 					<h1>{{ Form::label('','', array('name' => 'devi_Name', 'id'=>'dev_name', 'class' => 'deviceLbl')) }}</h1>
-					{{ Form::hidden('', '', array('name' => 'devi_Id', 'id'=>'dev_id')) }}
+						{{ Form::hidden('', '', array('name' => 'devi_Id', 'id'=>'dev_id')) }}
 					</br>
 				</div>
 				<div class="large-12 columns">
-					{{ Form::label('item', 'Change Headset Status', array('id' => 'modalLbl')) }}
+					{{ Form::label('item', 'Change Device Status', array('id' => 'modalLbl')) }}
 				</div>
 				</br>
-			  	<div class="large-9 columns">
+			  	<div class="large-12 columns">
 			  	</br></br>
 			  	{{ Form::select('status', array('Normal'=>'Normal','Defective' =>'Defective', 'Retired'=>'Retired')) }}
-				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius', 'name' => 'submit')) }}
+			  	{{ Form::label('Comment') }}
+			  	{{ Form::textarea('commentArea','') }}
+				{{ Form::submit('Update' , $attributes = array('class' => 'button tiny large-4 radius')) }}
 				</div>
 			</div>
 		</div>

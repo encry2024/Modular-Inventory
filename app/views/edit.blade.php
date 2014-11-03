@@ -55,7 +55,7 @@
 						<div class="row">
 							<div class="large-12 columns large-centered">
 								<div class="row">
-								
+
 									<div class="large-10 columns">
 										{{ Form::text('',$itemField->item_label, array('name' => 'field-'.$itemField->id, 'class'=>'inputField radius')) }}
 									</div>
@@ -76,8 +76,8 @@
 		<div class="large-9 columns large-centered">
 			<div class="row">
 				<div class="large-10 columns">
-					{{ Form::submit('Update', $attributes = array('class' => 'button tiny small-2 radius', 'title' => "Click update to change the Item's Information")) }}
-					{{ link_to('/', 'Add Field', $attributes = array('class' => 'button tiny small-2 radius add_field_button', 'title' => 'Return Home')) }}
+					{{ Form::submit('Update', $attributes = array('class' => 'button tiny radius', 'title' => "Click update to change the Item's Information")) }}
+					{{ link_to('/', 'Add Field', $attributes = array('class' => 'button tiny radius add_field_button', 'title' => 'Return Home')) }}
 					@if ($notification = Session::get('message'))
 						<div data-alert class="alert-box success ">
 							{{ $notification }}

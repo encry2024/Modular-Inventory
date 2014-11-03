@@ -167,6 +167,7 @@ class Device extends Eloquent {
 	public static function changeStatus($data) {
 		$device = Device::find($data["devi_Id"]);
 		$device->status = $data["status"];
+		$device->comment = $data["commentArea"];
 		if ($device->status == 'Normal') {
 			$device->availability = 'Available';
 		}
@@ -175,10 +176,11 @@ class Device extends Eloquent {
 		}
 		$device->save();
 		$device_name = $device->name;
+		$device_comment = $device->comment;
 		$device_status = $device->status;
 
 		$audits = new Audit;
-		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has set the Device ". $device_name ." status to ". $device_status .".";
+		$audits->history = Auth::user()->firstname ." ". Auth::user()->lastname . " has set the Device ". $device_name ." status to ". $device_status .". Comment: ".$device_comment.".";
 		$audits->save();
 
 		return Redirect::back()

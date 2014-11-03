@@ -1,0 +1,118 @@
+/*LABEL STYLES*/
+.label-header {
+	color: WHITE;
+	line-height: 2.5;
+}
+
+.label-size-20 {
+	font-size: 20;
+}
+
+.h1-border {
+	border-bottom-style: none;
+	border-top-style: Solid;
+	border-top-width: 2px;
+	border-top-color: #ddd;
+}
+
+.h1-style-login {
+	margin-left: -21;
+	margin-top: -21 !important;
+	width: 107.6%;
+	background-color: #333;
+	color: White !important;
+	line-height: 0 !important;
+	font-size: 14;
+	border-bottom-style: none;
+}
+
+.label-weight-bold {
+	font-weight: Bold;
+}
+
+.label-black {
+	color: Black;
+}
+
+/*TEXTBOX STYLES*/
+
+
+/*PANEL STYLES*/
+.topBar-style {
+	height: 55px;
+}
+
+.panel-style-login {
+	background-color: White;
+}
+
+.li-background-none {
+	background-color: transparent !important;
+}
+
+/*BUTTON STYLES*/
+
+/*FONT STYLES - font family, color, size*/
+.font-size-12 {
+	font-size: 12;
+}
+
+.font-color-white {
+	color: White;
+}
+
+.text-size-30 {
+	font-size: 30;
+}
+
+.text-size-28 {
+	font-size: 28;
+}
+
+.text-size-26 {
+	font-size: 26 !important;
+}
+
+.text-size-24 {
+	font-size: 24;
+}
+
+.text-size-22 {
+	font-size: 22;
+}
+
+.text-size-20 {
+	font-size: 20 !important;
+}
+
+.text-size-18 {
+	font-size: 18;
+}
+
+.text-size-16 {
+	font-size: 16;
+}
+
+.text-size-15 {
+	font-size: 15;
+}
+
+.text-size-14 {
+	font-size: 14 !important;
+}
+
+.text-size-12 {
+	font-size: 12 !important;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-lineHeight {
+	line-height: 2.5;
+}
+
+.link-lineHeight {
+	line-height: 3;
+}

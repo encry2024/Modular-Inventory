@@ -35,33 +35,35 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$values = array(
 			'username' => $data['username'],
 			'password' => $data['password'],
-			'firstname' => $data['firstName'],
-			'lastname' => $data['lastName']
+
+			'firstname' => $data['firstname'],
+			'lastname' => $data['lastname']
 		);
 
 		//rules
 		$rules =array(
 			'username' => 'required|unique:users,username|alpha_num',
-			'password' => 'required',
+			'password' => 'required|confirmed',
+			'password_confirmation' => 'required',
 			'firstname' => 'required',
 			'lastname' => 'required'
 		);
 
 		//create validation instance
-		$validation = Validator::make($values, $rules);
+		$validation = Validator::make(Input::all(), $rules);
 
 		//check if validation successful
 		if($validation->fails()) {
+			$error_index = $validation->failed();
 			return Redirect::back()
-				->withErrors($validation);
+				->withErrors("errors", $error_index)->withErrors($validation)->withInput();
 			//return var_dump($validation->messages());
 		} else {
-			
 			$user = new User;
 			$user->username = $data['username'];
 			$user->password = Hash::make($data['password']);
-			$user->firstname = $data['firstName'];
-			$user->lastname = $data['lastName'];
+			$user->firstname = $data['firstname'];
+			$user->lastname = $data['lastname'];
 
 			$user->save();
 
@@ -76,6 +78,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			return Redirect::to('login');
 		}
 	}
+
 
 	public static function tryAuthenticate($data) {
 		$values = array(
