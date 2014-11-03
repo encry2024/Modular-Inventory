@@ -1,17 +1,25 @@
 
-@extends('Templates.register')
+@extends('Templates.login')
 
-@section('registerBody')
+@section('bodyLogin')
+
+<div class="large-8 columns">
+	<ul class="breadcrumbs">
+		<li>{{ link_to('/login', 'Login') }}</li>
+		<li class="unavailable"><a href="#">Registration Page</a></li>
+	</ul>
+</div>
+<br><br>
+
 <div class="large-6 columns large-centered">
 	<div class="row">
-		
-		<h1 class="text-size-20 label-weight-bold large-12 label-black"><span class="foundicon-people size-18"> USER REGISTRATION</span></h1>
+		<h1 class="large-12 label-black">User Registration<div class=" foundicon-people size-24 push-6"></div></h1>
 		<br>
 		{{ Form::open(array('url' => 'registeruser')) }}
 			<div class="row">
 				<div class="large-10 columns large-centered">
 					<div class="large-3 columns">
-						{{ Form::label('', 'Username', array('class'=>'text-lineHeight label-weight-bold font-size-12')) }}
+						{{ Form::label('', 'Username', array('class'=>'text-lineHeight label-weight-bold font-size-14')) }}
 					</div>
 					<div class="large-8 columns">
 						{{ Form::text('username', Input::old('username'), array('class'=>'error text-center ', 'placeholder'=>'Enter your Username')) }}
@@ -25,7 +33,7 @@
 			<div class="row">
 				<div class="large-10 columns large-centered">
 					<div class="large-3 columns">
-						{{ Form::label('', 'Password', array('class'=>'text-lineHeight label-weight-bold font-size-12')) }}
+						{{ Form::label('', 'Password', array('class'=>'text-lineHeight label-weight-bold font-size-14')) }}
 					</div>
 					<div class="large-8 columns">
 						{{ Form::password('password', array('class'=>'error text-center ', 'placeholder'=>'Enter your Password')) }}
@@ -39,7 +47,7 @@
 			<div class="row">
 				<div class="large-10 columns large-centered">
 					<div class="large-4 columns">
-						{{ Form::label('', 'Confirm Password', array('class'=>'text-lineHeight label-weight-bold font-size-12')) }}
+						{{ Form::label('', 'Confirm Password', array('class'=>'text-lineHeight label-weight-bold font-size-14')) }}
 					</div>
 					<div class="large-8 columns">
 						{{ Form::password('password_confirmation', array('class'=>'error  text-center', 'placeholder'=>'Confirm your Password')) }}
@@ -53,7 +61,7 @@
 			<div class="row">
 				<div class="large-10 columns large-centered">
 					<div class="large-3 columns">
-						{{ Form::label('', 'Firstname', array('class'=>'text-lineHeight label-weight-bold font-size-12')) }}
+						{{ Form::label('', 'Firstname', array('class'=>'text-lineHeight label-weight-bold font-size-14')) }}
 					</div>
 					<div class="large-8 columns">
 						{{ Form::text('firstname', Input::old('firstname'), array('class'=>' error  text-center', 'placeholder'=>'Enter your Firstname')) }}
@@ -67,7 +75,7 @@
 			<div class="row">
 				<div class="large-10 columns large-centered">
 					<div class="large-3 columns">
-						{{ Form::label('', 'Lastname', array('class'=>'text-lineHeight label-weight-bold font-size-12')) }}
+						{{ Form::label('', 'Lastname', array('class'=>'text-lineHeight label-weight-bold font-size-14')) }}
 					</div>
 					<div class="large-8 columns">
 						{{ Form::text('lastname', Input::old('lastname'), array('class'=>'error  text-center', 'placeholder'=>'Enter your Lastname')) }}

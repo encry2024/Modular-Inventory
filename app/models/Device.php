@@ -193,13 +193,17 @@ class Device extends Eloquent {
 		# code...
 		//Search device id
 		$device = Device::find($id);
+
 		//Get Item by the Device's item_id
 		$item = Item::find($device->item_id);
 		$itemId = $item->id;
+
 		//Get all the Location of a specific Device
 		$device_location = DeviceLog::where('device_id', $id)->orderby('created_at', 'desc')->paginate(20);
+
 		//Get Devices with Location
 		$devices = Device::with('location')->where('id', $id)->get();
+		
 		//Get Information value on Field
 		$fields = Info::with('field')->where('device_id', $device->id)->get();
 

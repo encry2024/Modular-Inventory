@@ -61,8 +61,8 @@
 
 			<br>
 
-			@if ($alert = Session::get('flash_error'))
-				<div data-alert class="error radius">
+			@if ($alert = Session::get('message'))
+				<div data-alert class="alert-box alert error radius">
 					{{ $alert }}
 				</div>
 			@endif

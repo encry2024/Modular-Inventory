@@ -13,8 +13,15 @@ class DeviceController extends BaseController {
 	}
 
 	public function action_RetrieveReport() {
-		$devices = Device::where('location_id', '!=' ,'')->get();
-		return View::make('liveReport')->with('device', $devices);
+		$device = Device::all();
+		$items = Item::all();
+
+		$a_device = Device::where('location_id', '!=', '')->get();
+		
+
+		return View::make('livereport')->with('device', $device)
+										->with('item', $items)
+										->with('a_device', $a_device);
 	}
 
 	public function assignDevice() {

@@ -41,22 +41,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		);
 
 		//rules
-		$rules =array(
+		$rules = array(
 			'username' => 'required|unique:users,username|alpha_num',
 			'password' => 'required|confirmed',
 			'password_confirmation' => 'required',
 			'firstname' => 'required',
 			'lastname' => 'required'
 		);
-
+		
 		//create validation instance
 		$validation = Validator::make(Input::all(), $rules);
 
 		//check if validation successful
 		if($validation->fails()) {
-			$error_index = $validation->failed();
 			return Redirect::back()
-				->withErrors("errors", $error_index)->withErrors($validation)->withInput();
+				->withErrors($validation)->withInput();
 			//return var_dump($validation->messages());
 		} else {
 			$user = new User;
@@ -86,7 +85,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'password' => $data['password']
 		);
 	
-		$rules =array(
+		$rules = array(
 			'username' => 'required',
 			'password' => 'required'
 		);
@@ -95,7 +94,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		if($validation->fails()) {
 			return Redirect::back()
-				->withErrors($validation);
+				->withErrors($validation)->withInput();
 		}
 
 
@@ -105,7 +104,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			return Redirect::to('/');
 		} else {
 			return Redirect::back()
-				->with('message', 'Invalid username/password');
+				->with('message', 'Invalid username/password')->withInput();
 		}
 	}
 

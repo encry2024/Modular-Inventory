@@ -1,5 +1,11 @@
 @extends('Templates.Report')
 
+<?php
+	$ctr = 0;
+	$initItem = array("");
+	$initCount = array("");
+?>
+
 @section('reportHeader')
 <nav class="top-bar small-12" data-topbar role="navigation">
 	<ul class="title-area">
@@ -37,24 +43,38 @@
 <div class="large-10 small-12 columns">
 	<div class="row">
 		<div class="large-12 small-12 columns" >
-		<h1>Live Report</h1>
+		<h1>Summary Report</h1>
 			<table class="large-12 small-12 columns tableOne">
 	  			<thead>
 	   				<tr>
-		      			<th class="font weight history-Header-bg table-item-align">Device Name</th>
-						<th class="font weight history-Header-bg table-item-align">Assigned to</th>
-						<th class="font weight history-Header-bg table-item-align">Date/Time Checked Out</th>
+	   					<th class="font weight history-Header-bg table-item-align">#</th>
+		      			<th class="font weight history-Header-bg table-item-align">Categories</th>
+		      			<th class="font weight history-Header-bg table-item-align">Total Devices</th>
+						<th class="font weight history-Header-bg table-item-align">Total assigned Devices</th>
+						<th class="font weight history-Header-bg table-item-align">Total available Devices</th>
+						<th class="font weight history-Header-bg table-item-align">Total disposed Devices</th>
 					</tr>
 				</thead>
 
 				<tbody>
-				@foreach($device as $devices)
-					<tr>
-						<td class=" table-item-align"> {{ link_to('Device/Track/'.$devices->id , $devices->name, array( 'class'=>'fontSize-8', 'title' => "Go to ".$devices->name."'s profile.")) }} </td>
-						<td class=" table-item-align"> {{ link_to('Location/Profile/'.$devices->location->id, $devices->location->name, array('class'=>'fontSize-8', 'title' => "Go to ".$devices->location->name."'s profile.")) }} </td>
-						<td class=" table-item-align"> {{ date('F d, Y [ h:i A D ]', strtotime($devices->updated_at)) }} </td>
-	   				</tr>
-   				@endforeach
+					@foreach ($item as $items)
+							<tr>
+								<td class="table-item-align">{{ ++$ctr }}</td>
+								<td class="table-item-align">{{ $items->name }}</td>
+								<td class="table-item-align">{{ count($items->device) }}</td>
+								@foreach ($a_device as $a_id)
+									@if ($a_id->item_id == $items->id)
+										@if ($initItem == '' or $initItem != count($a_id->item_id))
+										
+										<td class="table-item-align">{{ $initItem = count($a_id->item_id) }}</td>
+										{{ $initItem = $a_id->item_id }}
+										@endif
+									@endif
+								@endforeach
+								<td class="table-item-align"></td>
+								<td class="table-item-align"></td>
+							</tr>
+					@endforeach
 	  			</tbody>
 			</table>
 		</div>
